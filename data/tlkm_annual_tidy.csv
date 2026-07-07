@@ -1,0 +1,650 @@
+ticker,statement_type,metric_id,metric_name,year,value
+TLKM,Balance Sheet (Annual),accountsPayable,Accounts Payable,2021,2650000000000.0
+TLKM,Balance Sheet (Annual),accountsPayable,Accounts Payable,2022,2400000000000.0
+TLKM,Balance Sheet (Annual),accountsPayable,Accounts Payable,2023,3037000000000.0
+TLKM,Balance Sheet (Annual),accountsPayable,Accounts Payable,2024,2598000000000.0
+TLKM,Balance Sheet (Annual),accountsPayable,Accounts Payable,2025,3357000000000.0
+TLKM,Balance Sheet (Annual),accountsReceivable,Accounts Receivable,2021,10840000000000.0
+TLKM,Balance Sheet (Annual),accountsReceivable,Accounts Receivable,2022,11091000000000.0
+TLKM,Balance Sheet (Annual),accountsReceivable,Accounts Receivable,2023,13371000000000.0
+TLKM,Balance Sheet (Annual),accountsReceivable,Accounts Receivable,2024,14642000000000.0
+TLKM,Balance Sheet (Annual),accountsReceivable,Accounts Receivable,2025,13513000000000.0
+TLKM,Balance Sheet (Annual),accruedExpenses,Accrued Expenses,2021,18873000000000.0
+TLKM,Balance Sheet (Annual),accruedExpenses,Accrued Expenses,2022,18335000000000.0
+TLKM,Balance Sheet (Annual),accruedExpenses,Accrued Expenses,2023,16839000000000.0
+TLKM,Balance Sheet (Annual),accruedExpenses,Accrued Expenses,2024,18169000000000.0
+TLKM,Balance Sheet (Annual),accruedExpenses,Accrued Expenses,2025,18454000000000.0
+TLKM,Balance Sheet (Annual),additionalPaidInCapital,Additional Paid-In Capital,2021,2711000000000.0
+TLKM,Balance Sheet (Annual),additionalPaidInCapital,Additional Paid-In Capital,2022,1977000000000.0
+TLKM,Balance Sheet (Annual),additionalPaidInCapital,Additional Paid-In Capital,2023,2711000000000.0
+TLKM,Balance Sheet (Annual),additionalPaidInCapital,Additional Paid-In Capital,2024,2310000000000.0
+TLKM,Balance Sheet (Annual),additionalPaidInCapital,Additional Paid-In Capital,2025,2310000000000.0
+TLKM,Balance Sheet (Annual),assets,Total Assets,2021,277184000000000.0
+TLKM,Balance Sheet (Annual),assets,Total Assets,2022,274817000000000.0
+TLKM,Balance Sheet (Annual),assets,Total Assets,2023,287042000000000.0
+TLKM,Balance Sheet (Annual),assets,Total Assets,2024,291389000000000.0
+TLKM,Balance Sheet (Annual),assets,Total Assets,2025,287759000000000.0
+TLKM,Balance Sheet (Annual),assetsc,Total Current Assets,2021,61277000000000.0
+TLKM,Balance Sheet (Annual),assetsc,Total Current Assets,2022,55073000000000.0
+TLKM,Balance Sheet (Annual),assetsc,Total Current Assets,2023,55613000000000.0
+TLKM,Balance Sheet (Annual),assetsc,Total Current Assets,2024,63080000000000.0
+TLKM,Balance Sheet (Annual),assetsc,Total Current Assets,2025,61766000000000.0
+TLKM,Balance Sheet (Annual),buildings,Buildings,2021,17296000000000.0
+TLKM,Balance Sheet (Annual),buildings,Buildings,2022,18947000000000.0
+TLKM,Balance Sheet (Annual),buildings,Buildings,2023,19596000000000.0
+TLKM,Balance Sheet (Annual),buildings,Buildings,2024,20907000000000.0
+TLKM,Balance Sheet (Annual),buildings,Buildings,2025,21963000000000.0
+TLKM,Balance Sheet (Annual),bvps,Book Value Per Share,2021,1227.975752
+TLKM,Balance Sheet (Annual),bvps,Book Value Per Share,2022,1304.473132
+TLKM,Balance Sheet (Annual),bvps,Book Value Per Share,2023,1370.290355
+TLKM,Balance Sheet (Annual),bvps,Book Value Per Share,2024,1350.747081
+TLKM,Balance Sheet (Annual),bvps,Book Value Per Share,2025,1319.340577
+TLKM,Balance Sheet (Annual),capitalLeases,Long-Term Leases,2021,10426000000000.0
+TLKM,Balance Sheet (Annual),capitalLeases,Long-Term Leases,2022,13701000000000.0
+TLKM,Balance Sheet (Annual),capitalLeases,Long-Term Leases,2023,14850000000000.0
+TLKM,Balance Sheet (Annual),capitalLeases,Long-Term Leases,2024,18468000000000.0
+TLKM,Balance Sheet (Annual),capitalLeases,Long-Term Leases,2025,18547000000000.0
+TLKM,Balance Sheet (Annual),cashGrowth,Cash Growth,2021,0.7756
+TLKM,Balance Sheet (Annual),cashGrowth,Cash Growth,2022,-0.15119
+TLKM,Balance Sheet (Annual),cashGrowth,Cash Growth,2023,-0.0746
+TLKM,Balance Sheet (Annual),cashGrowth,Cash Growth,2024,0.15107
+TLKM,Balance Sheet (Annual),cashGrowth,Cash Growth,2025,0.01265
+TLKM,Balance Sheet (Annual),cashneq,Cash & Equivalents,2021,38311000000000.0
+TLKM,Balance Sheet (Annual),cashneq,Cash & Equivalents,2022,31947000000000.0
+TLKM,Balance Sheet (Annual),cashneq,Cash & Equivalents,2023,29007000000000.0
+TLKM,Balance Sheet (Annual),cashneq,Cash & Equivalents,2024,33905000000000.0
+TLKM,Balance Sheet (Annual),cashneq,Cash & Equivalents,2025,34228000000000.0
+TLKM,Balance Sheet (Annual),commonStock,Common Stock,2021,4953000000000.0
+TLKM,Balance Sheet (Annual),commonStock,Common Stock,2022,4953000000000.0
+TLKM,Balance Sheet (Annual),commonStock,Common Stock,2023,4953000000000.0
+TLKM,Balance Sheet (Annual),commonStock,Common Stock,2024,4953000000000.0
+TLKM,Balance Sheet (Annual),commonStock,Common Stock,2025,4953000000000.0
+TLKM,Balance Sheet (Annual),constructionInProgress,Construction In Progress,2021,2950000000000.0
+TLKM,Balance Sheet (Annual),constructionInProgress,Construction In Progress,2022,4598000000000.0
+TLKM,Balance Sheet (Annual),constructionInProgress,Construction In Progress,2023,6240000000000.0
+TLKM,Balance Sheet (Annual),constructionInProgress,Construction In Progress,2024,2930000000000.0
+TLKM,Balance Sheet (Annual),constructionInProgress,Construction In Progress,2025,4011000000000.0
+TLKM,Balance Sheet (Annual),currentCapLeases,Current Portion of Leases,2021,5961000000000.0
+TLKM,Balance Sheet (Annual),currentCapLeases,Current Portion of Leases,2022,4772000000000.0
+TLKM,Balance Sheet (Annual),currentCapLeases,Current Portion of Leases,2023,5575000000000.0
+TLKM,Balance Sheet (Annual),currentCapLeases,Current Portion of Leases,2024,5491000000000.0
+TLKM,Balance Sheet (Annual),currentCapLeases,Current Portion of Leases,2025,5590000000000.0
+TLKM,Balance Sheet (Annual),currentIncomeTaxesPayable,Current Income Taxes Payable,2021,1876000000000.0
+TLKM,Balance Sheet (Annual),currentIncomeTaxesPayable,Current Income Taxes Payable,2022,3144000000000.0
+TLKM,Balance Sheet (Annual),currentIncomeTaxesPayable,Current Income Taxes Payable,2023,2683000000000.0
+TLKM,Balance Sheet (Annual),currentIncomeTaxesPayable,Current Income Taxes Payable,2024,1523000000000.0
+TLKM,Balance Sheet (Annual),currentIncomeTaxesPayable,Current Income Taxes Payable,2025,619000000000.0
+TLKM,Balance Sheet (Annual),currentLiabilities,Total Current Liabilities,2021,69131000000000.0
+TLKM,Balance Sheet (Annual),currentLiabilities,Total Current Liabilities,2022,70235000000000.0
+TLKM,Balance Sheet (Annual),currentLiabilities,Total Current Liabilities,2023,71568000000000.0
+TLKM,Balance Sheet (Annual),currentLiabilities,Total Current Liabilities,2024,76767000000000.0
+TLKM,Balance Sheet (Annual),currentLiabilities,Total Current Liabilities,2025,73948000000000.0
+TLKM,Balance Sheet (Annual),currentPortDebt,Current Portion of Long-Term Debt,2021,9690000000000.0
+TLKM,Balance Sheet (Annual),currentPortDebt,Current Portion of Long-Term Debt,2022,8858000000000.0
+TLKM,Balance Sheet (Annual),currentPortDebt,Current Portion of Long-Term Debt,2023,10276000000000.0
+TLKM,Balance Sheet (Annual),currentPortDebt,Current Portion of Long-Term Debt,2024,15866000000000.0
+TLKM,Balance Sheet (Annual),currentPortDebt,Current Portion of Long-Term Debt,2025,17746000000000.0
+TLKM,Balance Sheet (Annual),currentUnearnedRevenue,Current Unearned Revenue,2021,6795000000000.0
+TLKM,Balance Sheet (Annual),currentUnearnedRevenue,Current Unearned Revenue,2022,6295000000000.0
+TLKM,Balance Sheet (Annual),currentUnearnedRevenue,Current Unearned Revenue,2023,6848000000000.0
+TLKM,Balance Sheet (Annual),currentUnearnedRevenue,Current Unearned Revenue,2024,7738000000000.0
+TLKM,Balance Sheet (Annual),currentUnearnedRevenue,Current Unearned Revenue,2025,7970000000000.0
+TLKM,Balance Sheet (Annual),debt,Total Debt,2021,69078000000000.0
+TLKM,Balance Sheet (Annual),debt,Total Debt,2022,62853000000000.0
+TLKM,Balance Sheet (Annual),debt,Total Debt,2023,68124000000000.0
+TLKM,Balance Sheet (Annual),debt,Total Debt,2024,76868000000000.0
+TLKM,Balance Sheet (Annual),debt,Total Debt,2025,74911000000000.0
+TLKM,Balance Sheet (Annual),debtc,Short-Term Debt,2021,6682000000000.0
+TLKM,Balance Sheet (Annual),debtc,Short-Term Debt,2022,8191000000000.0
+TLKM,Balance Sheet (Annual),debtc,Short-Term Debt,2023,9650000000000.0
+TLKM,Balance Sheet (Annual),debtc,Short-Term Debt,2024,11525000000000.0
+TLKM,Balance Sheet (Annual),debtc,Short-Term Debt,2025,6929000000000.0
+TLKM,Balance Sheet (Annual),debtnc,Long-Term Debt,2021,36319000000000.0
+TLKM,Balance Sheet (Annual),debtnc,Long-Term Debt,2022,27331000000000.0
+TLKM,Balance Sheet (Annual),debtnc,Long-Term Debt,2023,27773000000000.0
+TLKM,Balance Sheet (Annual),debtnc,Long-Term Debt,2024,25518000000000.0
+TLKM,Balance Sheet (Annual),debtnc,Long-Term Debt,2025,26099000000000.0
+TLKM,Balance Sheet (Annual),deferredLongTermCharges,Long-Term Deferred Charges,2021,1608000000000.0
+TLKM,Balance Sheet (Annual),deferredLongTermCharges,Long-Term Deferred Charges,2022,1741000000000.0
+TLKM,Balance Sheet (Annual),deferredLongTermCharges,Long-Term Deferred Charges,2023,1568000000000.0
+TLKM,Balance Sheet (Annual),deferredLongTermCharges,Long-Term Deferred Charges,2024,1596000000000.0
+TLKM,Balance Sheet (Annual),deferredLongTermCharges,Long-Term Deferred Charges,2025,1370000000000.0
+TLKM,Balance Sheet (Annual),defferedTaxAssets,Long-Term Deferred Tax Assets,2021,3824000000000.0
+TLKM,Balance Sheet (Annual),defferedTaxAssets,Long-Term Deferred Tax Assets,2022,4369000000000.0
+TLKM,Balance Sheet (Annual),defferedTaxAssets,Long-Term Deferred Tax Assets,2023,4170000000000.0
+TLKM,Balance Sheet (Annual),defferedTaxAssets,Long-Term Deferred Tax Assets,2024,5354000000000.0
+TLKM,Balance Sheet (Annual),defferedTaxAssets,Long-Term Deferred Tax Assets,2025,6603000000000.0
+TLKM,Balance Sheet (Annual),equity,Shareholders' Equity,2021,145399000000000.0
+TLKM,Balance Sheet (Annual),equity,Shareholders' Equity,2022,149075000000000.0
+TLKM,Balance Sheet (Annual),equity,Shareholders' Equity,2023,156562000000000.0
+TLKM,Balance Sheet (Annual),equity,Shareholders' Equity,2024,154204000000000.0
+TLKM,Balance Sheet (Annual),equity,Shareholders' Equity,2025,150537000000000.0
+TLKM,Balance Sheet (Annual),goodwill,Goodwill,2021,1090000000000.0
+TLKM,Balance Sheet (Annual),goodwill,Goodwill,2022,1098000000000.0
+TLKM,Balance Sheet (Annual),goodwill,Goodwill,2023,1079000000000.0
+TLKM,Balance Sheet (Annual),goodwill,Goodwill,2024,995000000000.0
+TLKM,Balance Sheet (Annual),goodwill,Goodwill,2025,914000000000.0
+TLKM,Balance Sheet (Annual),inventory,Inventory,2021,779000000000.0
+TLKM,Balance Sheet (Annual),inventory,Inventory,2022,1144000000000.0
+TLKM,Balance Sheet (Annual),inventory,Inventory,2023,997000000000.0
+TLKM,Balance Sheet (Annual),inventory,Inventory,2024,1096000000000.0
+TLKM,Balance Sheet (Annual),inventory,Inventory,2025,901000000000.0
+TLKM,Balance Sheet (Annual),investmentsc,Short-Term Investments,2021,429000000000.0
+TLKM,Balance Sheet (Annual),investmentsc,Short-Term Investments,2022,936000000000.0
+TLKM,Balance Sheet (Annual),investmentsc,Short-Term Investments,2023,1423000000000.0
+TLKM,Balance Sheet (Annual),investmentsc,Short-Term Investments,2024,1122000000000.0
+TLKM,Balance Sheet (Annual),investmentsc,Short-Term Investments,2025,1242000000000.0
+TLKM,Balance Sheet (Annual),investmentsnc,Long-Term Investments,2021,13800000000000.0
+TLKM,Balance Sheet (Annual),investmentsnc,Long-Term Investments,2022,8653000000000.0
+TLKM,Balance Sheet (Annual),investmentsnc,Long-Term Investments,2023,8162000000000.0
+TLKM,Balance Sheet (Annual),investmentsnc,Long-Term Investments,2024,8335000000000.0
+TLKM,Balance Sheet (Annual),investmentsnc,Long-Term Investments,2025,7387000000000.0
+TLKM,Balance Sheet (Annual),land,Land,2021,1821000000000.0
+TLKM,Balance Sheet (Annual),land,Land,2023,1955000000000.0
+TLKM,Balance Sheet (Annual),land,Land,2024,1981000000000.0
+TLKM,Balance Sheet (Annual),land,Land,2025,1995000000000.0
+TLKM,Balance Sheet (Annual),leaseholdImprovements,Leasehold Improvements,2021,1477000000000.0
+TLKM,Balance Sheet (Annual),leaseholdImprovements,Leasehold Improvements,2022,1571000000000.0
+TLKM,Balance Sheet (Annual),leaseholdImprovements,Leasehold Improvements,2023,1675000000000.0
+TLKM,Balance Sheet (Annual),leaseholdImprovements,Leasehold Improvements,2024,1795000000000.0
+TLKM,Balance Sheet (Annual),leaseholdImprovements,Leasehold Improvements,2025,1901000000000.0
+TLKM,Balance Sheet (Annual),liabilities,Total Liabilities,2021,131785000000000.0
+TLKM,Balance Sheet (Annual),liabilities,Total Liabilities,2022,125742000000000.0
+TLKM,Balance Sheet (Annual),liabilities,Total Liabilities,2023,130480000000000.0
+TLKM,Balance Sheet (Annual),liabilities,Total Liabilities,2024,137185000000000.0
+TLKM,Balance Sheet (Annual),liabilities,Total Liabilities,2025,137222000000000.0
+TLKM,Balance Sheet (Annual),liabilitiesequity,Total Liabilities & Equity,2021,277184000000000.0
+TLKM,Balance Sheet (Annual),liabilitiesequity,Total Liabilities & Equity,2022,274817000000000.0
+TLKM,Balance Sheet (Annual),liabilitiesequity,Total Liabilities & Equity,2023,287042000000000.0
+TLKM,Balance Sheet (Annual),liabilitiesequity,Total Liabilities & Equity,2024,291389000000000.0
+TLKM,Balance Sheet (Annual),liabilitiesequity,Total Liabilities & Equity,2025,287759000000000.0
+TLKM,Balance Sheet (Annual),longTermAccountsReceivable,Long-Term Accounts Receivable,2021,143000000000.0
+TLKM,Balance Sheet (Annual),longTermAccountsReceivable,Long-Term Accounts Receivable,2022,34000000000.0
+TLKM,Balance Sheet (Annual),longTermAccountsReceivable,Long-Term Accounts Receivable,2023,26000000000.0
+TLKM,Balance Sheet (Annual),longTermAccountsReceivable,Long-Term Accounts Receivable,2024,129000000000.0
+TLKM,Balance Sheet (Annual),longTermAccountsReceivable,Long-Term Accounts Receivable,2025,109000000000.0
+TLKM,Balance Sheet (Annual),longTermDeferredTaxLiabilities,Long-Term Deferred Tax Liabilities,2021,1158000000000.0
+TLKM,Balance Sheet (Annual),longTermDeferredTaxLiabilities,Long-Term Deferred Tax Liabilities,2022,1023000000000.0
+TLKM,Balance Sheet (Annual),longTermDeferredTaxLiabilities,Long-Term Deferred Tax Liabilities,2023,841000000000.0
+TLKM,Balance Sheet (Annual),longTermDeferredTaxLiabilities,Long-Term Deferred Tax Liabilities,2024,992000000000.0
+TLKM,Balance Sheet (Annual),longTermDeferredTaxLiabilities,Long-Term Deferred Tax Liabilities,2025,1233000000000.0
+TLKM,Balance Sheet (Annual),longTermUnearnedRevenue,Long-Term Unearned Revenue,2021,1283000000000.0
+TLKM,Balance Sheet (Annual),longTermUnearnedRevenue,Long-Term Unearned Revenue,2022,1561000000000.0
+TLKM,Balance Sheet (Annual),longTermUnearnedRevenue,Long-Term Unearned Revenue,2023,2591000000000.0
+TLKM,Balance Sheet (Annual),longTermUnearnedRevenue,Long-Term Unearned Revenue,2024,2484000000000.0
+TLKM,Balance Sheet (Annual),longTermUnearnedRevenue,Long-Term Unearned Revenue,2025,2851000000000.0
+TLKM,Balance Sheet (Annual),machinery,Machinery,2021,227371000000000.0
+TLKM,Balance Sheet (Annual),machinery,Machinery,2022,238213000000000.0
+TLKM,Balance Sheet (Annual),machinery,Machinery,2023,249146000000000.0
+TLKM,Balance Sheet (Annual),machinery,Machinery,2024,253927000000000.0
+TLKM,Balance Sheet (Annual),machinery,Machinery,2025,261053000000000.0
+TLKM,Balance Sheet (Annual),minorityInterestBS,Minority Interest,2021,23753000000000.0
+TLKM,Balance Sheet (Annual),minorityInterestBS,Minority Interest,2022,19851000000000.0
+TLKM,Balance Sheet (Annual),minorityInterestBS,Minority Interest,2023,20818000000000.0
+TLKM,Balance Sheet (Annual),minorityInterestBS,Minority Interest,2024,20396000000000.0
+TLKM,Balance Sheet (Annual),minorityInterestBS,Minority Interest,2025,19852000000000.0
+TLKM,Balance Sheet (Annual),netPPE,"Property, Plant & Equipment",2021,183495000000000.0
+TLKM,Balance Sheet (Annual),netPPE,"Property, Plant & Equipment",2022,193022000000000.0
+TLKM,Balance Sheet (Annual),netPPE,"Property, Plant & Equipment",2023,203339000000000.0
+TLKM,Balance Sheet (Annual),netPPE,"Property, Plant & Equipment",2024,197245000000000.0
+TLKM,Balance Sheet (Annual),netPPE,"Property, Plant & Equipment",2025,193414000000000.0
+TLKM,Balance Sheet (Annual),netcash,Net Cash (Debt),2021,-30338000000000.0
+TLKM,Balance Sheet (Annual),netcash,Net Cash (Debt),2022,-29970000000000.0
+TLKM,Balance Sheet (Annual),netcash,Net Cash (Debt),2023,-37694000000000.0
+TLKM,Balance Sheet (Annual),netcash,Net Cash (Debt),2024,-41841000000000.0
+TLKM,Balance Sheet (Annual),netcash,Net Cash (Debt),2025,-39441000000000.0
+TLKM,Balance Sheet (Annual),netcashpershare,Net Cash Per Share,2021,-306.25198
+TLKM,Balance Sheet (Annual),netcashpershare,Net Cash Per Share,2022,-302.53714
+TLKM,Balance Sheet (Annual),netcashpershare,Net Cash Per Share,2023,-380.50834
+TLKM,Balance Sheet (Annual),netcashpershare,Net Cash Per Share,2024,-422.37092
+TLKM,Balance Sheet (Annual),netcashpershare,Net Cash Per Share,2025,-398.14852
+TLKM,Balance Sheet (Annual),otherCurrentLiabilities,Other Current Liabilities,2021,16604000000000.0
+TLKM,Balance Sheet (Annual),otherCurrentLiabilities,Other Current Liabilities,2022,18240000000000.0
+TLKM,Balance Sheet (Annual),otherCurrentLiabilities,Other Current Liabilities,2023,16660000000000.0
+TLKM,Balance Sheet (Annual),otherCurrentLiabilities,Other Current Liabilities,2024,13857000000000.0
+TLKM,Balance Sheet (Annual),otherCurrentLiabilities,Other Current Liabilities,2025,13283000000000.0
+TLKM,Balance Sheet (Annual),otherEquity,Comprehensive Income & Other,2021,9395000000000.0
+TLKM,Balance Sheet (Annual),otherEquity,Comprehensive Income & Other,2022,564000000000.0
+TLKM,Balance Sheet (Annual),otherEquity,Comprehensive Income & Other,2023,9639000000000.0
+TLKM,Balance Sheet (Annual),otherEquity,Comprehensive Income & Other,2024,9898000000000.0
+TLKM,Balance Sheet (Annual),otherEquity,Comprehensive Income & Other,2025,10259000000000.0
+TLKM,Balance Sheet (Annual),otherIntangibles,Other Intangible Assets,2021,7988000000000.0
+TLKM,Balance Sheet (Annual),otherIntangibles,Other Intangible Assets,2022,8495000000000.0
+TLKM,Balance Sheet (Annual),otherIntangibles,Other Intangible Assets,2023,9639000000000.0
+TLKM,Balance Sheet (Annual),otherIntangibles,Other Intangible Assets,2024,10041000000000.0
+TLKM,Balance Sheet (Annual),otherIntangibles,Other Intangible Assets,2025,9524000000000.0
+TLKM,Balance Sheet (Annual),otherReceivables,Other Receivables,2021,885000000000.0
+TLKM,Balance Sheet (Annual),otherReceivables,Other Receivables,2022,261000000000.0
+TLKM,Balance Sheet (Annual),otherReceivables,Other Receivables,2023,2194000000000.0
+TLKM,Balance Sheet (Annual),otherReceivables,Other Receivables,2024,1032000000000.0
+TLKM,Balance Sheet (Annual),otherReceivables,Other Receivables,2025,490000000000.0
+TLKM,Balance Sheet (Annual),othercurrent,Other Current Assets,2021,4925000000000.0
+TLKM,Balance Sheet (Annual),othercurrent,Other Current Assets,2022,2570000000000.0
+TLKM,Balance Sheet (Annual),othercurrent,Other Current Assets,2023,2101000000000.0
+TLKM,Balance Sheet (Annual),othercurrent,Other Current Assets,2024,4628000000000.0
+TLKM,Balance Sheet (Annual),othercurrent,Other Current Assets,2025,4668000000000.0
+TLKM,Balance Sheet (Annual),otherliabilitiesnoncurrent,Other Long-Term Liabilities,2021,1905000000000.0
+TLKM,Balance Sheet (Annual),otherliabilitiesnoncurrent,Other Long-Term Liabilities,2022,1619000000000.0
+TLKM,Balance Sheet (Annual),otherliabilitiesnoncurrent,Other Long-Term Liabilities,2023,1443000000000.0
+TLKM,Balance Sheet (Annual),otherliabilitiesnoncurrent,Other Long-Term Liabilities,2024,1416000000000.0
+TLKM,Balance Sheet (Annual),otherliabilitiesnoncurrent,Other Long-Term Liabilities,2025,1548000000000.0
+TLKM,Balance Sheet (Annual),othernoncurrent,Other Long-Term Assets,2021,3959000000000.0
+TLKM,Balance Sheet (Annual),othernoncurrent,Other Long-Term Assets,2022,2332000000000.0
+TLKM,Balance Sheet (Annual),othernoncurrent,Other Long-Term Assets,2023,3446000000000.0
+TLKM,Balance Sheet (Annual),othernoncurrent,Other Long-Term Assets,2024,4614000000000.0
+TLKM,Balance Sheet (Annual),othernoncurrent,Other Long-Term Assets,2025,6672000000000.0
+TLKM,Balance Sheet (Annual),pensionRetirementBenefits,Pension & Post-Retirement Benefits,2021,11563000000000.0
+TLKM,Balance Sheet (Annual),pensionRetirementBenefits,Pension & Post-Retirement Benefits,2022,10272000000000.0
+TLKM,Balance Sheet (Annual),pensionRetirementBenefits,Pension & Post-Retirement Benefits,2023,11414000000000.0
+TLKM,Balance Sheet (Annual),pensionRetirementBenefits,Pension & Post-Retirement Benefits,2024,11540000000000.0
+TLKM,Balance Sheet (Annual),pensionRetirementBenefits,Pension & Post-Retirement Benefits,2025,12996000000000.0
+TLKM,Balance Sheet (Annual),prepaidExpenses,Prepaid Expenses,2021,5108000000000.0
+TLKM,Balance Sheet (Annual),prepaidExpenses,Prepaid Expenses,2022,7124000000000.0
+TLKM,Balance Sheet (Annual),prepaidExpenses,Prepaid Expenses,2023,6520000000000.0
+TLKM,Balance Sheet (Annual),prepaidExpenses,Prepaid Expenses,2024,6655000000000.0
+TLKM,Balance Sheet (Annual),prepaidExpenses,Prepaid Expenses,2025,6724000000000.0
+TLKM,Balance Sheet (Annual),receivables,Receivables,2021,11725000000000.0
+TLKM,Balance Sheet (Annual),receivables,Receivables,2022,11352000000000.0
+TLKM,Balance Sheet (Annual),receivables,Receivables,2023,15565000000000.0
+TLKM,Balance Sheet (Annual),receivables,Receivables,2024,15674000000000.0
+TLKM,Balance Sheet (Annual),receivables,Receivables,2025,14003000000000.0
+TLKM,Balance Sheet (Annual),retearn,Retained Earnings,2021,104587000000000.0
+TLKM,Balance Sheet (Annual),retearn,Retained Earnings,2022,121730000000000.0
+TLKM,Balance Sheet (Annual),retearn,Retained Earnings,2023,118441000000000.0
+TLKM,Balance Sheet (Annual),retearn,Retained Earnings,2024,116647000000000.0
+TLKM,Balance Sheet (Annual),retearn,Retained Earnings,2025,113193000000000.0
+TLKM,Balance Sheet (Annual),sharesOutFilingDate,Filing Date Shares Outstanding,2021,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutFilingDate,Filing Date Shares Outstanding,2022,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutFilingDate,Filing Date Shares Outstanding,2023,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutFilingDate,Filing Date Shares Outstanding,2024,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutFilingDate,Filing Date Shares Outstanding,2025,99053271200.0
+TLKM,Balance Sheet (Annual),sharesOutTotalCommon,Total Common Shares Outstanding,2021,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutTotalCommon,Total Common Shares Outstanding,2022,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutTotalCommon,Total Common Shares Outstanding,2023,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutTotalCommon,Total Common Shares Outstanding,2024,99062216600.0
+TLKM,Balance Sheet (Annual),sharesOutTotalCommon,Total Common Shares Outstanding,2025,99053271200.0
+TLKM,Balance Sheet (Annual),tangibleBookValue,Tangible Book Value,2021,112568000000000.0
+TLKM,Balance Sheet (Annual),tangibleBookValue,Tangible Book Value,2022,119631000000000.0
+TLKM,Balance Sheet (Annual),tangibleBookValue,Tangible Book Value,2023,125026000000000.0
+TLKM,Balance Sheet (Annual),tangibleBookValue,Tangible Book Value,2024,122772000000000.0
+TLKM,Balance Sheet (Annual),tangibleBookValue,Tangible Book Value,2025,120247000000000.0
+TLKM,Balance Sheet (Annual),tangibleBookValuePerShare,Tangible Book Value Per Share,2021,1136.336373
+TLKM,Balance Sheet (Annual),tangibleBookValuePerShare,Tangible Book Value Per Share,2022,1207.635
+TLKM,Balance Sheet (Annual),tangibleBookValuePerShare,Tangible Book Value Per Share,2023,1262.095724
+TLKM,Balance Sheet (Annual),tangibleBookValuePerShare,Tangible Book Value Per Share,2024,1239.342346
+TLKM,Balance Sheet (Annual),tangibleBookValuePerShare,Tangible Book Value Per Share,2025,1213.962936
+TLKM,Balance Sheet (Annual),totalCommonEquity,Total Common Equity,2021,121646000000000.0
+TLKM,Balance Sheet (Annual),totalCommonEquity,Total Common Equity,2022,129224000000000.0
+TLKM,Balance Sheet (Annual),totalCommonEquity,Total Common Equity,2023,135744000000000.0
+TLKM,Balance Sheet (Annual),totalCommonEquity,Total Common Equity,2024,133808000000000.0
+TLKM,Balance Sheet (Annual),totalCommonEquity,Total Common Equity,2025,130685000000000.0
+TLKM,Balance Sheet (Annual),totalcash,Cash & Short-Term Investments,2021,38740000000000.0
+TLKM,Balance Sheet (Annual),totalcash,Cash & Short-Term Investments,2022,32883000000000.0
+TLKM,Balance Sheet (Annual),totalcash,Cash & Short-Term Investments,2023,30430000000000.0
+TLKM,Balance Sheet (Annual),totalcash,Cash & Short-Term Investments,2024,35027000000000.0
+TLKM,Balance Sheet (Annual),totalcash,Cash & Short-Term Investments,2025,35470000000000.0
+TLKM,Balance Sheet (Annual),treasuryStock,Treasury Stock,2025,-30000000000.0
+TLKM,Balance Sheet (Annual),workingcapital,Working Capital,2021,-7854000000000.0
+TLKM,Balance Sheet (Annual),workingcapital,Working Capital,2022,-15162000000000.0
+TLKM,Balance Sheet (Annual),workingcapital,Working Capital,2023,-15955000000000.0
+TLKM,Balance Sheet (Annual),workingcapital,Working Capital,2024,-13687000000000.0
+TLKM,Balance Sheet (Annual),workingcapital,Working Capital,2025,-12182000000000.0
+TLKM,Cash Flow Statement (Annual),assetWritedownCF,Asset Writedown & Restructuring Costs,2023,13000000000.0
+TLKM,Cash Flow Statement (Annual),assetWritedownCF,Asset Writedown & Restructuring Costs,2024,77000000000.0
+TLKM,Cash Flow Statement (Annual),capex,Capital Expenditures,2021,-29923000000000.0
+TLKM,Cash Flow Statement (Annual),capex,Capital Expenditures,2022,-35010000000000.0
+TLKM,Cash Flow Statement (Annual),capex,Capital Expenditures,2023,-33601000000000.0
+TLKM,Cash Flow Statement (Annual),capex,Capital Expenditures,2024,-26005000000000.0
+TLKM,Cash Flow Statement (Annual),capex,Capital Expenditures,2025,-22871000000000.0
+TLKM,Cash Flow Statement (Annual),cashAcquisition,Cash Acquisitions,2024,-635000000000.0
+TLKM,Cash Flow Statement (Annual),cashInterestPaid,Cash Interest Paid,2021,4426000000000.0
+TLKM,Cash Flow Statement (Annual),cashInterestPaid,Cash Interest Paid,2022,4064000000000.0
+TLKM,Cash Flow Statement (Annual),cashInterestPaid,Cash Interest Paid,2023,4748000000000.0
+TLKM,Cash Flow Statement (Annual),cashInterestPaid,Cash Interest Paid,2024,5295000000000.0
+TLKM,Cash Flow Statement (Annual),cashInterestPaid,Cash Interest Paid,2025,5230000000000.0
+TLKM,Cash Flow Statement (Annual),cashTaxesPaid,Cash Income Tax Paid,2021,5911000000000.0
+TLKM,Cash Flow Statement (Annual),cashTaxesPaid,Cash Income Tax Paid,2022,6054000000000.0
+TLKM,Cash Flow Statement (Annual),cashTaxesPaid,Cash Income Tax Paid,2023,10065000000000.0
+TLKM,Cash Flow Statement (Annual),cashTaxesPaid,Cash Income Tax Paid,2024,10384000000000.0
+TLKM,Cash Flow Statement (Annual),cashTaxesPaid,Cash Income Tax Paid,2025,9116000000000.0
+TLKM,Cash Flow Statement (Annual),commonDividendCF,Common Dividends Paid,2021,-12482000000000.0
+TLKM,Cash Flow Statement (Annual),commonDividendCF,Common Dividends Paid,2022,-14856000000000.0
+TLKM,Cash Flow Statement (Annual),commonDividendCF,Common Dividends Paid,2023,-16603000000000.0
+TLKM,Cash Flow Statement (Annual),commonDividendCF,Common Dividends Paid,2024,-17683000000000.0
+TLKM,Cash Flow Statement (Annual),commonDividendCF,Common Dividends Paid,2025,-21047000000000.0
+TLKM,Cash Flow Statement (Annual),commonRepurchased,Repurchase of Common Stock,2025,-30000000000.0
+TLKM,Cash Flow Statement (Annual),debtIssuedLongTerm,Long-Term Debt Issued,2021,46612000000000.0
+TLKM,Cash Flow Statement (Annual),debtIssuedLongTerm,Long-Term Debt Issued,2022,35958000000000.0
+TLKM,Cash Flow Statement (Annual),debtIssuedLongTerm,Long-Term Debt Issued,2023,38834000000000.0
+TLKM,Cash Flow Statement (Annual),debtIssuedLongTerm,Long-Term Debt Issued,2024,52653000000000.0
+TLKM,Cash Flow Statement (Annual),debtIssuedLongTerm,Long-Term Debt Issued,2025,69895000000000.0
+TLKM,Cash Flow Statement (Annual),debtRepaidLongTerm,Long-Term Debt Repaid,2021,-47965000000000.0
+TLKM,Cash Flow Statement (Annual),debtRepaidLongTerm,Long-Term Debt Repaid,2022,-51328000000000.0
+TLKM,Cash Flow Statement (Annual),debtRepaidLongTerm,Long-Term Debt Repaid,2023,-41925000000000.0
+TLKM,Cash Flow Statement (Annual),debtRepaidLongTerm,Long-Term Debt Repaid,2024,-54994000000000.0
+TLKM,Cash Flow Statement (Annual),debtRepaidLongTerm,Long-Term Debt Repaid,2025,-79393000000000.0
+TLKM,Cash Flow Statement (Annual),exchangeRateAdjustments,Foreign Exchange Rate Adjustments,2021,59000000000.0
+TLKM,Cash Flow Statement (Annual),exchangeRateAdjustments,Foreign Exchange Rate Adjustments,2022,370000000000.0
+TLKM,Cash Flow Statement (Annual),exchangeRateAdjustments,Foreign Exchange Rate Adjustments,2023,-44000000000.0
+TLKM,Cash Flow Statement (Annual),exchangeRateAdjustments,Foreign Exchange Rate Adjustments,2024,260000000000.0
+TLKM,Cash Flow Statement (Annual),exchangeRateAdjustments,Foreign Exchange Rate Adjustments,2025,320000000000.0
+TLKM,Cash Flow Statement (Annual),fcf,Free Cash Flow,2021,38430000000000.0
+TLKM,Cash Flow Statement (Annual),fcf,Free Cash Flow,2022,38344000000000.0
+TLKM,Cash Flow Statement (Annual),fcf,Free Cash Flow,2023,26980000000000.0
+TLKM,Cash Flow Statement (Annual),fcf,Free Cash Flow,2024,35595000000000.0
+TLKM,Cash Flow Statement (Annual),fcf,Free Cash Flow,2025,40971000000000.0
+TLKM,Cash Flow Statement (Annual),fcfGrowth,Free Cash Flow Growth,2021,0.07475
+TLKM,Cash Flow Statement (Annual),fcfGrowth,Free Cash Flow Growth,2022,-0.00224
+TLKM,Cash Flow Statement (Annual),fcfGrowth,Free Cash Flow Growth,2023,-0.29637
+TLKM,Cash Flow Statement (Annual),fcfGrowth,Free Cash Flow Growth,2024,0.31931
+TLKM,Cash Flow Statement (Annual),fcfGrowth,Free Cash Flow Growth,2025,0.15103
+TLKM,Cash Flow Statement (Annual),fcfMargin,Free Cash Flow Margin,2021,0.26835
+TLKM,Cash Flow Statement (Annual),fcfMargin,Free Cash Flow Margin,2022,0.2603
+TLKM,Cash Flow Statement (Annual),fcfMargin,Free Cash Flow Margin,2023,0.18081
+TLKM,Cash Flow Statement (Annual),fcfMargin,Free Cash Flow Margin,2024,0.23735
+TLKM,Cash Flow Statement (Annual),fcfMargin,Free Cash Flow Margin,2025,0.2792
+TLKM,Cash Flow Statement (Annual),fcfps,Free Cash Flow Per Share,2021,387.938
+TLKM,Cash Flow Statement (Annual),fcfps,Free Cash Flow Per Share,2022,387.07
+TLKM,Cash Flow Statement (Annual),fcfps,Free Cash Flow Per Share,2023,272.354
+TLKM,Cash Flow Statement (Annual),fcfps,Free Cash Flow Per Share,2024,359.32
+TLKM,Cash Flow Statement (Annual),fcfps,Free Cash Flow Per Share,2025,413.594
+TLKM,Cash Flow Statement (Annual),investInSecurities,Investment in Securities,2021,-5593000000000.0
+TLKM,Cash Flow Statement (Annual),investInSecurities,Investment in Securities,2022,-2238000000000.0
+TLKM,Cash Flow Statement (Annual),investInSecurities,Investment in Securities,2023,-641000000000.0
+TLKM,Cash Flow Statement (Annual),investInSecurities,Investment in Securities,2024,312000000000.0
+TLKM,Cash Flow Statement (Annual),investInSecurities,Investment in Securities,2025,561000000000.0
+TLKM,Cash Flow Statement (Annual),leveredFCF,Levered Free Cash Flow,2021,27806500000000.0
+TLKM,Cash Flow Statement (Annual),leveredFCF,Levered Free Cash Flow,2022,22526125000000.0
+TLKM,Cash Flow Statement (Annual),leveredFCF,Levered Free Cash Flow,2023,16037625000000.0
+TLKM,Cash Flow Statement (Annual),leveredFCF,Levered Free Cash Flow,2024,22080250000000.0
+TLKM,Cash Flow Statement (Annual),leveredFCF,Levered Free Cash Flow,2025,32318500000000.0
+TLKM,Cash Flow Statement (Annual),miscCashFlowAdjustments,Miscellaneous Cash Flow Adjustments,2021,-1000000000.0
+TLKM,Cash Flow Statement (Annual),miscCashFlowAdjustments,Miscellaneous Cash Flow Adjustments,2022,-1000000000.0
+TLKM,Cash Flow Statement (Annual),miscCashFlowAdjustments,Miscellaneous Cash Flow Adjustments,2023,-1000000000.0
+TLKM,Cash Flow Statement (Annual),miscCashFlowAdjustments,Miscellaneous Cash Flow Adjustments,2024,-1000000000.0
+TLKM,Cash Flow Statement (Annual),miscCashFlowAdjustments,Miscellaneous Cash Flow Adjustments,2025,-1000000000.0
+TLKM,Cash Flow Statement (Annual),ncf,Net Cash Flow,2021,17722000000000.0
+TLKM,Cash Flow Statement (Annual),ncf,Net Cash Flow,2022,-6364000000000.0
+TLKM,Cash Flow Statement (Annual),ncf,Net Cash Flow,2023,-2940000000000.0
+TLKM,Cash Flow Statement (Annual),ncf,Net Cash Flow,2024,4898000000000.0
+TLKM,Cash Flow Statement (Annual),ncf,Net Cash Flow,2025,323000000000.0
+TLKM,Cash Flow Statement (Annual),ncff,Financing Cash Flow,2021,-12775000000000.0
+TLKM,Cash Flow Statement (Annual),ncff,Financing Cash Flow,2022,-40965000000000.0
+TLKM,Cash Flow Statement (Annual),ncff,Financing Cash Flow,2023,-26567000000000.0
+TLKM,Cash Flow Statement (Annual),ncff,Financing Cash Flow,2024,-27505000000000.0
+TLKM,Cash Flow Statement (Annual),ncff,Financing Cash Flow,2025,-37743000000000.0
+TLKM,Cash Flow Statement (Annual),ncfi,Investing Cash Flow,2021,-37914000000000.0
+TLKM,Cash Flow Statement (Annual),ncfi,Investing Cash Flow,2022,-39122000000000.0
+TLKM,Cash Flow Statement (Annual),ncfi,Investing Cash Flow,2023,-36909000000000.0
+TLKM,Cash Flow Statement (Annual),ncfi,Investing Cash Flow,2024,-29456000000000.0
+TLKM,Cash Flow Statement (Annual),ncfi,Investing Cash Flow,2025,-26095000000000.0
+TLKM,Cash Flow Statement (Annual),ncfo,Operating Cash Flow,2021,68353000000000.0
+TLKM,Cash Flow Statement (Annual),ncfo,Operating Cash Flow,2022,73354000000000.0
+TLKM,Cash Flow Statement (Annual),ncfo,Operating Cash Flow,2023,60581000000000.0
+TLKM,Cash Flow Statement (Annual),ncfo,Operating Cash Flow,2024,61600000000000.0
+TLKM,Cash Flow Statement (Annual),ncfo,Operating Cash Flow,2025,63842000000000.0
+TLKM,Cash Flow Statement (Annual),netDebtIssued,Net Debt Issued (Repaid),2021,-1353000000000.0
+TLKM,Cash Flow Statement (Annual),netDebtIssued,Net Debt Issued (Repaid),2022,-15370000000000.0
+TLKM,Cash Flow Statement (Annual),netDebtIssued,Net Debt Issued (Repaid),2023,-3091000000000.0
+TLKM,Cash Flow Statement (Annual),netDebtIssued,Net Debt Issued (Repaid),2024,-2341000000000.0
+TLKM,Cash Flow Statement (Annual),netDebtIssued,Net Debt Issued (Repaid),2025,-9498000000000.0
+TLKM,Cash Flow Statement (Annual),netIncomeCF,Net Income,2021,24877000000000.0
+TLKM,Cash Flow Statement (Annual),netIncomeCF,Net Income,2022,20736000000000.0
+TLKM,Cash Flow Statement (Annual),netIncomeCF,Net Income,2023,24560000000000.0
+TLKM,Cash Flow Statement (Annual),netIncomeCF,Net Income,2024,22403000000000.0
+TLKM,Cash Flow Statement (Annual),netIncomeCF,Net Income,2025,17814000000000.0
+TLKM,Cash Flow Statement (Annual),ocfGrowth,Operating Cash Flow Growth,2021,0.04648
+TLKM,Cash Flow Statement (Annual),ocfGrowth,Operating Cash Flow Growth,2022,0.07316
+TLKM,Cash Flow Statement (Annual),ocfGrowth,Operating Cash Flow Growth,2023,-0.17413
+TLKM,Cash Flow Statement (Annual),ocfGrowth,Operating Cash Flow Growth,2024,0.01682
+TLKM,Cash Flow Statement (Annual),ocfGrowth,Operating Cash Flow Growth,2025,0.0364
+TLKM,Cash Flow Statement (Annual),otherAmortization,Other Amortization,2022,2063000000000.0
+TLKM,Cash Flow Statement (Annual),otherAmortization,Other Amortization,2023,2321000000000.0
+TLKM,Cash Flow Statement (Annual),otherAmortization,Other Amortization,2024,2515000000000.0
+TLKM,Cash Flow Statement (Annual),otherAmortization,Other Amortization,2025,2906000000000.0
+TLKM,Cash Flow Statement (Annual),otherfinancing,Other Financing Activities,2021,5221000000000.0
+TLKM,Cash Flow Statement (Annual),otherfinancing,Other Financing Activities,2022,-10739000000000.0
+TLKM,Cash Flow Statement (Annual),otherfinancing,Other Financing Activities,2023,-6873000000000.0
+TLKM,Cash Flow Statement (Annual),otherfinancing,Other Financing Activities,2024,-7481000000000.0
+TLKM,Cash Flow Statement (Annual),otherfinancing,Other Financing Activities,2025,-7168000000000.0
+TLKM,Cash Flow Statement (Annual),otherinvesting,Other Investing Activities,2021,-309000000000.0
+TLKM,Cash Flow Statement (Annual),otherinvesting,Other Investing Activities,2022,859000000000.0
+TLKM,Cash Flow Statement (Annual),otherinvesting,Other Investing Activities,2023,50000000000.0
+TLKM,Cash Flow Statement (Annual),otherinvesting,Other Investing Activities,2024,-187000000000.0
+TLKM,Cash Flow Statement (Annual),otherinvesting,Other Investing Activities,2025,-966000000000.0
+TLKM,Cash Flow Statement (Annual),otheroperating,Other Operating Activities,2021,11762000000000.0
+TLKM,Cash Flow Statement (Annual),otheroperating,Other Operating Activities,2022,19489000000000.0
+TLKM,Cash Flow Statement (Annual),otheroperating,Other Operating Activities,2023,3358000000000.0
+TLKM,Cash Flow Statement (Annual),otheroperating,Other Operating Activities,2024,5016000000000.0
+TLKM,Cash Flow Statement (Annual),otheroperating,Other Operating Activities,2025,8379000000000.0
+TLKM,Cash Flow Statement (Annual),saleOfPropertyPlantAndEquipment,"Sale of Property, Plant & Equipment",2021,756000000000.0
+TLKM,Cash Flow Statement (Annual),saleOfPropertyPlantAndEquipment,"Sale of Property, Plant & Equipment",2022,526000000000.0
+TLKM,Cash Flow Statement (Annual),saleOfPropertyPlantAndEquipment,"Sale of Property, Plant & Equipment",2023,100000000000.0
+TLKM,Cash Flow Statement (Annual),saleOfPropertyPlantAndEquipment,"Sale of Property, Plant & Equipment",2024,717000000000.0
+TLKM,Cash Flow Statement (Annual),saleOfPropertyPlantAndEquipment,"Sale of Property, Plant & Equipment",2025,78000000000.0
+TLKM,Cash Flow Statement (Annual),salePurchaseIntangibles,Sale (Purchase) of Intangibles,2021,-2845000000000.0
+TLKM,Cash Flow Statement (Annual),salePurchaseIntangibles,Sale (Purchase) of Intangibles,2022,-3259000000000.0
+TLKM,Cash Flow Statement (Annual),salePurchaseIntangibles,Sale (Purchase) of Intangibles,2023,-2817000000000.0
+TLKM,Cash Flow Statement (Annual),salePurchaseIntangibles,Sale (Purchase) of Intangibles,2024,-3658000000000.0
+TLKM,Cash Flow Statement (Annual),salePurchaseIntangibles,Sale (Purchase) of Intangibles,2025,-2897000000000.0
+TLKM,Cash Flow Statement (Annual),totalDepAmorCF,Depreciation & Amortization,2021,31714000000000.0
+TLKM,Cash Flow Statement (Annual),totalDepAmorCF,Depreciation & Amortization,2022,31066000000000.0
+TLKM,Cash Flow Statement (Annual),totalDepAmorCF,Depreciation & Amortization,2023,30329000000000.0
+TLKM,Cash Flow Statement (Annual),totalDepAmorCF,Depreciation & Amortization,2024,31589000000000.0
+TLKM,Cash Flow Statement (Annual),totalDepAmorCF,Depreciation & Amortization,2025,34743000000000.0
+TLKM,Cash Flow Statement (Annual),unleveredFCF,Unlevered Free Cash Flow,2021,30552750000000.0
+TLKM,Cash Flow Statement (Annual),unleveredFCF,Unlevered Free Cash Flow,2022,25074250000000.0
+TLKM,Cash Flow Statement (Annual),unleveredFCF,Unlevered Free Cash Flow,2023,18945125000000.0
+TLKM,Cash Flow Statement (Annual),unleveredFCF,Unlevered Free Cash Flow,2024,25335250000000.0
+TLKM,Cash Flow Statement (Annual),unleveredFCF,Unlevered Free Cash Flow,2025,35572250000000.0
+TLKM,Income Statement (Annual),cor,Cost of Revenue,2021,53530000000000.0
+TLKM,Income Statement (Annual),cor,Cost of Revenue,2022,54658000000000.0
+TLKM,Income Statement (Annual),cor,Cost of Revenue,2023,58238000000000.0
+TLKM,Income Statement (Annual),cor,Cost of Revenue,2024,60010000000000.0
+TLKM,Income Statement (Annual),cor,Cost of Revenue,2025,59039000000000.0
+TLKM,Income Statement (Annual),currencyGains,Currency Exchange Gain (Loss),2021,50000000000.0
+TLKM,Income Statement (Annual),currencyGains,Currency Exchange Gain (Loss),2022,256000000000.0
+TLKM,Income Statement (Annual),currencyGains,Currency Exchange Gain (Loss),2023,-36000000000.0
+TLKM,Income Statement (Annual),currencyGains,Currency Exchange Gain (Loss),2024,136000000000.0
+TLKM,Income Statement (Annual),currencyGains,Currency Exchange Gain (Loss),2025,180000000000.0
+TLKM,Income Statement (Annual),depAmorEbitda,D&A For EBITDA,2021,31714000000000.0
+TLKM,Income Statement (Annual),depAmorEbitda,D&A For EBITDA,2022,25840000000000.0
+TLKM,Income Statement (Annual),depAmorEbitda,D&A For EBITDA,2023,25169000000000.0
+TLKM,Income Statement (Annual),depAmorEbitda,D&A For EBITDA,2024,26090000000000.0
+TLKM,Income Statement (Annual),depAmorEbitda,D&A For EBITDA,2025,29082000000000.0
+TLKM,Income Statement (Annual),dividendGrowth,Dividend Growth,2021,0.19014
+TLKM,Income Statement (Annual),dividendGrowth,Dividend Growth,2022,0.11749
+TLKM,Income Statement (Annual),dividendGrowth,Dividend Growth,2023,0.0651
+TLKM,Income Statement (Annual),dividendGrowth,Dividend Growth,2024,0.19031
+TLKM,Income Statement (Annual),dps,Dividend Per Share,2021,149.97
+TLKM,Income Statement (Annual),dps,Dividend Per Share,2022,167.59
+TLKM,Income Statement (Annual),dps,Dividend Per Share,2023,178.5
+TLKM,Income Statement (Annual),dps,Dividend Per Share,2024,212.47
+TLKM,Income Statement (Annual),earningContinuing,Earnings From Continuing Operations,2021,34099000000000.0
+TLKM,Income Statement (Annual),earningContinuing,Earnings From Continuing Operations,2022,27720000000000.0
+TLKM,Income Statement (Annual),earningContinuing,Earnings From Continuing Operations,2023,32208000000000.0
+TLKM,Income Statement (Annual),earningContinuing,Earnings From Continuing Operations,2024,29497000000000.0
+TLKM,Income Statement (Annual),earningContinuing,Earnings From Continuing Operations,2025,24458000000000.0
+TLKM,Income Statement (Annual),ebit,EBIT,2021,43318000000000.0
+TLKM,Income Statement (Annual),ebit,EBIT,2022,45202000000000.0
+TLKM,Income Statement (Annual),ebit,EBIT,2023,44885000000000.0
+TLKM,Income Statement (Annual),ebit,EBIT,2024,41514000000000.0
+TLKM,Income Statement (Annual),ebit,EBIT,2025,35418000000000.0
+TLKM,Income Statement (Annual),ebitMargin,EBIT Margin,2021,0.30248
+TLKM,Income Statement (Annual),ebitMargin,EBIT Margin,2022,0.30686
+TLKM,Income Statement (Annual),ebitMargin,EBIT Margin,2023,0.30081
+TLKM,Income Statement (Annual),ebitMargin,EBIT Margin,2024,0.27682
+TLKM,Income Statement (Annual),ebitMargin,EBIT Margin,2025,0.24136
+TLKM,Income Statement (Annual),ebitda,EBITDA,2021,75032000000000.0
+TLKM,Income Statement (Annual),ebitda,EBITDA,2022,71042000000000.0
+TLKM,Income Statement (Annual),ebitda,EBITDA,2023,70054000000000.0
+TLKM,Income Statement (Annual),ebitda,EBITDA,2024,67604000000000.0
+TLKM,Income Statement (Annual),ebitda,EBITDA,2025,64500000000000.0
+TLKM,Income Statement (Annual),ebitdaMargin,EBITDA Margin,2021,0.52393
+TLKM,Income Statement (Annual),ebitdaMargin,EBITDA Margin,2022,0.48227
+TLKM,Income Statement (Annual),ebitdaMargin,EBITDA Margin,2023,0.46948
+TLKM,Income Statement (Annual),ebitdaMargin,EBITDA Margin,2024,0.45079
+TLKM,Income Statement (Annual),ebitdaMargin,EBITDA Margin,2025,0.43955
+TLKM,Income Statement (Annual),ebtExcl,EBT Excluding Unusual Items,2021,39454000000000.0
+TLKM,Income Statement (Annual),ebtExcl,EBT Excluding Unusual Items,2022,42172000000000.0
+TLKM,Income Statement (Annual),ebtExcl,EBT Excluding Unusual Items,2023,41259000000000.0
+TLKM,Income Statement (Annual),ebtExcl,EBT Excluding Unusual Items,2024,37812000000000.0
+TLKM,Income Statement (Annual),ebtExcl,EBT Excluding Unusual Items,2025,32052000000000.0
+TLKM,Income Statement (Annual),epsBasic,EPS (Basic),2021,251.125008
+TLKM,Income Statement (Annual),epsBasic,EPS (Basic),2022,209.322996
+TLKM,Income Statement (Annual),epsBasic,EPS (Basic),2023,247.924999
+TLKM,Income Statement (Annual),epsBasic,EPS (Basic),2024,226.150804
+TLKM,Income Statement (Annual),epsBasic,EPS (Basic),2025,179.828545
+TLKM,Income Statement (Annual),epsGrowth,EPS Growth,2021,0.19578
+TLKM,Income Statement (Annual),epsGrowth,EPS Growth,2022,-0.16646
+TLKM,Income Statement (Annual),epsGrowth,EPS Growth,2023,0.18441
+TLKM,Income Statement (Annual),epsGrowth,EPS Growth,2024,-0.08783
+TLKM,Income Statement (Annual),epsGrowth,EPS Growth,2025,-0.20483
+TLKM,Income Statement (Annual),epsdil,EPS (Diluted),2021,251.125008
+TLKM,Income Statement (Annual),epsdil,EPS (Diluted),2022,209.322996
+TLKM,Income Statement (Annual),epsdil,EPS (Diluted),2023,247.924999
+TLKM,Income Statement (Annual),epsdil,EPS (Diluted),2024,226.150804
+TLKM,Income Statement (Annual),epsdil,EPS (Diluted),2025,179.828545
+TLKM,Income Statement (Annual),fcf,Free Cash Flow,2021,38430000000000.0
+TLKM,Income Statement (Annual),fcf,Free Cash Flow,2022,38344000000000.0
+TLKM,Income Statement (Annual),fcf,Free Cash Flow,2023,26980000000000.0
+TLKM,Income Statement (Annual),fcf,Free Cash Flow,2024,35595000000000.0
+TLKM,Income Statement (Annual),fcf,Free Cash Flow,2025,40971000000000.0
+TLKM,Income Statement (Annual),fcfMargin,Free Cash Flow Margin,2021,0.26835
+TLKM,Income Statement (Annual),fcfMargin,Free Cash Flow Margin,2022,0.2603
+TLKM,Income Statement (Annual),fcfMargin,Free Cash Flow Margin,2023,0.18081
+TLKM,Income Statement (Annual),fcfMargin,Free Cash Flow Margin,2024,0.23735
+TLKM,Income Statement (Annual),fcfMargin,Free Cash Flow Margin,2025,0.2792
+TLKM,Income Statement (Annual),fcfps,Free Cash Flow Per Share,2021,387.938
+TLKM,Income Statement (Annual),fcfps,Free Cash Flow Per Share,2022,387.07
+TLKM,Income Statement (Annual),fcfps,Free Cash Flow Per Share,2023,272.354
+TLKM,Income Statement (Annual),fcfps,Free Cash Flow Per Share,2024,359.32
+TLKM,Income Statement (Annual),fcfps,Free Cash Flow Per Share,2025,413.594
+TLKM,Income Statement (Annual),gainAssets,Gain (Loss) on Sale of Assets,2021,720000000000.0
+TLKM,Income Statement (Annual),gainAssets,Gain (Loss) on Sale of Assets,2022,397000000000.0
+TLKM,Income Statement (Annual),gainAssets,Gain (Loss) on Sale of Assets,2023,84000000000.0
+TLKM,Income Statement (Annual),gainAssets,Gain (Loss) on Sale of Assets,2024,658000000000.0
+TLKM,Income Statement (Annual),gainAssets,Gain (Loss) on Sale of Assets,2025,78000000000.0
+TLKM,Income Statement (Annual),gainInvestments,Gain (Loss) on Sale of Investments,2021,3432000000000.0
+TLKM,Income Statement (Annual),gainInvestments,Gain (Loss) on Sale of Investments,2022,-6438000000000.0
+TLKM,Income Statement (Annual),gainInvestments,Gain (Loss) on Sale of Investments,2023,-748000000000.0
+TLKM,Income Statement (Annual),gainInvestments,Gain (Loss) on Sale of Investments,2024,188000000000.0
+TLKM,Income Statement (Annual),gainInvestments,Gain (Loss) on Sale of Investments,2025,-242000000000.0
+TLKM,Income Statement (Annual),gp,Gross Profit,2021,89680000000000.0
+TLKM,Income Statement (Annual),gp,Gross Profit,2022,92648000000000.0
+TLKM,Income Statement (Annual),gp,Gross Profit,2023,90978000000000.0
+TLKM,Income Statement (Annual),gp,Gross Profit,2024,89957000000000.0
+TLKM,Income Statement (Annual),gp,Gross Profit,2025,87703000000000.0
+TLKM,Income Statement (Annual),grossMargin,Gross Margin,2021,0.62621
+TLKM,Income Statement (Annual),grossMargin,Gross Margin,2022,0.62895
+TLKM,Income Statement (Annual),grossMargin,Gross Margin,2023,0.60971
+TLKM,Income Statement (Annual),grossMargin,Gross Margin,2024,0.59984
+TLKM,Income Statement (Annual),grossMargin,Gross Margin,2025,0.59767
+TLKM,Income Statement (Annual),incomeEquity,Earnings From Equity Investments,2021,-78000000000.0
+TLKM,Income Statement (Annual),incomeEquity,Earnings From Equity Investments,2022,-87000000000.0
+TLKM,Income Statement (Annual),incomeEquity,Earnings From Equity Investments,2023,1000000000.0
+TLKM,Income Statement (Annual),incomeEquity,Earnings From Equity Investments,2024,3000000000.0
+TLKM,Income Statement (Annual),incomeEquity,Earnings From Equity Investments,2025,-1000000000.0
+TLKM,Income Statement (Annual),interestExpense,Interest Expense,2021,-4394000000000.0
+TLKM,Income Statement (Annual),interestExpense,Interest Expense,2022,-4077000000000.0
+TLKM,Income Statement (Annual),interestExpense,Interest Expense,2023,-4652000000000.0
+TLKM,Income Statement (Annual),interestExpense,Interest Expense,2024,-5208000000000.0
+TLKM,Income Statement (Annual),interestExpense,Interest Expense,2025,-5206000000000.0
+TLKM,Income Statement (Annual),interestIncome,Interest & Investment Income,2021,558000000000.0
+TLKM,Income Statement (Annual),interestIncome,Interest & Investment Income,2022,878000000000.0
+TLKM,Income Statement (Annual),interestIncome,Interest & Investment Income,2023,1061000000000.0
+TLKM,Income Statement (Annual),interestIncome,Interest & Investment Income,2024,1367000000000.0
+TLKM,Income Statement (Annual),interestIncome,Interest & Investment Income,2025,1661000000000.0
+TLKM,Income Statement (Annual),mergerRestructureCharges,Merger & Restructuring Charges,2024,-1186000000000.0
+TLKM,Income Statement (Annual),mergerRestructureCharges,Merger & Restructuring Charges,2025,-937000000000.0
+TLKM,Income Statement (Annual),minorityInterest,Minority Interest in Earnings,2021,-9222000000000.0
+TLKM,Income Statement (Annual),minorityInterest,Minority Interest in Earnings,2022,-6984000000000.0
+TLKM,Income Statement (Annual),minorityInterest,Minority Interest in Earnings,2023,-7648000000000.0
+TLKM,Income Statement (Annual),minorityInterest,Minority Interest in Earnings,2024,-7094000000000.0
+TLKM,Income Statement (Annual),minorityInterest,Minority Interest in Earnings,2025,-6644000000000.0
+TLKM,Income Statement (Annual),netIncomeGrowth,Net Income Growth,2021,0.19578
+TLKM,Income Statement (Annual),netIncomeGrowth,Net Income Growth,2022,-0.16646
+TLKM,Income Statement (Annual),netIncomeGrowth,Net Income Growth,2023,0.18441
+TLKM,Income Statement (Annual),netIncomeGrowth,Net Income Growth,2024,-0.08783
+TLKM,Income Statement (Annual),netIncomeGrowth,Net Income Growth,2025,-0.20484
+TLKM,Income Statement (Annual),netinc,Net Income,2021,24877000000000.0
+TLKM,Income Statement (Annual),netinc,Net Income,2022,20736000000000.0
+TLKM,Income Statement (Annual),netinc,Net Income,2023,24560000000000.0
+TLKM,Income Statement (Annual),netinc,Net Income,2024,22403000000000.0
+TLKM,Income Statement (Annual),netinc,Net Income,2025,17814000000000.0
+TLKM,Income Statement (Annual),netinccmn,Net Income to Common,2021,24877000000000.0
+TLKM,Income Statement (Annual),netinccmn,Net Income to Common,2022,20736000000000.0
+TLKM,Income Statement (Annual),netinccmn,Net Income to Common,2023,24560000000000.0
+TLKM,Income Statement (Annual),netinccmn,Net Income to Common,2024,22403000000000.0
+TLKM,Income Statement (Annual),netinccmn,Net Income to Common,2025,17814000000000.0
+TLKM,Income Statement (Annual),operatingMargin,Operating Margin,2021,0.30248
+TLKM,Income Statement (Annual),operatingMargin,Operating Margin,2022,0.30686
+TLKM,Income Statement (Annual),operatingMargin,Operating Margin,2023,0.30081
+TLKM,Income Statement (Annual),operatingMargin,Operating Margin,2024,0.27682
+TLKM,Income Statement (Annual),operatingMargin,Operating Margin,2025,0.24136
+TLKM,Income Statement (Annual),opex,Operating Expenses,2021,46362000000000.0
+TLKM,Income Statement (Annual),opex,Operating Expenses,2022,47446000000000.0
+TLKM,Income Statement (Annual),opex,Operating Expenses,2023,46093000000000.0
+TLKM,Income Statement (Annual),opex,Operating Expenses,2024,48443000000000.0
+TLKM,Income Statement (Annual),opex,Operating Expenses,2025,52285000000000.0
+TLKM,Income Statement (Annual),opinc,Operating Income,2021,43318000000000.0
+TLKM,Income Statement (Annual),opinc,Operating Income,2022,45202000000000.0
+TLKM,Income Statement (Annual),opinc,Operating Income,2023,44885000000000.0
+TLKM,Income Statement (Annual),opinc,Operating Income,2024,41514000000000.0
+TLKM,Income Statement (Annual),opinc,Operating Income,2025,35418000000000.0
+TLKM,Income Statement (Annual),otheropex,Other Operating Expenses,2021,691000000000.0
+TLKM,Income Statement (Annual),otheropex,Other Operating Expenses,2022,661000000000.0
+TLKM,Income Statement (Annual),otheropex,Other Operating Expenses,2023,31000000000.0
+TLKM,Income Statement (Annual),otheropex,Other Operating Expenses,2024,520000000000.0
+TLKM,Income Statement (Annual),otheropex,Other Operating Expenses,2025,110000000000.0
+TLKM,Income Statement (Annual),payoutratio,payoutratio,2021,0.50175
+TLKM,Income Statement (Annual),payoutratio,payoutratio,2022,0.71644
+TLKM,Income Statement (Annual),payoutratio,payoutratio,2023,0.67602
+TLKM,Income Statement (Annual),payoutratio,payoutratio,2024,0.78931
+TLKM,Income Statement (Annual),payoutratio,payoutratio,2025,1.18149
+TLKM,Income Statement (Annual),pretax,Pretax Income,2021,43739000000000.0
+TLKM,Income Statement (Annual),pretax,Pretax Income,2022,36430000000000.0
+TLKM,Income Statement (Annual),pretax,Pretax Income,2023,40794000000000.0
+TLKM,Income Statement (Annual),pretax,Pretax Income,2024,37615000000000.0
+TLKM,Income Statement (Annual),pretax,Pretax Income,2025,31102000000000.0
+TLKM,Income Statement (Annual),profitMargin,Profit Margin,2021,0.17371
+TLKM,Income Statement (Annual),profitMargin,Profit Margin,2022,0.14077
+TLKM,Income Statement (Annual),profitMargin,Profit Margin,2023,0.16459
+TLKM,Income Statement (Annual),profitMargin,Profit Margin,2024,0.14939
+TLKM,Income Statement (Annual),profitMargin,Profit Margin,2025,0.1214
+TLKM,Income Statement (Annual),revenue,Revenue,2021,143210000000000.0
+TLKM,Income Statement (Annual),revenue,Revenue,2022,147306000000000.0
+TLKM,Income Statement (Annual),revenue,Revenue,2023,149216000000000.0
+TLKM,Income Statement (Annual),revenue,Revenue,2024,149967000000000.0
+TLKM,Income Statement (Annual),revenue,Revenue,2025,146742000000000.0
+TLKM,Income Statement (Annual),revenueGrowth,Revenue Growth (YoY),2021,0.04945
+TLKM,Income Statement (Annual),revenueGrowth,Revenue Growth (YoY),2022,0.0286
+TLKM,Income Statement (Annual),revenueGrowth,Revenue Growth (YoY),2023,0.01297
+TLKM,Income Statement (Annual),revenueGrowth,Revenue Growth (YoY),2024,0.00503
+TLKM,Income Statement (Annual),revenueGrowth,Revenue Growth (YoY),2025,-0.0215
+TLKM,Income Statement (Annual),sgna,"Selling, General & Admin",2021,13957000000000.0
+TLKM,Income Statement (Annual),sgna,"Selling, General & Admin",2022,13656000000000.0
+TLKM,Income Statement (Annual),sgna,"Selling, General & Admin",2023,13399000000000.0
+TLKM,Income Statement (Annual),sgna,"Selling, General & Admin",2024,13742000000000.0
+TLKM,Income Statement (Annual),sgna,"Selling, General & Admin",2025,14526000000000.0
+TLKM,Income Statement (Annual),sharesBasic,Shares Outstanding (Basic),2021,99062216600.0
+TLKM,Income Statement (Annual),sharesBasic,Shares Outstanding (Basic),2022,99062216600.0
+TLKM,Income Statement (Annual),sharesBasic,Shares Outstanding (Basic),2023,99062216600.0
+TLKM,Income Statement (Annual),sharesBasic,Shares Outstanding (Basic),2024,99062216600.0
+TLKM,Income Statement (Annual),sharesBasic,Shares Outstanding (Basic),2025,99061024659.0
+TLKM,Income Statement (Annual),sharesDiluted,Shares Outstanding (Diluted),2021,99062216600.0
+TLKM,Income Statement (Annual),sharesDiluted,Shares Outstanding (Diluted),2022,99062216600.0
+TLKM,Income Statement (Annual),sharesDiluted,Shares Outstanding (Diluted),2023,99062216600.0
+TLKM,Income Statement (Annual),sharesDiluted,Shares Outstanding (Diluted),2024,99062216600.0
+TLKM,Income Statement (Annual),sharesDiluted,Shares Outstanding (Diluted),2025,99061024659.0
+TLKM,Income Statement (Annual),sharesYoY,Shares Change (YoY),2025,-1e-05
+TLKM,Income Statement (Annual),taxexp,Income Tax Expense,2021,9640000000000.0
+TLKM,Income Statement (Annual),taxexp,Income Tax Expense,2022,8710000000000.0
+TLKM,Income Statement (Annual),taxexp,Income Tax Expense,2023,8586000000000.0
+TLKM,Income Statement (Annual),taxexp,Income Tax Expense,2024,8118000000000.0
+TLKM,Income Statement (Annual),taxexp,Income Tax Expense,2025,6644000000000.0
+TLKM,Income Statement (Annual),taxrate,Effective Tax Rate,2021,0.2204
+TLKM,Income Statement (Annual),taxrate,Effective Tax Rate,2022,0.23909
+TLKM,Income Statement (Annual),taxrate,Effective Tax Rate,2023,0.21047
+TLKM,Income Statement (Annual),taxrate,Effective Tax Rate,2024,0.21582
+TLKM,Income Statement (Annual),taxrate,Effective Tax Rate,2025,0.21362
