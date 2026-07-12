@@ -1,7 +1,7 @@
 # FPIS — Financial Performance Intelligence System
 ## Telkom Indonesia (TLKM) — Usecase 8, Digistar Class Intern 2026
 
-🚀 **Live Enterprise Dashboard:** [https://digistarhardskillusecase8.vercel.app/](https://digistarhardskillusecase8.vercel.app/)
+**Live Enterprise Dashboard:** [https://digistarhardskillusecase8.vercel.app/](https://digistarhardskillusecase8.vercel.app/)
 
 ---
 
@@ -129,10 +129,10 @@ Sistem **DILARANG** mencakup:
 
 - **Short series**: Hanya 20 kuartal — *uncertainty forecast* besar, *prediction interval* harus jujur ditampilkan.
 - **Metrik pasar**: EPS, shares, dividend hanya digunakan sebagai konteks performa internal, **BUKAN** untuk prediksi harga saham.
-- **Simulasi Segmentasi (Mock Data)**: Karena data asli konsolidasi Telkom dari sumber publik (BEI/Stockbit) **tidak memiliki rincian segmentasi (Regional, Produk, Budget, Subscribers)**, maka kami menggunakan **Mock Data (Data Simulasi)** khusus untuk bagian visualisasi *Frontend* tersebut. 
-  - **Mengapa ini dilakukan?** Untuk membuktikan bahwa arsitektur AI dan *dashboard* kami sudah 100% siap untuk menampung data segmentasi nyata jika kelak diberikan akses internal oleh perusahaan.
+- **Simulasi Segmentasi (Mock Data)**: Karena data asli konsolidasi Telkom dari sumber publik (BEI/Stockbit) **tidak memiliki rincian segmentasi (Regional, Produk, Budget, Subscribers)**, maka digunakan **Mock Data (Data Simulasi)** khusus untuk bagian visualisasi *Frontend* tersebut. 
+  - **Tujuan Simulasi:** Membuktikan bahwa arsitektur AI dan dashboard secara teknis siap (enterprise-ready) untuk menampung dan memvisualisasikan data segmentasi nyata jika kelak diintegrasikan dengan sistem internal perusahaan.
   - **Variabel Dummy:** *Revenue per Regional* (5 Regional Resmi Telkom), *Revenue per Produk* (3 Pilar Bisnis: Digital Connectivity, Digital Platform, Digital Services), dan nilai *Target*.
-  - **Catatan Validitas:** Prediksi level agregat (Nasional) tetap akurat 100% menggunakan model AI historis, sementara chart segmentasi berfungsi sebagai *architectural showcase*.
+  - **Catatan Validitas:** Prediksi level agregat (Nasional) tetap akurat 100% karena diproses menggunakan model AI historis riil. Grafik segmentasi hanya berfungsi sebagai visualisasi kapabilitas arsitektur dan tidak mempengaruhi metrik prediksi.
 
 ### Future Work
 
