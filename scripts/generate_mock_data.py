@@ -24,10 +24,10 @@ def generate_mock_data():
         # Values are already in Billions (Miliar Rupiah)
         item = {
             "period": row['period'],
-            "revenue": row.get('revenue', 0) if pd.notna(row.get('revenue')) else 0,
-            "netIncome": row.get('netinc', 0) if pd.notna(row.get('netinc')) else 0,
-            "operatingIncome": row.get('ebitda', 0) if pd.notna(row.get('ebitda')) else 0,
-            "operatingExpenses": row.get('opex', 0) if pd.notna(row.get('opex')) else 0,
+            "revenue": (row.get('revenue', 0) / 1e9) if pd.notna(row.get('revenue')) else 0,
+            "netIncome": (row.get('netinc', 0) / 1e9) if pd.notna(row.get('netinc')) else 0,
+            "operatingIncome": (row.get('ebitda', 0) / 1e9) if pd.notna(row.get('ebitda')) else 0,
+            "operatingExpenses": (row.get('opex', 0) / 1e9) if pd.notna(row.get('opex')) else 0,
         }
         # Add mock Subscribers (in Millions)
         # Starting around 160M, growing slightly

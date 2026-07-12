@@ -122,152 +122,209 @@ function App() {
         {/* TOP BAR WITH INTERACTIVE DROPDOWN */}
         <header className="top-bar">
           <div className="page-title">
-            <h1>Performance Analytics</h1>
+            <h1>
+              {activeMenu === 'dashboard' && 'Performance Analytics'}
+              {activeMenu === 'data' && 'Dataset & AI Models'}
+              {activeMenu === 'settings' && 'System Settings'}
+            </h1>
           </div>
-          <div className="topbar-controls">
-            <div className="metric-select-wrapper">
-              <label htmlFor="metric-select">Select Metric:</label>
-              <select 
-                id="metric-select" 
-                className="metric-select" 
-                value={selectedMetric} 
-                onChange={(e) => setSelectedMetric(e.target.value)}
-              >
-                <option value="revenue">Total Revenue</option>
-                <option value="ebitda">EBITDA</option>
-                <option value="netinc">Net Income</option>
-                <option value="opex">Operating Expenses</option>
-              </select>
+          {activeMenu === 'dashboard' && (
+            <div className="topbar-controls">
+              <div className="metric-select-wrapper">
+                <label htmlFor="metric-select">Select Metric:</label>
+                <select 
+                  id="metric-select" 
+                  className="metric-select" 
+                  value={selectedMetric} 
+                  onChange={(e) => setSelectedMetric(e.target.value)}
+                >
+                  <option value="revenue">Total Revenue</option>
+                  <option value="ebitda">EBITDA</option>
+                  <option value="netinc">Net Income</option>
+                  <option value="opex">Operating Expenses</option>
+                </select>
+              </div>
             </div>
-          </div>
+          )}
         </header>
 
         <div className="dashboard-container">
-          {/* KPI Cards */}
-          <section className="kpi-grid">
-            <div className="glass-card">
-              <div className="card-title"><DollarSign size={18}/> Q1 2026 {metricInfo.label}</div>
-              <div className="kpi-value">{formatIDR(latestHist[histKey] || 0)}</div>
-              <div className="kpi-trend trend-up"><TrendingUp size={16}/> +3.2% QoQ</div>
-            </div>
-            <div className="glass-card">
-              <div className="card-title"><Target size={18}/> Forecast Q2 2026</div>
-              <div className="kpi-value">{metricForecasts.length > 0 ? formatIDR(metricForecasts[0].forecast) : 'N/A'}</div>
-              <div className="kpi-trend trend-up"><TrendingUp size={16}/> Expected Growth</div>
-            </div>
-            <div className="glass-card">
-              <div className="card-title"><Activity size={18}/> Target Achievement</div>
-              <div className="kpi-value">98.5%</div>
-              <div className="kpi-trend trend-down"><TrendingDown size={16}/> -1.5% Gap</div>
-            </div>
-            <div className="glass-card">
-              <div className="card-title"><Users size={18}/> Total Subscribers</div>
-              <div className="kpi-value">{latestHist.subscribers} Juta</div>
-              <div className="kpi-trend trend-up"><TrendingUp size={16}/> +0.5 Juta QoQ</div>
-            </div>
-          </section>
+          {activeMenu === 'dashboard' && (
+            <>
+              {/* KPI Cards */}
+              <section className="kpi-grid">
+                <div className="glass-card">
+                  <div className="card-title"><DollarSign size={18}/> Q1 2026 {metricInfo.label}</div>
+                  <div className="kpi-value">{formatIDR(latestHist[histKey] || 0)}</div>
+                  <div className="kpi-trend trend-up"><TrendingUp size={16}/> +3.2% QoQ</div>
+                </div>
+                <div className="glass-card">
+                  <div className="card-title"><Target size={18}/> Forecast Q2 2026</div>
+                  <div className="kpi-value">{metricForecasts.length > 0 ? formatIDR(metricForecasts[0].forecast) : 'N/A'}</div>
+                  <div className="kpi-trend trend-up"><TrendingUp size={16}/> Expected Growth</div>
+                </div>
+                <div className="glass-card">
+                  <div className="card-title"><Activity size={18}/> Target Achievement</div>
+                  <div className="kpi-value">98.5%</div>
+                  <div className="kpi-trend trend-down"><TrendingDown size={16}/> -1.5% Gap</div>
+                </div>
+                <div className="glass-card">
+                  <div className="card-title"><Users size={18}/> Total Subscribers</div>
+                  <div className="kpi-value">{latestHist.subscribers} Juta</div>
+                  <div className="kpi-trend trend-up"><TrendingUp size={16}/> +0.5 Juta QoQ</div>
+                </div>
+              </section>
 
-          {/* Main Chart */}
-          <section className="chart-grid">
-            <div className="glass-card">
-              <div className="card-title">AI Forecast vs Target ({metricInfo.label})</div>
-              <div style={{ width: '100%', height: 300 }}>
-                <ResponsiveContainer>
-                  <ComposedChart data={combinedData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
-                    <XAxis dataKey="period" stroke="var(--text-muted)" fontSize={12} />
-                    <YAxis stroke="var(--text-muted)" fontSize={12} tickFormatter={(val) => val >= 1000 ? `${(val/1000).toFixed(0)}T` : `${val}M`} />
-                    <RechartsTooltip 
-                      contentStyle={{ backgroundColor: 'var(--bg-dark)', borderColor: 'var(--border-glass)', borderRadius: '8px' }}
-                      itemStyle={{ color: 'var(--text-main)' }}
-                    />
-                    <Legend />
-                    <Area type="monotone" dataKey="Upper80" fill="rgba(59, 130, 246, 0.1)" stroke="none" />
-                    <Area type="monotone" dataKey="Lower80" fill="var(--bg-card)" stroke="none" />
-                    <Line type="monotone" dataKey="Actual" stroke="var(--text-main)" strokeWidth={3} dot={{r: 4}} />
-                    <Line type="monotone" dataKey="Forecast" stroke="var(--accent-blue)" strokeWidth={3} strokeDasharray="5 5" />
-                    <Line type="monotone" dataKey="Target" stroke="var(--danger)" strokeWidth={2} strokeDasharray="3 3" />
-                  </ComposedChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            <div className="glass-card">
-              <div className="card-title">Anomaly Detection Alerts</div>
-              <div className="alerts-container" style={{maxHeight: '300px', overflowY: 'auto'}}>
-                {data.anomalies.map((anom, idx) => (
-                  <div key={idx} className={`alert-box ${anom.status === 'CRITICAL' ? 'critical' : 'warning'}`}>
-                    {anom.status === 'CRITICAL' ? <AlertTriangle color="var(--danger)"/> : <AlertCircle color="var(--warning)"/>}
-                    <div>
-                      <div className="alert-title">{anom.period} - {anom.metric_id}</div>
-                      <div className="alert-desc">{anom.deskripsi}</div>
-                    </div>
+              {/* Main Chart */}
+              <section className="chart-grid">
+                <div className="glass-card">
+                  <div className="card-title">AI Forecast vs Target ({metricInfo.label})</div>
+                  <div style={{ width: '100%', height: 300 }}>
+                    <ResponsiveContainer>
+                      <ComposedChart data={combinedData}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
+                        <XAxis dataKey="period" stroke="var(--text-muted)" fontSize={12} />
+                        <YAxis stroke="var(--text-muted)" fontSize={12} tickFormatter={(val) => val >= 1000 ? `${(val/1000).toFixed(0)}T` : `${val}M`} />
+                        <RechartsTooltip 
+                          contentStyle={{ backgroundColor: 'var(--bg-dark)', borderColor: 'var(--border-glass)', borderRadius: '8px' }}
+                          itemStyle={{ color: 'var(--text-main)' }}
+                        />
+                        <Legend />
+                        <Area type="monotone" dataKey="Upper80" fill="rgba(59, 130, 246, 0.1)" stroke="none" />
+                        <Area type="monotone" dataKey="Lower80" fill="var(--bg-card)" stroke="none" />
+                        <Line type="monotone" dataKey="Actual" stroke="var(--text-main)" strokeWidth={3} dot={{r: 4}} />
+                        <Line type="monotone" dataKey="Forecast" stroke="var(--accent-blue)" strokeWidth={3} strokeDasharray="5 5" />
+                        <Line type="monotone" dataKey="Target" stroke="var(--danger)" strokeWidth={2} strokeDasharray="3 3" />
+                      </ComposedChart>
+                    </ResponsiveContainer>
                   </div>
-                ))}
-                {data.anomalies.length === 0 && (
-                  <p style={{color: 'var(--text-muted)'}}>No critical anomalies detected.</p>
-                )}
-              </div>
-            </div>
-          </section>
+                </div>
 
-          {/* Segmentation Charts */}
-          <section className="split-grid">
+                <div className="glass-card">
+                  <div className="card-title">Anomaly Detection Alerts</div>
+                  <div className="alerts-container" style={{maxHeight: '300px', overflowY: 'auto'}}>
+                    {data.anomalies.map((anom, idx) => (
+                      <div key={idx} className={`alert-box ${anom.status === 'CRITICAL' ? 'critical' : 'warning'}`}>
+                        {anom.status === 'CRITICAL' ? <AlertTriangle color="var(--danger)"/> : <AlertCircle color="var(--warning)"/>}
+                        <div>
+                          <div className="alert-title">{anom.period} - {anom.metric_id}</div>
+                          <div className="alert-desc">{anom.deskripsi}</div>
+                        </div>
+                      </div>
+                    ))}
+                    {data.anomalies.length === 0 && (
+                      <p style={{color: 'var(--text-muted)'}}>No critical anomalies detected.</p>
+                    )}
+                  </div>
+                </div>
+              </section>
+
+              {/* Segmentation Charts */}
+              <section className="split-grid">
+                <div className="glass-card">
+                  <div className="card-title">Regional Segmentation (Mock)</div>
+                  <div style={{ width: '100%', height: 250 }}>
+                    <ResponsiveContainer>
+                      <BarChart data={data.regional} layout="vertical" margin={{ left: 20 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
+                        <XAxis type="number" stroke="var(--text-muted)" tickFormatter={(val) => `${(val/1000).toFixed(0)}T`} />
+                        <YAxis dataKey="name" type="category" stroke="var(--text-muted)" fontSize={12} />
+                        <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-dark)' }} />
+                        <Bar dataKey="value" fill="var(--accent-purple)" radius={[0, 4, 4, 0]}>
+                          {data.regional.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          ))}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                <div className="glass-card">
+                  <div className="card-title">Product Contribution (Mock)</div>
+                  <div style={{ width: '100%', height: 250 }}>
+                    <ResponsiveContainer>
+                      <PieChart>
+                        <Pie
+                          data={data.product}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={60}
+                          outerRadius={100}
+                          paddingAngle={5}
+                          dataKey="value"
+                          label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          labelLine={false}
+                        >
+                          {data.product.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          ))}
+                        </Pie>
+                        <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-dark)' }} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </section>
+
+              {/* AI Insights */}
+              <section className="glass-card">
+                <div className="card-title">AI Predictive Insights</div>
+                <ul style={{marginLeft: '1.5rem', color: 'var(--text-muted)', lineHeight: '1.8'}}>
+                  {data.insights.map((insight, idx) => (
+                    <li key={idx}>{insight}</li>
+                  ))}
+                </ul>
+              </section>
+            </>
+          )}
+
+          {activeMenu === 'data' && (
             <div className="glass-card">
-              <div className="card-title">Regional Segmentation (Mock)</div>
-              <div style={{ width: '100%', height: 250 }}>
-                <ResponsiveContainer>
-                  <BarChart data={data.regional} layout="vertical" margin={{ left: 20 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
-                    <XAxis type="number" stroke="var(--text-muted)" tickFormatter={(val) => `${(val/1000).toFixed(0)}T`} />
-                    <YAxis dataKey="name" type="category" stroke="var(--text-muted)" fontSize={12} />
-                    <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-dark)' }} />
-                    <Bar dataKey="value" fill="var(--accent-purple)" radius={[0, 4, 4, 0]}>
-                      {data.regional.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+              <h2 style={{marginBottom: '1rem'}}>Dataset & Models Configuration</h2>
+              <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem'}}>
+                Fitur ini terhubung ke SQLite dan Pipeline Machine Learning. Di sini kamu bisa mengganti model 
+                (ARIMA, XGBoost, LSTM) dan memicu pelatihan ulang (retrain).
+              </p>
+              
+              <div style={{display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
+                <div style={{padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', flex: 1}}>
+                  <h3 style={{fontSize: '1rem', marginBottom: '0.5rem'}}><Database size={16} style={{marginRight: '0.5rem', verticalAlign: 'middle'}}/> Active Dataset</h3>
+                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Source:</strong> tlkm_quarterly_tidy.csv</p>
+                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Rows:</strong> 2,505 records</p>
+                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Last Updated:</strong> Today, 08:30 AM</p>
+                </div>
+                
+                <div style={{padding: '1rem', background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', borderRadius: '8px', flex: 1}}>
+                  <h3 style={{fontSize: '1rem', marginBottom: '0.5rem'}}><Activity size={16} style={{marginRight: '0.5rem', verticalAlign: 'middle'}}/> Best Model (Active)</h3>
+                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Algorithm:</strong> XGBoost Regressor</p>
+                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>RMSE:</strong> 2.14%</p>
+                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Hyperparams:</strong> max_depth=6, lr=0.01</p>
+                  <button style={{marginTop: '1rem', background: 'var(--accent-blue)', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold'}}>Retrain Model</button>
+                </div>
               </div>
             </div>
+          )}
 
+          {activeMenu === 'settings' && (
             <div className="glass-card">
-              <div className="card-title">Product Contribution (Mock)</div>
-              <div style={{ width: '100%', height: 250 }}>
-                <ResponsiveContainer>
-                  <PieChart>
-                    <Pie
-                      data={data.product}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={100}
-                      paddingAngle={5}
-                      dataKey="value"
-                      label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
-                      labelLine={false}
-                    >
-                      {data.product.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-dark)' }} />
-                  </PieChart>
-                </ResponsiveContainer>
+              <h2 style={{marginBottom: '1rem'}}>System Settings</h2>
+              <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem'}}>Pengaturan notifikasi anomali, integrasi API eksternal, dan preferensi tampilan.</p>
+              
+              <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <input type="checkbox" defaultChecked /> Enable Email Alerts for CRITICAL Anomalies
+                </label>
+                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <input type="checkbox" defaultChecked /> Auto-refresh Data Pipeline Every 24H
+                </label>
+                <div style={{marginTop: '1rem'}}>
+                  <p style={{marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-muted)'}}>Anomaly Threshold (Z-Score):</p>
+                  <input type="range" min="1" max="5" defaultValue="3" style={{width: '200px'}} />
+                </div>
               </div>
             </div>
-          </section>
-
-          {/* AI Insights */}
-          <section className="glass-card">
-            <div className="card-title">AI Predictive Insights</div>
-            <ul style={{marginLeft: '1.5rem', color: 'var(--text-muted)', lineHeight: '1.8'}}>
-              {data.insights.map((insight, idx) => (
-                <li key={idx}>{insight}</li>
-              ))}
-            </ul>
-          </section>
+          )}
         </div>
       </main>
     </div>
