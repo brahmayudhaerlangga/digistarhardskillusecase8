@@ -4,135 +4,110 @@ import os
 import numpy as np
 
 def generate_mock_data():
-    print("Membaca data historis...")
+    print("Membaca data historis dan pipeline...")
+    
+    output_data = {
+        "historical": [],
+        "forecast": [],
+        "anomalies": [],
+        "evaluations": [],
+        "best_models": [],
+        "insights": []
+    }
+    
     # 1. Historical Data
-    df_hist = pd.read_csv('data/tlkm_quarterly_tidy.csv')
-    
-    # Filter only important metrics
-    metrics = ['revenue', 'netinc', 'assets', 'liabilities', 'equity', 'ebitda', 'opex']
-    df_filtered = df_hist[df_hist['metric_id'].isin(metrics)].copy()
-    
-    # Pivot to get periods as rows and metrics as columns
-    df_pivot = df_filtered.pivot_table(index=['year', 'quarter', 'period_date'], columns='metric_id', values='value').reset_index()
-    df_pivot['period'] = df_pivot['year'].astype(str) + ' Q' + df_pivot['quarter'].astype(str)
-    
-    # Sort by date
-    df_pivot = df_pivot.sort_values('period_date')
-    
-    historical_data = []
-    for _, row in df_pivot.iterrows():
-        # Values are already in Billions (Miliar Rupiah)
-        item = {
-            "period": row['period'],
-            "revenue": (row.get('revenue', 0) / 1e9) if pd.notna(row.get('revenue')) else 0,
-            "netIncome": (row.get('netinc', 0) / 1e9) if pd.notna(row.get('netinc')) else 0,
-            "operatingIncome": (row.get('ebitda', 0) / 1e9) if pd.notna(row.get('ebitda')) else 0,
-            "operatingExpenses": (row.get('opex', 0) / 1e9) if pd.notna(row.get('opex')) else 0,
-        }
-        # Add mock Subscribers (in Millions)
-        # Starting around 160M, growing slightly
-        base_subs = 160 + (row['year'] - 2021) * 3 + (row['quarter']) * 0.5
-        noise = np.random.normal(0, 1)
-        item["subscribers"] = round(base_subs + noise, 2)
+    try:
+        df_hist = pd.read_csv('data/tlkm_quarterly_tidy.csv')
+        df_hist['period'] = df_hist['year'].astype(str) + ' Q' + df_hist['quarter'].astype(str)
         
-        historical_data.append(item)
+        # We need to scale numbers by 1e9 for consistency with forecast
+        # Some metrics might be ratios/percentages, but standard financial metrics in this dataset are absolute.
+        # We'll just scale everything except if it's already small or known ratio (e.g. margin).
+        # We can pass raw values and let frontend handle it, OR scale them all.
+        # It's safer to just pass values / 1e9 if they are large, but let's do it dynamically:
+        def scale_val(val):
+            if pd.isna(val): return 0
+            if abs(val) > 1000000: # if it's millions/billions/trillions absolute
+                return val / 1e9
+            return val
+            
+        df_hist['value_scaled'] = df_hist['value'].apply(scale_val)
         
-    last_hist_revenue = historical_data[-1]['revenue'] if historical_data else 35000
-    
-    print("Membaca data forecast...")
+        # Convert to records
+        output_data['historical'] = df_hist[['period', 'year', 'quarter', 'metric_id', 'value_scaled']].to_dict(orient='records')
+        
+    except Exception as e:
+        print(f"Error reading historical: {e}")
+
     # 2. Forecast Data
     try:
         df_fc = pd.read_csv('outputs/forecast_results.csv')
-        # Only take the best model (assume Holt-Winters or just the first model's results)
-        best_model = df_fc['model'].iloc[0]
-        df_fc = df_fc[df_fc['model'] == best_model].copy()
-        
         df_fc['period'] = df_fc['year'].astype(str) + ' Q' + df_fc['quarter'].astype(str)
-        
-        forecast_data = {}
-        target_growth = 1.05 # 5% QoQ target
-        
-        # We need forecasts for these main metrics
-        target_metrics = ['revenue', 'netinc', 'ebitda', 'opex']
-        
-        for metric in target_metrics:
-            metric_forecast = []
-            
-            # Find last historical value for target calculation
-            last_val = 0
-            if historical_data:
-                # Map metric_id to the key in historical_data
-                hist_key = 'revenue' if metric == 'revenue' else 'netIncome' if metric == 'netinc' else 'operatingIncome' if metric == 'ebitda' else 'operatingExpenses'
-                last_val = historical_data[-1].get(hist_key, 0)
-                
-            current_target = last_val * target_growth if last_val > 0 else 1000
-            
-            # Filter df_fc for this metric
-            df_metric_fc = df_fc[df_fc['metric_id'] == metric]
-            
-            for _, row in df_metric_fc.iterrows():
-                metric_forecast.append({
-                    "period": row['period'],
-                    "forecast": row['forecast'],
-                    "lower_80": row['lower_80'],
-                    "upper_80": row['upper_80'],
-                    "target": current_target
-                })
-                current_target *= target_growth
-                
-            forecast_data[metric] = metric_forecast
-            
+        # forecast is already in billions from pipeline!
+        output_data['forecast'] = df_fc.to_dict(orient='records')
     except Exception as e:
         print(f"Error reading forecast: {e}")
-        forecast_data = []
 
-    print("Membaca data anomali...")
-    # 3. Anomalies
+    # 3. Anomaly Data
     try:
-        df_anom = pd.read_csv('outputs/anomaly_report.csv')
-        df_anom['period'] = df_anom['year'].astype(str) + ' Q' + df_anom['quarter'].astype(str)
-        anomalies = df_anom[['period', 'metric_id', 'value', 'status', 'deskripsi']].to_dict('records')
+        df_ano = pd.read_csv('outputs/anomaly_report.csv')
+        # If quarter exists
+        if 'quarter' in df_ano.columns:
+            df_ano['period'] = df_ano['year'].astype(str) + ' Q' + df_ano['quarter'].astype(float).astype(int).astype(str)
+        else:
+            df_ano['period'] = df_ano['year'].astype(str)
+            
+        output_data['anomalies'] = df_ano.to_dict(orient='records')
+    except Exception as e:
+        print(f"Error reading anomalies: {e}")
+
+    # 4. Evaluations
+    try:
+        df_eval = pd.read_csv('outputs/evaluation_report.csv')
+        output_data['evaluations'] = df_eval.to_dict(orient='records')
+    except Exception as e:
+        print(f"Error reading evaluations: {e}")
+
+    # 5. Best Models
+    try:
+        df_best = pd.read_csv('outputs/best_models.csv')
+        output_data['best_models'] = df_best.to_dict(orient='records')
+    except Exception as e:
+        print(f"Error reading best models: {e}")
+
+    # 6. Insights
+    try:
+        df_insights = pd.read_csv('outputs/insights_report.csv')
+        output_data['insights'] = df_insights.to_dict(orient='records')
+    except Exception as e:
+        print(f"Error reading insights: {e}")
+        
+    # 7. Add Segments (Mock for Frontend visual)
+    # Get last revenue for scaling
+    try:
+        last_revenue = df_hist[df_hist['metric_id'] == 'revenue']['value_scaled'].iloc[-1]
     except:
-        anomalies = []
-
-    # 4. Generate Regional & Product Mock Data
-    print("Generate Mock Data Regional & Produk...")
-    # Base on last historical revenue
-    regional_data = [
-        {"name": "Jawa", "value": round(last_hist_revenue * 0.55), "growth": 3.2},
-        {"name": "Sumatera", "value": round(last_hist_revenue * 0.22), "growth": -1.5},
-        {"name": "KTI (Timur)", "value": round(last_hist_revenue * 0.13), "growth": 5.8},
-        {"name": "Kalimantan", "value": round(last_hist_revenue * 0.10), "growth": 2.1},
+        last_revenue = 35000
+        
+    output_data['regional'] = [
+        {"name": "Jawa", "value": round(last_revenue * 0.55), "growth": 3.2},
+        {"name": "Sumatera", "value": round(last_revenue * 0.20), "growth": 4.1},
+        {"name": "KTI", "value": round(last_revenue * 0.15), "growth": 5.5},
+        {"name": "Kalimantan", "value": round(last_revenue * 0.10), "growth": 2.8}
     ]
-    
-    product_data = [
-        {"name": "Telkomsel", "value": round(last_hist_revenue * 0.60), "growth": 1.5},
-        {"name": "IndiHome", "value": round(last_hist_revenue * 0.25), "growth": 7.2},
-        {"name": "Enterprise", "value": round(last_hist_revenue * 0.10), "growth": -4.0},
-        {"name": "WIFI.ID / Lainnya", "value": round(last_hist_revenue * 0.05), "growth": 2.0},
+    output_data['product'] = [
+        {"name": "Telkomsel", "value": 65},
+        {"name": "IndiHome", "value": 20},
+        {"name": "Enterprise", "value": 10},
+        {"name": "WIFI.ID", "value": 5}
     ]
 
-    # Combine everything
-    dashboard_json = {
-        "historical": historical_data,
-        "forecast": forecast_data,
-        "anomalies": anomalies,
-        "regional": regional_data,
-        "product": product_data,
-        "insights": [
-            "Revenue Enterprise diprediksi turun 8% pada kuartal berikutnya (Mock Insight).",
-            "Cost Network meningkat abnormal 15% dibanding historical trend di Regional Sumatera.",
-            "Produk IndiHome memiliki growth tertinggi selama 12 bulan terakhir.",
-            "Regional Sumatera memiliki risiko tidak mencapai target EBITDA sebesar 5%."
-        ]
-    }
-    
-    # Save to frontend public folder
+    # Save to JSON
     os.makedirs('frontend/public/data', exist_ok=True)
     with open('frontend/public/data/dashboard.json', 'w') as f:
-        json.dump(dashboard_json, f, indent=4)
+        json.dump(output_data, f, indent=4)
         
-    print("Berhasil! File JSON tersimpan di frontend/public/data/dashboard.json")
+    print("Berhasil! File JSON ekstensif tersimpan di frontend/public/data/dashboard.json")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     generate_mock_data()

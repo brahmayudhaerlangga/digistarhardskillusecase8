@@ -3,33 +3,35 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
   BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, ComposedChart
 } from 'recharts';
-import { TrendingUp, TrendingDown, AlertTriangle, AlertCircle, Activity, DollarSign, Users, Target, LayoutDashboard, Database, Settings } from 'lucide-react';
+import { 
+  TrendingUp, TrendingDown, AlertTriangle, AlertCircle, Activity, 
+  DollarSign, Users, Target, LayoutDashboard, LineChart as ChartIcon, 
+  Crosshair, BarChart2, ShieldAlert, FileText, Info
+} from 'lucide-react';
 import './index.css';
 
-const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444'];
+const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#0ea5e9'];
 
-const METRIC_MAP = {
-  'revenue': { label: 'Revenue', historicalKey: 'revenue' },
-  'netinc': { label: 'Net Income', historicalKey: 'netIncome' },
-  'ebitda': { label: 'EBITDA', historicalKey: 'operatingIncome' },
-  'opex': { label: 'Operating Expenses', historicalKey: 'operatingExpenses' }
+// Utilities
+const formatIDR = (val, isPercentage = false) => {
+  if (val === undefined || val === null) return 'N/A';
+  if (isPercentage) return `${val.toFixed(1)}%`;
+  if (Math.abs(val) >= 1000) return `Rp ${(val / 1000).toFixed(2)} T`;
+  if (Math.abs(val) >= 1) return `Rp ${val.toFixed(1)} M`;
+  return `Rp ${(val * 1000).toFixed(0)} Jt`;
 };
 
+// Main App
 function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // Interactive States
-  const [selectedMetric, setSelectedMetric] = useState('revenue');
-  const [activeMenu, setActiveMenu] = useState('dashboard');
+  const [activeMenu, setActiveMenu] = useState('1');
 
   useEffect(() => {
     fetch('/data/dashboard.json')
-      .then(res => {
-        if (!res.ok) throw new Error('Data tidak ditemukan');
-        return res.json();
-      })
+      .then(res => res.json())
       .then(json => {
         setData(json);
         setLoading(false);
@@ -40,293 +42,498 @@ function App() {
       });
   }, []);
 
-  if (loading) return <div className="dashboard-container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><h2>Loading AI Data...</h2></div>;
+  if (loading) return <div className="dashboard-container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><h2>Loading AI Pipeline Data...</h2></div>;
   if (error) return <div className="dashboard-container"><h2>Error: {error}</h2></div>;
   if (!data) return null;
-
-  // Format Rupiah in Billions/Trillions
-  const formatIDR = (val) => {
-    if (val >= 1000) return `Rp ${(val / 1000).toFixed(2)} T`;
-    return `Rp ${val.toFixed(0)} M`;
-  };
-
-  // Get currently selected metric info
-  const metricInfo = METRIC_MAP[selectedMetric];
-  const histKey = metricInfo.historicalKey;
-
-  // Prepare combined historical + forecast data for the main chart based on selected metric
-  const historicalChartData = data.historical.map(d => ({
-    period: d.period,
-    Actual: d[histKey] || 0
-  }));
-  
-  const metricForecasts = data.forecast[selectedMetric] || [];
-  
-  const forecastChartData = metricForecasts.map(d => ({
-    period: d.period,
-    Forecast: d.forecast,
-    Target: d.target,
-    Lower80: d.lower_80,
-    Upper80: d.upper_80
-  }));
-
-  // Connect the lines
-  if (historicalChartData.length > 0 && forecastChartData.length > 0) {
-    const lastHist = historicalChartData[historicalChartData.length - 1];
-    forecastChartData.unshift({
-      period: lastHist.period,
-      Actual: lastHist.Actual,
-      Forecast: lastHist.Actual,
-      Target: lastHist.Actual
-    });
-  }
-
-  const combinedData = [...historicalChartData, ...forecastChartData.slice(1)];
-  const latestHist = data.historical[data.historical.length-1];
 
   return (
     <div className="app-layout">
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-logo">
-          <h2>FPIS B2B</h2>
-          <p>Financial AI System</p>
+          <h2>FPIS</h2>
+          <p>Financial Performance Intelligence System</p>
         </div>
         
         <div className="sidebar-menu">
-          <div className="sidebar-section-title">Main Menu</div>
-          <div className={`menu-item ${activeMenu === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveMenu('dashboard')}>
-            <LayoutDashboard size={18} />
-            <span>Executive Dashboard</span>
+          <div className="sidebar-section-title">Navigasi Utama</div>
+          <div className={`menu-item ${activeMenu === '1' ? 'active' : ''}`} onClick={() => setActiveMenu('1')}>
+            <LayoutDashboard size={18} /><span>1. Executive Summary</span>
           </div>
-          <div className={`menu-item ${activeMenu === 'data' ? 'active' : ''}`} onClick={() => setActiveMenu('data')}>
-            <Database size={18} />
-            <span>Dataset & Models</span>
+          <div className={`menu-item ${activeMenu === '2' ? 'active' : ''}`} onClick={() => setActiveMenu('2')}>
+            <ChartIcon size={18} /><span>2. Performance Trend</span>
           </div>
-          <div className={`menu-item ${activeMenu === 'settings' ? 'active' : ''}`} onClick={() => setActiveMenu('settings')}>
-            <Settings size={18} />
-            <span>Settings</span>
+          <div className={`menu-item ${activeMenu === '3' ? 'active' : ''}`} onClick={() => setActiveMenu('3')}>
+            <Activity size={18} /><span>3. AI Forecast</span>
+          </div>
+          <div className={`menu-item ${activeMenu === '4' ? 'active' : ''}`} onClick={() => setActiveMenu('4')}>
+            <Crosshair size={18} /><span>4. Forecast vs Target</span>
+          </div>
+          <div className={`menu-item ${activeMenu === '5' ? 'active' : ''}`} onClick={() => setActiveMenu('5')}>
+            <BarChart2 size={18} /><span>5. Revenue Growth</span>
+          </div>
+          <div className={`menu-item ${activeMenu === '6' ? 'active' : ''}`} onClick={() => setActiveMenu('6')}>
+            <ShieldAlert size={18} /><span>6. Anomaly Alert</span>
+          </div>
+          <div className={`menu-item ${activeMenu === '7' ? 'active' : ''}`} onClick={() => setActiveMenu('7')}>
+            <FileText size={18} /><span>7. Model Limitations</span>
           </div>
         </div>
 
-        <div style={{marginTop: 'auto'}}>
-          <div className="glass-card" style={{padding: '1rem', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)'}}>
-            <p style={{fontSize: '0.8rem', color: 'var(--accent-blue)', fontWeight: '600', marginBottom: '0.25rem'}}>Model Status</p>
-            <p style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>XGBoost & Holt-Winters active. RMSE: 2.14%</p>
-          </div>
+        <div style={{marginTop: 'auto', borderTop: '1px solid var(--border-glass)', paddingTop: '1rem'}}>
+          <p style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>Digistar Intern 2026</p>
+          <p style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>Usecase 8 — AI Team</p>
         </div>
       </aside>
 
       {/* MAIN CONTENT */}
       <main className="main-content">
-        {/* TOP BAR WITH INTERACTIVE DROPDOWN */}
         <header className="top-bar">
           <div className="page-title">
             <h1>
-              {activeMenu === 'dashboard' && 'Performance Analytics'}
-              {activeMenu === 'data' && 'Dataset & AI Models'}
-              {activeMenu === 'settings' && 'System Settings'}
+              {activeMenu === '1' && 'Executive Financial Summary'}
+              {activeMenu === '2' && 'Financial Performance Trend'}
+              {activeMenu === '3' && 'Forecast — Proyeksi 4 Kuartal'}
+              {activeMenu === '4' && 'Forecast vs Target Gap Analysis'}
+              {activeMenu === '5' && 'Revenue Growth Projection'}
+              {activeMenu === '6' && 'Anomaly Alert System'}
+              {activeMenu === '7' && 'Model Limitations & Disclaimer'}
             </h1>
           </div>
-          {activeMenu === 'dashboard' && (
-            <div className="topbar-controls">
-              <div className="metric-select-wrapper">
-                <label htmlFor="metric-select">Select Metric:</label>
-                <select 
-                  id="metric-select" 
-                  className="metric-select" 
-                  value={selectedMetric} 
-                  onChange={(e) => setSelectedMetric(e.target.value)}
-                >
-                  <option value="revenue">Total Revenue</option>
-                  <option value="ebitda">EBITDA</option>
-                  <option value="netinc">Net Income</option>
-                  <option value="opex">Operating Expenses</option>
-                </select>
-              </div>
-            </div>
-          )}
         </header>
 
         <div className="dashboard-container">
-          {activeMenu === 'dashboard' && (
-            <>
-              {/* KPI Cards */}
-              <section className="kpi-grid">
-                <div className="glass-card">
-                  <div className="card-title"><DollarSign size={18}/> Q1 2026 {metricInfo.label}</div>
-                  <div className="kpi-value">{formatIDR(latestHist[histKey] || 0)}</div>
-                  <div className="kpi-trend trend-up"><TrendingUp size={16}/> +3.2% QoQ</div>
-                </div>
-                <div className="glass-card">
-                  <div className="card-title"><Target size={18}/> Forecast Q2 2026</div>
-                  <div className="kpi-value">{metricForecasts.length > 0 ? formatIDR(metricForecasts[0].forecast) : 'N/A'}</div>
-                  <div className="kpi-trend trend-up"><TrendingUp size={16}/> Expected Growth</div>
-                </div>
-                <div className="glass-card">
-                  <div className="card-title"><Activity size={18}/> Target Achievement</div>
-                  <div className="kpi-value">98.5%</div>
-                  <div className="kpi-trend trend-down"><TrendingDown size={16}/> -1.5% Gap</div>
-                </div>
-                <div className="glass-card">
-                  <div className="card-title"><Users size={18}/> Total Subscribers</div>
-                  <div className="kpi-value">{latestHist.subscribers} Juta</div>
-                  <div className="kpi-trend trend-up"><TrendingUp size={16}/> +0.5 Juta QoQ</div>
-                </div>
-              </section>
-
-              {/* Main Chart */}
-              <section className="chart-grid">
-                <div className="glass-card">
-                  <div className="card-title">AI Forecast vs Target ({metricInfo.label})</div>
-                  <div style={{ width: '100%', height: 300 }}>
-                    <ResponsiveContainer>
-                      <ComposedChart data={combinedData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
-                        <XAxis dataKey="period" stroke="var(--text-muted)" fontSize={12} />
-                        <YAxis stroke="var(--text-muted)" fontSize={12} tickFormatter={(val) => val >= 1000 ? `${(val/1000).toFixed(0)}T` : `${val}M`} />
-                        <RechartsTooltip 
-                          contentStyle={{ backgroundColor: 'var(--bg-dark)', borderColor: 'var(--border-glass)', borderRadius: '8px' }}
-                          itemStyle={{ color: 'var(--text-main)' }}
-                        />
-                        <Legend />
-                        <Area type="monotone" dataKey="Upper80" fill="rgba(59, 130, 246, 0.1)" stroke="none" />
-                        <Area type="monotone" dataKey="Lower80" fill="var(--bg-card)" stroke="none" />
-                        <Line type="monotone" dataKey="Actual" stroke="var(--text-main)" strokeWidth={3} dot={{r: 4}} />
-                        <Line type="monotone" dataKey="Forecast" stroke="var(--accent-blue)" strokeWidth={3} strokeDasharray="5 5" />
-                        <Line type="monotone" dataKey="Target" stroke="var(--danger)" strokeWidth={2} strokeDasharray="3 3" />
-                      </ComposedChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-
-                <div className="glass-card">
-                  <div className="card-title">Anomaly Detection Alerts</div>
-                  <div className="alerts-container" style={{maxHeight: '300px', overflowY: 'auto'}}>
-                    {data.anomalies.map((anom, idx) => (
-                      <div key={idx} className={`alert-box ${anom.status === 'CRITICAL' ? 'critical' : 'warning'}`}>
-                        {anom.status === 'CRITICAL' ? <AlertTriangle color="var(--danger)"/> : <AlertCircle color="var(--warning)"/>}
-                        <div>
-                          <div className="alert-title">{anom.period} - {anom.metric_id}</div>
-                          <div className="alert-desc">{anom.deskripsi}</div>
-                        </div>
-                      </div>
-                    ))}
-                    {data.anomalies.length === 0 && (
-                      <p style={{color: 'var(--text-muted)'}}>No critical anomalies detected.</p>
-                    )}
-                  </div>
-                </div>
-              </section>
-
-              {/* Segmentation Charts */}
-              <section className="split-grid">
-                <div className="glass-card">
-                  <div className="card-title">Regional Segmentation (Mock)</div>
-                  <div style={{ width: '100%', height: 250 }}>
-                    <ResponsiveContainer>
-                      <BarChart data={data.regional} layout="vertical" margin={{ left: 20 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
-                        <XAxis type="number" stroke="var(--text-muted)" tickFormatter={(val) => `${(val/1000).toFixed(0)}T`} />
-                        <YAxis dataKey="name" type="category" stroke="var(--text-muted)" fontSize={12} />
-                        <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-dark)' }} />
-                        <Bar dataKey="value" fill="var(--accent-purple)" radius={[0, 4, 4, 0]}>
-                          {data.regional.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                          ))}
-                        </Bar>
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-
-                <div className="glass-card">
-                  <div className="card-title">Product Contribution (Mock)</div>
-                  <div style={{ width: '100%', height: 250 }}>
-                    <ResponsiveContainer>
-                      <PieChart>
-                        <Pie
-                          data={data.product}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={60}
-                          outerRadius={100}
-                          paddingAngle={5}
-                          dataKey="value"
-                          label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
-                          labelLine={false}
-                        >
-                          {data.product.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                          ))}
-                        </Pie>
-                        <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-dark)' }} />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              </section>
-
-              {/* AI Insights */}
-              <section className="glass-card">
-                <div className="card-title">AI Predictive Insights</div>
-                <ul style={{marginLeft: '1.5rem', color: 'var(--text-muted)', lineHeight: '1.8'}}>
-                  {data.insights.map((insight, idx) => (
-                    <li key={idx}>{insight}</li>
-                  ))}
-                </ul>
-              </section>
-            </>
-          )}
-
-          {activeMenu === 'data' && (
-            <div className="glass-card">
-              <h2 style={{marginBottom: '1rem'}}>Dataset & Models Configuration</h2>
-              <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem'}}>
-                Fitur ini terhubung ke SQLite dan Pipeline Machine Learning. Di sini kamu bisa mengganti model 
-                (ARIMA, XGBoost, LSTM) dan memicu pelatihan ulang (retrain).
-              </p>
-              
-              <div style={{display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
-                <div style={{padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', flex: 1}}>
-                  <h3 style={{fontSize: '1rem', marginBottom: '0.5rem'}}><Database size={16} style={{marginRight: '0.5rem', verticalAlign: 'middle'}}/> Active Dataset</h3>
-                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Source:</strong> tlkm_quarterly_tidy.csv</p>
-                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Rows:</strong> 2,505 records</p>
-                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Last Updated:</strong> Today, 08:30 AM</p>
-                </div>
-                
-                <div style={{padding: '1rem', background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', borderRadius: '8px', flex: 1}}>
-                  <h3 style={{fontSize: '1rem', marginBottom: '0.5rem'}}><Activity size={16} style={{marginRight: '0.5rem', verticalAlign: 'middle'}}/> Best Model (Active)</h3>
-                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Algorithm:</strong> XGBoost Regressor</p>
-                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>RMSE:</strong> 2.14%</p>
-                  <p style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}><strong>Hyperparams:</strong> max_depth=6, lr=0.01</p>
-                  <button style={{marginTop: '1rem', background: 'var(--accent-blue)', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold'}}>Retrain Model</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeMenu === 'settings' && (
-            <div className="glass-card">
-              <h2 style={{marginBottom: '1rem'}}>System Settings</h2>
-              <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem'}}>Pengaturan notifikasi anomali, integrasi API eksternal, dan preferensi tampilan.</p>
-              
-              <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
-                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                  <input type="checkbox" defaultChecked /> Enable Email Alerts for CRITICAL Anomalies
-                </label>
-                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                  <input type="checkbox" defaultChecked /> Auto-refresh Data Pipeline Every 24H
-                </label>
-                <div style={{marginTop: '1rem'}}>
-                  <p style={{marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-muted)'}}>Anomaly Threshold (Z-Score):</p>
-                  <input type="range" min="1" max="5" defaultValue="3" style={{width: '200px'}} />
-                </div>
-              </div>
-            </div>
-          )}
+          {activeMenu === '1' && <Section1 data={data} />}
+          {activeMenu === '2' && <Section2 data={data} />}
+          {activeMenu === '3' && <Section3 data={data} />}
+          {activeMenu === '4' && <Section4 data={data} />}
+          {activeMenu === '5' && <Section5 data={data} />}
+          {activeMenu === '6' && <Section6 data={data} />}
+          {activeMenu === '7' && <Section7 data={data} />}
         </div>
       </main>
+    </div>
+  );
+}
+
+// ==========================================
+// SECTION 1: Executive Summary
+// ==========================================
+function Section1({ data }) {
+  const kpis = [
+    { id: 'revenue', label: 'Total Revenue', isNominal: true },
+    { id: 'ebitda', label: 'EBITDA', isNominal: true },
+    { id: 'netinc', label: 'Net Income', isNominal: true },
+    { id: 'opex', label: 'Operating Expenses', isNominal: true }
+  ];
+
+  const hist = data.historical;
+
+  return (
+    <div className="kpi-grid">
+      {kpis.map(kpi => {
+        const metricData = hist.filter(d => d.metric_id === kpi.id);
+        if (metricData.length < 2) return null;
+        
+        const last = metricData[metricData.length - 1];
+        const prev = metricData[metricData.length - 2];
+        const qoq = prev.value_scaled !== 0 ? ((last.value_scaled - prev.value_scaled) / Math.abs(prev.value_scaled)) * 100 : 0;
+        
+        // Check anomaly
+        const isAnomaly = data.anomalies.some(a => a.metric_id === kpi.id && a.period === last.period && a.severity === 'CRITICAL');
+        
+        return (
+          <div className="glass-card" key={kpi.id}>
+            <div className="card-title">
+              {kpi.label} — {last.period}
+              {isAnomaly ? <span className="badge badge-critical" style={{marginLeft: 'auto'}}>ANOMALI</span> 
+                         : <span className="badge badge-healthy" style={{marginLeft: 'auto'}}>SEHAT</span>}
+            </div>
+            <div className="kpi-value">{formatIDR(last.value_scaled, !kpi.isNominal)}</div>
+            <div className={`kpi-trend ${qoq >= 0 ? 'trend-up' : 'trend-down'}`}>
+              {qoq >= 0 ? <TrendingUp size={16}/> : <TrendingDown size={16}/>}
+              {Math.abs(qoq).toFixed(1)}% QoQ
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ==========================================
+// SECTION 2: Performance Trend
+// ==========================================
+function Section2({ data }) {
+  const [metric, setMetric] = useState('revenue');
+  const metrics = [...new Set(data.historical.map(d => d.metric_id))];
+
+  const chartData = data.historical.filter(d => d.metric_id === metric);
+
+  return (
+    <div className="glass-card">
+      <div className="controls-row">
+        <div className="control-group">
+          <label>Pilih Metrik</label>
+          <select className="form-select" value={metric} onChange={(e) => setMetric(e.target.value)} style={{borderBottom: '1px solid var(--border-glass)', padding: '0.25rem'}}>
+            {metrics.map(m => <option key={m} value={m}>{m}</option>)}
+          </select>
+        </div>
+      </div>
+      <div style={{ width: '100%', height: 400 }}>
+        <ResponsiveContainer>
+          <LineChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
+            <XAxis dataKey="period" stroke="var(--text-muted)" />
+            <YAxis stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
+            <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} formatter={(val) => formatIDR(val)} />
+            <Line type="monotone" dataKey="value_scaled" name={metric} stroke="var(--accent-blue)" strokeWidth={3} dot={{r:4}} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// SECTION 3: Forecast
+// ==========================================
+function Section3({ data }) {
+  const [metric, setMetric] = useState('revenue');
+  const [model, setModel] = useState('');
+  
+  const metrics = [...new Set(data.forecast.map(d => d.metric_id))];
+  
+  useEffect(() => {
+    if (metrics.length > 0 && !metrics.includes(metric)) setMetric(metrics[0]);
+  }, [data]);
+
+  const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))];
+  
+  useEffect(() => {
+    if (availableModels.length > 0 && !availableModels.includes(model)) {
+      setModel(availableModels[0]);
+    }
+  }, [metric, data]);
+
+  const hist = data.historical.filter(d => d.metric_id === metric);
+  const fc = data.forecast.filter(d => d.metric_id === metric && d.model === model);
+
+  // Combine
+  let combined = hist.map(d => ({ period: d.period, Actual: d.value_scaled }));
+  if (hist.length > 0 && fc.length > 0) {
+    const lastHist = hist[hist.length - 1];
+    fc.unshift({ period: lastHist.period, forecast: lastHist.value_scaled, lower_80: lastHist.value_scaled, upper_80: lastHist.value_scaled, lower_95: lastHist.value_scaled, upper_95: lastHist.value_scaled });
+  }
+  
+  fc.forEach(f => {
+    const existing = combined.find(c => c.period === f.period);
+    if (existing) {
+      existing.Forecast = f.forecast;
+      existing.L80 = f.lower_80; existing.U80 = f.upper_80;
+      existing.L95 = f.lower_95; existing.U95 = f.upper_95;
+    } else {
+      combined.push({ period: f.period, Forecast: f.forecast, L80: f.lower_80, U80: f.upper_80, L95: f.lower_95, U95: f.upper_95 });
+    }
+  });
+
+  return (
+    <div className="glass-card">
+      <div className="controls-row">
+        <div className="control-group">
+          <label>Metrik</label>
+          <select className="form-select" value={metric} onChange={(e) => setMetric(e.target.value)}>
+            {metrics.map(m => <option key={m} value={m}>{m}</option>)}
+          </select>
+        </div>
+        <div className="control-group">
+          <label>Model AI</label>
+          <select className="form-select" value={model} onChange={(e) => setModel(e.target.value)}>
+            {availableModels.map(m => <option key={m} value={m}>{m}</option>)}
+          </select>
+        </div>
+      </div>
+      
+      <div style={{ width: '100%', height: 450 }}>
+        <ResponsiveContainer>
+          <ComposedChart data={combined}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
+            <XAxis dataKey="period" stroke="var(--text-muted)" />
+            <YAxis stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
+            <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} formatter={(val) => formatIDR(val)} />
+            <Legend />
+            <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.05)" stroke="none" name="Upper 95%" />
+            <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95%" />
+            <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.15)" stroke="none" name="Upper 80%" />
+            <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80%" />
+            <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={2} dot={{r:3}} />
+            <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={2} strokeDasharray="5 5" />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// SECTION 4: Forecast vs Target
+// ==========================================
+function Section4({ data }) {
+  const targetMetrics = ["revenue", "ebitda", "netinc"];
+  
+  // Initialize targets dynamically based on last historical + 5%
+  const [targets, setTargets] = useState({});
+  
+  useEffect(() => {
+    const initialTargets = {};
+    targetMetrics.forEach(m => {
+      const hist = data.historical.filter(d => d.metric_id === m);
+      if (hist.length > 0) initialTargets[m] = hist[hist.length - 1].value_scaled * 1.05;
+    });
+    setTargets(initialTargets);
+  }, [data]);
+
+  const handleTargetChange = (m, val) => {
+    setTargets(prev => ({...prev, [m]: parseFloat(val)}));
+  };
+
+  const results = targetMetrics.map(m => {
+    const fc = data.forecast.filter(d => d.metric_id === m);
+    if (fc.length === 0) return null;
+    
+    // Pick best model for simplicity or first
+    const modelFc = fc.filter(d => d.model === fc[0].model);
+    const nextQ = modelFc[0]; // first forecast period
+    
+    const target = targets[m] || 0;
+    const gap = target !== 0 ? ((nextQ.forecast - target) / Math.abs(target)) * 100 : 0;
+    
+    let status = "OFF-TRACK";
+    let statusColor = "var(--danger)";
+    if (nextQ.forecast >= target) { status = "ON-TRACK"; statusColor = "var(--success)"; }
+    else if (nextQ.upper_95 >= target) { status = "AT-RISK"; statusColor = "var(--warning)"; }
+    
+    return (
+      <tr key={m}>
+        <td><strong>{m.toUpperCase()}</strong></td>
+        <td>{nextQ.model}</td>
+        <td>{formatIDR(nextQ.forecast)}</td>
+        <td>
+          <input type="number" className="form-input" value={(targets[m] || 0).toFixed(1)} onChange={(e) => handleTargetChange(m, e.target.value)} />
+        </td>
+        <td style={{color: gap >= 0 ? 'var(--success)' : 'var(--danger)'}}>{gap > 0 ? '+' : ''}{gap.toFixed(1)}%</td>
+        <td><span className="badge" style={{backgroundColor: statusColor, color: '#fff'}}>{status}</span></td>
+      </tr>
+    );
+  }).filter(Boolean);
+
+  return (
+    <div className="glass-card">
+      <div className="card-title">Gap Analysis (Next Quarter)</div>
+      <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.85rem'}}>Ubah nilai Target pada kolom input untuk melihat simulasi status pencapaian secara instan.</p>
+      
+      <div className="data-table-container">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Metrik</th>
+              <th>Model</th>
+              <th>Forecast AI</th>
+              <th>Target (Input)</th>
+              <th>Gap (%)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {results}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// SECTION 5: Revenue Growth
+// ==========================================
+function Section5({ data }) {
+  const hist = data.historical.filter(d => d.metric_id === 'revenue');
+  const fcData = data.forecast.filter(d => d.metric_id === 'revenue' && d.model === 'Naive Seasonal'); // Example model
+  
+  const chartData = [];
+  hist.forEach((h, i) => {
+    let qoq = 0;
+    if (i > 0) qoq = ((h.value_scaled - hist[i-1].value_scaled) / Math.abs(hist[i-1].value_scaled)) * 100;
+    chartData.push({ period: h.period, Revenue: h.value_scaled, Growth: qoq });
+  });
+  
+  if (fcData.length > 0 && hist.length > 0) {
+    let prevVal = hist[hist.length-1].value_scaled;
+    fcData.forEach(f => {
+      let qoq = ((f.forecast - prevVal) / Math.abs(prevVal)) * 100;
+      chartData.push({ period: f.period, ForecastRev: f.forecast, Growth: qoq });
+      prevVal = f.forecast;
+    });
+  }
+
+  return (
+    <div className="glass-card">
+      <div style={{ width: '100%', height: 400 }}>
+        <ResponsiveContainer>
+          <ComposedChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
+            <XAxis dataKey="period" stroke="var(--text-muted)" />
+            <YAxis yAxisId="left" stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
+            <YAxis yAxisId="right" orientation="right" stroke="var(--accent-purple)" tickFormatter={val => `${val}%`} />
+            <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} />
+            <Legend />
+            <Bar yAxisId="left" dataKey="Revenue" fill="#64ffda" opacity={0.7} />
+            <Bar yAxisId="left" dataKey="ForecastRev" fill="#ffd166" opacity={0.7} name="Forecast Revenue" />
+            <Line yAxisId="right" type="monotone" dataKey="Growth" stroke="#a78bfa" strokeWidth={2} name="QoQ Growth %" />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// SECTION 6: Anomaly Alert
+// ==========================================
+function Section6({ data }) {
+  const anomalies = data.anomalies || [];
+  const critical = anomalies.filter(a => a.severity === 'CRITICAL').length;
+  const warning = anomalies.filter(a => a.severity === 'WARNING').length;
+
+  return (
+    <div>
+      <div className="kpi-grid">
+        <div className="glass-card" style={{borderLeft: '4px solid var(--danger)'}}>
+          <div className="card-title">CRITICAL Anomalies</div>
+          <div className="kpi-value">{critical}</div>
+        </div>
+        <div className="glass-card" style={{borderLeft: '4px solid var(--warning)'}}>
+          <div className="card-title">WARNING Anomalies</div>
+          <div className="kpi-value">{warning}</div>
+        </div>
+      </div>
+      
+      <div className="glass-card">
+        <div className="card-title">Detail Log Anomali</div>
+        <div className="data-table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Periode</th>
+                <th>Metrik</th>
+                <th>Severity</th>
+                <th>Tipe</th>
+                <th>Deskripsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {anomalies.map((a, i) => (
+                <tr key={i}>
+                  <td>{a.period}</td>
+                  <td><strong>{a.metric_id || a.metric_name}</strong></td>
+                  <td>
+                    <span className={`badge ${a.severity === 'CRITICAL' ? 'badge-critical' : 'badge-warning'}`}>
+                      {a.severity}
+                    </span>
+                  </td>
+                  <td>{a.type}</td>
+                  <td>{a.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ==========================================
+// SECTION 7: Limitations & Insights
+// ==========================================
+function Section7({ data }) {
+  return (
+    <div>
+      <div className="glass-card">
+        <div className="card-title">Evaluasi Model (Walk-Forward Backtest)</div>
+        <div className="data-table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Metrik</th>
+                <th>Model</th>
+                <th>MAPE (%)</th>
+                <th>RMSE</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.evaluations.map((e, i) => (
+                <tr key={i}>
+                  <td><strong>{e.metric_id}</strong></td>
+                  <td>{e.model}</td>
+                  <td>{e.MAPE !== undefined ? e.MAPE.toFixed(2) : 'N/A'}%</td>
+                  <td>{e.RMSE !== undefined ? e.RMSE.toFixed(2) : 'N/A'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="glass-card">
+        <div className="card-title">Model Terbaik Terpilih</div>
+        <div className="data-table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Metrik</th>
+                <th>Best Model</th>
+                <th>MAPE (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.best_models.map((b, i) => (
+                <tr key={i}>
+                  <td><strong>{b.metric_id}</strong></td>
+                  <td style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>{b.best_model}</td>
+                  <td>{b.MAPE !== undefined ? b.MAPE.toFixed(2) : 'N/A'}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="glass-card">
+        <div className="card-title"><Info size={18}/> Batasan Usecase (WAJIB DIPATUHI)</div>
+        <div className="alert-box info">
+          <Info color="var(--info)" />
+          <div>
+            <div className="alert-title">Sistem ini HANYA mencakup analisis performa keuangan internal perusahaan.</div>
+            <div className="alert-desc">
+              <strong>DILARANG:</strong> Prediksi harga saham, analisis market sentiment, prediksi IHSG/kapitalisasi pasar, 
+              rekomendasi trading (buy/sell/hold), analisis perilaku investor.
+            </div>
+          </div>
+        </div>
+        
+        <div className="alert-box warning">
+          <AlertCircle color="var(--warning)" />
+          <div>
+            <div className="alert-title">Limitasi Data</div>
+            <div className="alert-desc">
+              • Short time-series: hanya 20 kuartal (2021 Q2 – 2026 Q1)<br/>
+              • Tidak ada segmentasi regional / produk (hanya mock up visual)<br/>
+              • Tidak ada data budget nyata (target menggunakan input simulator)
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
