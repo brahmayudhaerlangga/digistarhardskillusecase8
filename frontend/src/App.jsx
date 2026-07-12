@@ -208,16 +208,16 @@ function DashboardTab({ data, metric, ciVisibility }) {
   }
   
   const lastHistVal = hist.length > 0 ? hist[hist.length-1].value_scaled : 0;
-  let targetGrowthRate = 0;
-  if (lastHistVal !== 0 && currentTarget !== 0) {
-    targetGrowthRate = (currentTarget - lastHistVal) / Math.abs(lastHistVal);
+  let targetDiff = 0;
+  if (currentTarget !== 0) {
+    targetDiff = currentTarget - lastHistVal;
   }
 
   fc.forEach((f, i) => {
-    // Calculate compound growth for target line so it's not a flat line
+    // Calculate linear growth for target line (straight diagonal line)
     let stepTarget = currentTarget;
     if (lastHistVal !== 0) {
-      stepTarget = lastHistVal * Math.pow(1 + targetGrowthRate, i + 1);
+      stepTarget = currentTarget + (targetDiff * i);
     }
 
     const existing = combined.find(c => c.period === f.period);
