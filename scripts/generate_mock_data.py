@@ -49,19 +49,38 @@ def generate_mock_data():
         
         df_fc['period'] = df_fc['year'].astype(str) + ' Q' + df_fc['quarter'].astype(str)
         
-        forecast_data = []
+        forecast_data = {}
         target_growth = 1.05 # 5% QoQ target
-        current_target = last_hist_revenue * target_growth
         
-        for _, row in df_fc[df_fc['metric_id'] == 'revenue'].iterrows():
-            forecast_data.append({
-                "period": row['period'],
-                "forecast": row['forecast'],
-                "lower_80": row['lower_80'],
-                "upper_80": row['upper_80'],
-                "target": current_target
-            })
-            current_target *= target_growth
+        # We need forecasts for these main metrics
+        target_metrics = ['revenue', 'netinc', 'ebitda', 'opex']
+        
+        for metric in target_metrics:
+            metric_forecast = []
+            
+            # Find last historical value for target calculation
+            last_val = 0
+            if historical_data:
+                # Map metric_id to the key in historical_data
+                hist_key = 'revenue' if metric == 'revenue' else 'netIncome' if metric == 'netinc' else 'operatingIncome' if metric == 'ebitda' else 'operatingExpenses'
+                last_val = historical_data[-1].get(hist_key, 0)
+                
+            current_target = last_val * target_growth if last_val > 0 else 1000
+            
+            # Filter df_fc for this metric
+            df_metric_fc = df_fc[df_fc['metric_id'] == metric]
+            
+            for _, row in df_metric_fc.iterrows():
+                metric_forecast.append({
+                    "period": row['period'],
+                    "forecast": row['forecast'],
+                    "lower_80": row['lower_80'],
+                    "upper_80": row['upper_80'],
+                    "target": current_target
+                })
+                current_target *= target_growth
+                
+            forecast_data[metric] = metric_forecast
             
     except Exception as e:
         print(f"Error reading forecast: {e}")

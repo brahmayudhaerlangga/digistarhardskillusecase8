@@ -6,7 +6,7 @@
             "netIncome": 6437000000000.0,
             "operatingIncome": 18982000000000.0,
             "operatingExpenses": 9856000000000.0,
-            "subscribers": 161.76
+            "subscribers": 160.43
         },
         {
             "period": "2021 Q3",
@@ -14,7 +14,7 @@
             "netIncome": 6421000000000.0,
             "operatingIncome": 20142000000000.0,
             "operatingExpenses": 11545000000000.0,
-            "subscribers": 162.03
+            "subscribers": 161.42
         },
         {
             "period": "2021 Q4",
@@ -22,7 +22,7 @@
             "netIncome": 5888000000000.0,
             "operatingIncome": 10898000000000.0,
             "operatingExpenses": 14719000000000.0,
-            "subscribers": 162.06
+            "subscribers": 161.39
         },
         {
             "period": "2022 Q1",
@@ -30,7 +30,7 @@
             "netIncome": 6118000000000.0,
             "operatingIncome": 18102000000000.0,
             "operatingExpenses": 10740000000000.0,
-            "subscribers": 163.02
+            "subscribers": 163.4
         },
         {
             "period": "2022 Q2",
@@ -38,7 +38,7 @@
             "netIncome": 7192000000000.0,
             "operatingIncome": 18727000000000.0,
             "operatingExpenses": 12269000000000.0,
-            "subscribers": 162.78
+            "subscribers": 163.8
         },
         {
             "period": "2022 Q3",
@@ -46,7 +46,7 @@
             "netIncome": 3271000000000.0,
             "operatingIncome": 18356000000000.0,
             "operatingExpenses": 11827000000000.0,
-            "subscribers": 165.48
+            "subscribers": 165.25
         },
         {
             "period": "2022 Q4",
@@ -54,7 +54,7 @@
             "netIncome": 4155000000000.0,
             "operatingIncome": 15857000000000.0,
             "operatingExpenses": 12610000000000.0,
-            "subscribers": 164.39
+            "subscribers": 165.3
         },
         {
             "period": "2023 Q1",
@@ -62,7 +62,7 @@
             "netIncome": 6424000000000.0,
             "operatingIncome": 17596000000000.0,
             "operatingExpenses": 10595000000000.0,
-            "subscribers": 165.03
+            "subscribers": 165.05
         },
         {
             "period": "2023 Q2",
@@ -70,7 +70,7 @@
             "netIncome": 6332000000000.0,
             "operatingIncome": 18381000000000.0,
             "operatingExpenses": 11858000000000.0,
-            "subscribers": 167.32
+            "subscribers": 166.06
         },
         {
             "period": "2023 Q3",
@@ -78,7 +78,7 @@
             "netIncome": 6743000000000.0,
             "operatingIncome": 19394000000000.0,
             "operatingExpenses": 8705000000000.0,
-            "subscribers": 166.99
+            "subscribers": 168.42
         },
         {
             "period": "2023 Q4",
@@ -86,7 +86,7 @@
             "netIncome": 5061000000000.0,
             "operatingIncome": 14683000000000.0,
             "operatingExpenses": 14935000000000.0,
-            "subscribers": 168.09
+            "subscribers": 169.05
         },
         {
             "period": "2024 Q1",
@@ -94,7 +94,7 @@
             "netIncome": 6053000000000.0,
             "operatingIncome": 18018000000000.0,
             "operatingExpenses": 10443000000000.0,
-            "subscribers": 171.35
+            "subscribers": 171.36
         },
         {
             "period": "2024 Q2",
@@ -102,7 +102,7 @@
             "netIncome": 5708000000000.0,
             "operatingIncome": 18847000000000.0,
             "operatingExpenses": 11635000000000.0,
-            "subscribers": 170.76
+            "subscribers": 169.1
         },
         {
             "period": "2024 Q3",
@@ -110,7 +110,7 @@
             "netIncome": 5914000000000.0,
             "operatingIncome": 17295000000000.0,
             "operatingExpenses": 9160000000000.0,
-            "subscribers": 170.5
+            "subscribers": 171.31
         },
         {
             "period": "2024 Q4",
@@ -118,7 +118,7 @@
             "netIncome": 4728000000000.0,
             "operatingIncome": 13444000000000.0,
             "operatingExpenses": 17205000000000.0,
-            "subscribers": 171.13
+            "subscribers": 169.93
         },
         {
             "period": "2025 Q1",
@@ -126,7 +126,7 @@
             "netIncome": 5549000000000.0,
             "operatingIncome": 16741000000000.0,
             "operatingExpenses": 11865000000000.0,
-            "subscribers": 171.22
+            "subscribers": 171.04
         },
         {
             "period": "2025 Q2",
@@ -134,7 +134,7 @@
             "netIncome": 5165000000000.0,
             "operatingIncome": 16016000000000.0,
             "operatingExpenses": 11887000000000.0,
-            "subscribers": 172.5
+            "subscribers": 173.01
         },
         {
             "period": "2025 Q3",
@@ -142,7 +142,7 @@
             "netIncome": 4809000000000.0,
             "operatingIncome": 15933000000000.0,
             "operatingExpenses": 9898000000000.0,
-            "subscribers": 172.63
+            "subscribers": 172.83
         },
         {
             "period": "2025 Q4",
@@ -150,7 +150,7 @@
             "netIncome": 2030000000000.0,
             "operatingIncome": 16481000000000.0,
             "operatingExpenses": 19782000000000.0,
-            "subscribers": 171.79
+            "subscribers": 172.46
         },
         {
             "period": "2026 Q1",
@@ -158,39 +158,102 @@
             "netIncome": 4344000000000.0,
             "operatingIncome": 15684000000000.0,
             "operatingExpenses": 12253000000000.0,
-            "subscribers": 175.68
+            "subscribers": 177.16
         }
     ],
-    "forecast": [
-        {
-            "period": "2026 Q2",
-            "forecast": 36365.0,
-            "lower_80": 35019.72724493333,
-            "upper_80": 37710.27275506667,
-            "target": 39048450000000.0
-        },
-        {
-            "period": "2026 Q3",
-            "forecast": 36613.0,
-            "lower_80": 35267.72724493333,
-            "upper_80": 37958.27275506667,
-            "target": 41000872500000.0
-        },
-        {
-            "period": "2026 Q4",
-            "forecast": 37125.0,
-            "lower_80": 35779.72724493333,
-            "upper_80": 38470.27275506667,
-            "target": 43050916125000.0
-        },
-        {
-            "period": "2027 Q1",
-            "forecast": 37189.0,
-            "lower_80": 35843.72724493333,
-            "upper_80": 38534.27275506667,
-            "target": 45203461931250.0
-        }
-    ],
+    "forecast": {
+        "revenue": [
+            {
+                "period": "2026 Q2",
+                "forecast": 36365.0,
+                "lower_80": 35019.72724493333,
+                "upper_80": 37710.27275506667,
+                "target": 39048450000000.0
+            },
+            {
+                "period": "2026 Q3",
+                "forecast": 36613.0,
+                "lower_80": 35267.72724493333,
+                "upper_80": 37958.27275506667,
+                "target": 41000872500000.0
+            },
+            {
+                "period": "2026 Q4",
+                "forecast": 37125.0,
+                "lower_80": 35779.72724493333,
+                "upper_80": 38470.27275506667,
+                "target": 43050916125000.0
+            },
+            {
+                "period": "2027 Q1",
+                "forecast": 37189.0,
+                "lower_80": 35843.72724493333,
+                "upper_80": 38534.27275506667,
+                "target": 45203461931250.0
+            }
+        ],
+        "netinc": [
+            {
+                "period": "2026 Q2",
+                "forecast": 5165.0,
+                "lower_80": 3258.5547994194485,
+                "upper_80": 7071.445200580552,
+                "target": 4561200000000.0
+            },
+            {
+                "period": "2026 Q3",
+                "forecast": 4809.0,
+                "lower_80": 2902.5547994194485,
+                "upper_80": 6715.445200580552,
+                "target": 4789260000000.0
+            },
+            {
+                "period": "2026 Q4",
+                "forecast": 2030.0,
+                "lower_80": 123.55479941944829,
+                "upper_80": 3936.445200580552,
+                "target": 5028723000000.0
+            },
+            {
+                "period": "2027 Q1",
+                "forecast": 4344.0,
+                "lower_80": 2437.5547994194485,
+                "upper_80": 6250.445200580552,
+                "target": 5280159150000.0
+            }
+        ],
+        "ebitda": [
+            {
+                "period": "2026 Q2",
+                "forecast": 16016.0,
+                "lower_80": 11728.857790052369,
+                "upper_80": 20303.142209947637,
+                "target": 16468200000000.0
+            },
+            {
+                "period": "2026 Q3",
+                "forecast": 15933.0,
+                "lower_80": 11645.857790052369,
+                "upper_80": 20220.142209947637,
+                "target": 17291610000000.0
+            },
+            {
+                "period": "2026 Q4",
+                "forecast": 16481.0,
+                "lower_80": 12193.857790052369,
+                "upper_80": 20768.142209947637,
+                "target": 18156190500000.0
+            },
+            {
+                "period": "2027 Q1",
+                "forecast": 15684.0,
+                "lower_80": 11396.857790052369,
+                "upper_80": 19971.142209947637,
+                "target": 19064000025000.0
+            }
+        ],
+        "opex": []
+    },
     "anomalies": [],
     "regional": [
         {
