@@ -25618,20 +25618,16 @@
     ],
     "product": [
         {
-            "name": "Telkomsel",
-            "value": 65
+            "name": "Digital Connectivity",
+            "value": 75
         },
         {
-            "name": "IndiHome",
-            "value": 20
+            "name": "Digital Platform",
+            "value": 15
         },
         {
-            "name": "Enterprise",
+            "name": "Digital Services",
             "value": 10
-        },
-        {
-            "name": "WIFI.ID",
-            "value": 5
         }
     ]
 }

@@ -97,10 +97,9 @@ def generate_mock_data():
         {"name": "Regional V (KTI)", "value": round(last_revenue * 0.12), "growth": 5.5}
     ]
     output_data['product'] = [
-        {"name": "Telkomsel", "value": 65},
-        {"name": "IndiHome", "value": 20},
-        {"name": "Enterprise", "value": 10},
-        {"name": "WIFI.ID", "value": 5}
+        {"name": "Digital Connectivity", "value": 75},
+        {"name": "Digital Platform", "value": 15},
+        {"name": "Digital Services", "value": 10}
     ]
 
     # Save to JSON
