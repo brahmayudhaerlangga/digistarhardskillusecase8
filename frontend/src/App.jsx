@@ -424,10 +424,10 @@ function DashboardTab({ data, metric, ciVisibility }) {
           <div className="card-title">Regional Share</div>
           <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
-              <BarChart data={data.regional || []} layout="vertical" margin={{ left: 10 }}>
+              <BarChart data={data.regional || []} layout="vertical" margin={{ top: 10, right: 30, left: -10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" horizontal={true} vertical={false} />
                 <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" width={160} tick={{fontSize: 11}} />
+                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" width={140} tick={{fontSize: 11}} />
                 <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} cursor={{fill: 'rgba(255,255,255,0.05)'}} formatter={(val) => formatIDR(val)} />
                 <Bar dataKey="value" fill="var(--accent-blue)" radius={[0, 4, 4, 0]}>
                   {data.regional && data.regional.map((entry, index) => (
