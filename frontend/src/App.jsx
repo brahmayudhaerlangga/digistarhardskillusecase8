@@ -202,23 +202,14 @@ function DashboardTab({ data, metric, ciVisibility }) {
       lower_95: lastHist.value_scaled, 
       upper_95: lastHist.value_scaled 
     });
-    
-    // Connect target from last historical point
-    combined[combined.length-1].Target = lastHist.value_scaled;
+    // Disconnect Target from historical data so it renders as a flat threshold benchmark
   }
   
   const lastHistVal = hist.length > 0 ? hist[hist.length-1].value_scaled : 0;
-  let targetDiff = 0;
-  if (currentTarget !== 0) {
-    targetDiff = currentTarget - lastHistVal;
-  }
 
   fc.forEach((f, i) => {
-    // Calculate linear growth for target line (straight diagonal line)
+    // Treat the target as a constant benchmark threshold (flat line) across quarters
     let stepTarget = currentTarget;
-    if (lastHistVal !== 0) {
-      stepTarget = currentTarget + (targetDiff * i);
-    }
 
     const existing = combined.find(c => c.period === f.period);
     if (existing) {
