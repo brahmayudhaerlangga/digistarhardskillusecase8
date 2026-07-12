@@ -112,18 +112,18 @@ Hasil evaluasi tersedia di `outputs/evaluation_report.csv`. Tabel RMSE/MAE/MAPE 
 ### Hard Constraints (WAJIB DIPATUHI)
 
 Sistem **HANYA** mencakup:
-- Forecast KPI finansial internal (revenue, EBITDA, laba, aset, liabilitas, ekuitas, rasio, margin)
-- Monitoring performa bisnis
-- Analisis profitabilitas
-- Deteksi anomali finansial
-- Early warning performa perusahaan
+- [x] Forecast KPI finansial internal (revenue, EBITDA, laba, aset, liabilitas, ekuitas, rasio, margin)
+- [x] Monitoring performa bisnis
+- [x] Analisis profitabilitas
+- [x] Deteksi anomali finansial
+- [x] Early warning performa perusahaan
 
 Sistem **DILARANG** mencakup:
-- Prediksi harga saham (TLKM atau saham apapun)
-- Analisis market sentiment
-- Prediksi IHSG atau kapitalisasi pasar
-- Financial trading recommendation (signal buy/sell/hold)
-- Analisis perilaku investor
+- [ ] Prediksi harga saham (TLKM atau saham apapun)
+- [ ] Analisis market sentiment
+- [ ] Prediksi IHSG atau kapitalisasi pasar
+- [ ] Financial trading recommendation (signal buy/sell/hold)
+- [ ] Analisis perilaku investor
 
 ### Limitasi Data & Penggunaan Mock Data (Academic Integrity)
 
@@ -178,17 +178,17 @@ fpis/
 
 | Tool (Playbook) | Status | Peran |
 |-----------------|--------|-------|
-| Python | Terimplementasi | Bahasa utama |
-| Pandas | Terimplementasi | Data manipulation |
-| Scikit-learn | Terimplementasi | ML regression (RF), preprocessing |
-| TensorFlow | Terimplementasi | LSTM forecasting |
-| Prophet | Terimplementasi | Time-series forecasting |
-| XGBoost | Terimplementasi | ML regression |
-| Matplotlib | Terimplementasi | Chart di notebook EDA |
-| React & Vite | Terimplementasi | Dashboard frontend modern (pengganti Streamlit) |
-| Recharts | Terimplementasi | Visualisasi grafik interaktif di frontend |
-| SQL (SQLite) | Terimplementasi | Storage layer |
-| Node.js & npm | Terimplementasi | Build system untuk frontend |
+| Python | ✓ | Bahasa utama |
+| Pandas | ✓ | Data manipulation |
+| Scikit-learn | ✓ | ML regression (RF), preprocessing |
+| TensorFlow | ✓ | LSTM forecasting |
+| Prophet | ✓ | Time-series forecasting |
+| XGBoost | ✓ | ML regression |
+| Matplotlib | ✓ | Chart di notebook EDA |
+| React & Vite | ✓ | Dashboard frontend modern (pengganti Streamlit) |
+| Recharts | ✓ | Visualisasi grafik interaktif di frontend |
+| SQL (SQLite) | ✓ | Storage layer |
+| Node.js & npm | ✓ | Build system untuk frontend |
 
 Plus: Statsmodels (SARIMA/Holt-Winters).
 
