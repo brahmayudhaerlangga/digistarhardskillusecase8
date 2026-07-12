@@ -29,6 +29,11 @@ function App() {
   
   const [activeMenu, setActiveMenu] = useState('dashboard');
   const [globalMetric, setGlobalMetric] = useState('revenue');
+  
+  // Global Settings State
+  const [ciVisibility, setCiVisibility] = useState('80% & 95% (Default)');
+  const [emailAlerts, setEmailAlerts] = useState('ON');
+  const [autoRefresh, setAutoRefresh] = useState('ON');
 
   useEffect(() => {
     fetch('/data/dashboard.json')
@@ -47,7 +52,8 @@ function App() {
   if (error) return <div className="dashboard-container"><h2>Error: {error}</h2></div>;
   if (!data) return null;
 
-  const metrics = [...new Set(data.historical.map(d => d.metric_id))];
+  // Hardcode core metrics for clarity, instead of showing all 16 technical ratios
+  const coreMetrics = ['revenue', 'ebitda', 'netinc', 'opinc', 'opex', 'ncfo', 'fcf'];
 
   return (
     <div className="app-layout">
@@ -92,7 +98,7 @@ function App() {
               <div className="metric-select-wrapper">
                 <label>Fokus Analisis:</label>
                 <select className="metric-select" value={globalMetric} onChange={(e) => setGlobalMetric(e.target.value)}>
-                  {metrics.map(m => (
+                  {coreMetrics.map(m => (
                     <option key={m} value={m}>{m.toUpperCase()}</option>
                   ))}
                 </select>
@@ -102,9 +108,15 @@ function App() {
         </header>
 
         <div className="dashboard-container">
-          {activeMenu === 'dashboard' && <DashboardTab data={data} metric={globalMetric} />}
+          {activeMenu === 'dashboard' && <DashboardTab data={data} metric={globalMetric} ciVisibility={ciVisibility} />}
           {activeMenu === 'data' && <DataTab data={data} />}
-          {activeMenu === 'settings' && <SettingsTab />}
+          {activeMenu === 'settings' && (
+            <SettingsTab 
+              ciVisibility={ciVisibility} setCiVisibility={setCiVisibility}
+              emailAlerts={emailAlerts} setEmailAlerts={setEmailAlerts}
+              autoRefresh={autoRefresh} setAutoRefresh={setAutoRefresh}
+            />
+          )}
         </div>
       </main>
     </div>
@@ -114,16 +126,26 @@ function App() {
 // ==========================================
 // TAB 1: EXECUTIVE DASHBOARD
 // ==========================================
-function DashboardTab({ data, metric }) {
+function DashboardTab({ data, metric, ciVisibility }) {
   const [model, setModel] = useState('');
   
   const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))];
   
+  // When metric changes, or on initial load, default to the first available model
   useEffect(() => {
-    if (availableModels.length > 0 && !availableModels.includes(model)) {
-      setModel(availableModels[0]);
+    if (availableModels.length > 0) {
+      if (!availableModels.includes(model)) {
+        setModel(availableModels[0]);
+      }
+    } else {
+      setModel('');
     }
-  }, [metric, data]);
+  }, [metric, data]); // removed 'model' from dependency to prevent infinite loops, but react to 'metric' changes
+
+  // Manual handler for dropdown to ensure state updates
+  const handleModelChange = (e) => {
+    setModel(e.target.value);
+  };
 
   // 1. KPI Cards
   const kpis = [
@@ -137,10 +159,23 @@ function DashboardTab({ data, metric }) {
   const hist = data.historical.filter(d => d.metric_id === metric);
   const fc = data.forecast.filter(d => d.metric_id === metric && d.model === model);
 
-  let combined = hist.map(d => ({ period: d.period, Actual: d.value_scaled }));
+  // Merge historical and forecast perfectly
+  let combined = hist.map(d => ({ 
+    period: d.period, 
+    Actual: d.value_scaled 
+  }));
+  
+  // To connect the line smoothly, we append the LAST historical point to the forecast series
   if (hist.length > 0 && fc.length > 0) {
     const lastHist = hist[hist.length - 1];
-    fc.unshift({ period: lastHist.period, forecast: lastHist.value_scaled, lower_80: lastHist.value_scaled, upper_80: lastHist.value_scaled, lower_95: lastHist.value_scaled, upper_95: lastHist.value_scaled });
+    fc.unshift({ 
+      period: lastHist.period, 
+      forecast: lastHist.value_scaled, 
+      lower_80: lastHist.value_scaled, 
+      upper_80: lastHist.value_scaled, 
+      lower_95: lastHist.value_scaled, 
+      upper_95: lastHist.value_scaled 
+    });
   }
   
   fc.forEach(f => {
@@ -150,9 +185,18 @@ function DashboardTab({ data, metric }) {
       existing.L80 = f.lower_80; existing.U80 = f.upper_80;
       existing.L95 = f.lower_95; existing.U95 = f.upper_95;
     } else {
-      combined.push({ period: f.period, Forecast: f.forecast, L80: f.lower_80, U80: f.upper_80, L95: f.lower_95, U95: f.upper_95 });
+      combined.push({ 
+        period: f.period, 
+        Forecast: f.forecast, 
+        L80: f.lower_80, U80: f.upper_80, 
+        L95: f.lower_95, U95: f.upper_95 
+      });
     }
   });
+
+  // Settings visibility
+  const show95 = ciVisibility.includes('95%');
+  const show80 = ciVisibility.includes('80%');
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
@@ -206,7 +250,7 @@ function DashboardTab({ data, metric }) {
           
           <div className="metric-select-wrapper" style={{padding: '0.25rem 0.75rem', background: 'rgba(0,0,0,0.2)'}}>
             <label>Model AI Prediksi:</label>
-            <select className="metric-select" style={{color: 'var(--accent-blue)'}} value={model} onChange={(e) => setModel(e.target.value)}>
+            <select className="metric-select" style={{color: 'var(--accent-blue)'}} value={model} onChange={handleModelChange}>
               {availableModels.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
@@ -220,10 +264,11 @@ function DashboardTab({ data, metric }) {
               <YAxis stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
               <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} formatter={(val) => formatIDR(val)} />
               <Legend />
-              <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.05)" stroke="none" name="Upper 95%" />
-              <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95%" />
-              <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.15)" stroke="none" name="Upper 80%" />
-              <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80%" />
+              {show95 && <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.05)" stroke="none" name="Upper 95%" />}
+              {show95 && <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95%" />}
+              {show80 && <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.15)" stroke="none" name="Upper 80%" />}
+              {show80 && <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80%" />}
+              
               <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={2} dot={{r:3}} />
               <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={2} strokeDasharray="5 5" />
             </ComposedChart>
@@ -271,10 +316,17 @@ function DashboardTab({ data, metric }) {
           </div>
         </div>
         
-        {/* Anomaly Mini-Table */}
+        {/* Anomaly Mini-Table & SOP */}
         <div className="glass-card" style={{marginBottom: 0}}>
-          <div className="card-title"><ShieldAlert size={18} color="var(--danger)"/> Recent Anomalies</div>
-          <div style={{maxHeight: '250px', overflowY: 'auto'}}>
+          <div className="card-title"><ShieldAlert size={18} color="var(--danger)"/> Recent Anomalies & SOP</div>
+          
+          <div style={{marginBottom: '1rem', fontSize: '0.75rem', color: 'var(--text-muted)'}}>
+            <strong>SOP Tindakan:</strong><br/>
+            <span style={{color: 'var(--danger)'}}>● CRITICAL:</span> Penurunan ekstrem di luar margin batas bawah, perlu eskalasi segera ke BOD.<br/>
+            <span style={{color: 'var(--warning)'}}>● WARNING:</span> Penyimpangan minor, instruksikan FP&A lokal untuk meninjau kuartal depan.
+          </div>
+
+          <div style={{maxHeight: '180px', overflowY: 'auto'}}>
             <table className="data-table" style={{fontSize: '0.75rem'}}>
               <thead>
                 <tr>
@@ -356,7 +408,8 @@ function DataTab({ data }) {
                   <tr key={i}>
                     <td><strong>{b.metric_id.toUpperCase()}</strong></td>
                     <td style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>{b.best_model}</td>
-                    <td>{b.MAPE !== undefined ? b.MAPE.toFixed(2) : 'N/A'}%</td>
+                    {/* Fixed: Use b.best_MAPE instead of b.MAPE based on CSV column */}
+                    <td>{b.best_MAPE !== undefined ? b.best_MAPE.toFixed(2) : 'N/A'}%</td>
                   </tr>
                 ))}
               </tbody>
@@ -393,13 +446,17 @@ function DataTab({ data }) {
 // ==========================================
 // TAB 3: SETTINGS
 // ==========================================
-function SettingsTab() {
+function SettingsTab({ 
+  ciVisibility, setCiVisibility, 
+  emailAlerts, setEmailAlerts, 
+  autoRefresh, setAutoRefresh 
+}) {
   return (
     <div className="glass-card">
       <div className="card-title">System Settings</div>
       <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
         <div className="alert-box info">
-          Halaman ini mensimulasikan konfigurasi sistem level enterprise.
+          Halaman ini mengonfigurasi parameter dashboard secara real-time.
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid var(--border-glass)'}}>
           <div>
@@ -407,8 +464,8 @@ function SettingsTab() {
             <p style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>Kirim peringatan seketika ke jajaran BOD jika ada anomali terdeteksi.</p>
           </div>
           <div className="radio-group">
-            <div className="radio-label active">ON</div>
-            <div className="radio-label">OFF</div>
+            <div className={`radio-label ${emailAlerts === 'ON' ? 'active' : ''}`} onClick={() => setEmailAlerts('ON')}>ON</div>
+            <div className={`radio-label ${emailAlerts === 'OFF' ? 'active' : ''}`} onClick={() => setEmailAlerts('OFF')}>OFF</div>
           </div>
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid var(--border-glass)'}}>
@@ -417,19 +474,24 @@ function SettingsTab() {
             <p style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>Tarik data real-time dari ERP (SAP) setiap 15 menit.</p>
           </div>
           <div className="radio-group">
-            <div className="radio-label active">ON</div>
-            <div className="radio-label">OFF</div>
+            <div className={`radio-label ${autoRefresh === 'ON' ? 'active' : ''}`} onClick={() => setAutoRefresh('ON')}>ON</div>
+            <div className={`radio-label ${autoRefresh === 'OFF' ? 'active' : ''}`} onClick={() => setAutoRefresh('OFF')}>OFF</div>
           </div>
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between', padding: '1rem'}}>
           <div>
             <strong>Confidence Interval Band</strong>
-            <p style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>Tampilkan rentang probabilitas prediksi di grafik utama.</p>
+            <p style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>Tampilkan rentang probabilitas prediksi di grafik utama Executive Dashboard.</p>
           </div>
-          <select className="form-select" style={{background: 'var(--bg-sidebar)', padding: '0.5rem', borderRadius: '4px'}}>
-            <option>80% & 95% (Default)</option>
-            <option>95% Only</option>
-            <option>Hidden</option>
+          <select 
+            className="form-select" 
+            style={{background: 'var(--bg-sidebar)', padding: '0.5rem', borderRadius: '4px'}}
+            value={ciVisibility}
+            onChange={(e) => setCiVisibility(e.target.value)}
+          >
+            <option value="80% & 95% (Default)">80% & 95% (Default)</option>
+            <option value="95% Only">95% Only</option>
+            <option value="Hidden">Hidden</option>
           </select>
         </div>
       </div>
