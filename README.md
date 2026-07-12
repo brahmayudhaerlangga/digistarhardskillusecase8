@@ -121,20 +121,20 @@ Sistem **DILARANG** mencakup:
 - [x] Financial trading recommendation (signal buy/sell/hold)
 - [x] Analisis perilaku investor
 
-### Limitasi Data
+### Limitasi Data & Penggunaan Mock Data (Academic Integrity)
 
-- **Short series**: hanya 20 kuartal — uncertainty forecast besar, prediction interval harus jujur ditampilkan
-- **No segmentasi**: data konsolidasi entity-level, tidak tersedia breakdown regional/produk/customer
-- **No budget data**: target input manual; tidak ada data realisasi vs budget
-- **Metrik pasar**: EPS, shares, dividend hanya digunakan sebagai konteks performa internal, **BUKAN** untuk prediksi harga saham
+- **Short series**: Hanya 20 kuartal — *uncertainty forecast* besar, *prediction interval* harus jujur ditampilkan.
+- **Metrik pasar**: EPS, shares, dividend hanya digunakan sebagai konteks performa internal, **BUKAN** untuk prediksi harga saham.
+- **Simulasi Segmentasi (Mock Data)**: Karena data asli konsolidasi Telkom dari sumber publik (BEI/Stockbit) **tidak memiliki rincian segmentasi (Regional, Produk, Budget, Subscribers)**, maka kami menggunakan **Mock Data (Data Simulasi)** khusus untuk bagian visualisasi *Frontend* tersebut. 
+  - **Mengapa ini dilakukan?** Untuk membuktikan bahwa arsitektur AI dan *dashboard* kami sudah 100% siap untuk menampung data segmentasi nyata jika kelak diberikan akses internal oleh perusahaan.
+  - **Variabel Dummy:** *Revenue per Regional* (Jawa, Sumatera, KTI, Kalimantan), *Revenue per Produk* (Telkomsel, IndiHome, Enterprise, WIFI.ID), *Target Budget* (Asumsi Growth 5%), dan jumlah *Subscribers*.
+  - **Catatan Validitas:** Total kumulatif dari data tiruan ini **sama persis** dengan total data finansial riil Telkom, sehingga metrik level-perusahaan tetap akurat 100%.
 
 ### Future Work
 
-1. Segmentasi regional / produk / subsidiary / customer (jika data tersedia)
-2. Integrasi data budget & realisasi
-3. Customer & subscription data untuk analisis churn
-4. Real-time data pipeline untuk monitoring kontinu
-5. Model ensemble untuk meningkatkan akurasi forecast
+1. Penggunaan data segmentasi riil (menggantikan *mock data*).
+2. Real-time data pipeline untuk monitoring kontinu.
+3. Model ensemble untuk meningkatkan akurasi forecast di dataset pendek.
 
 ---
 

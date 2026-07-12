@@ -1,0 +1,245 @@
+{
+    "historical": [
+        {
+            "period": "2021 Q2",
+            "revenue": 35535.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 161.39
+        },
+        {
+            "period": "2021 Q3",
+            "revenue": 36563.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 160.55
+        },
+        {
+            "period": "2021 Q4",
+            "revenue": 37167.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 161.61
+        },
+        {
+            "period": "2022 Q1",
+            "revenue": 35208.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 163.83
+        },
+        {
+            "period": "2022 Q2",
+            "revenue": 36775.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 162.88
+        },
+        {
+            "period": "2022 Q3",
+            "revenue": 36891.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 164.64
+        },
+        {
+            "period": "2022 Q4",
+            "revenue": 38432.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 164.03
+        },
+        {
+            "period": "2023 Q1",
+            "revenue": 36090.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 165.97
+        },
+        {
+            "period": "2023 Q2",
+            "revenue": 37388.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 167.6
+        },
+        {
+            "period": "2023 Q3",
+            "revenue": 37760.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 168.23
+        },
+        {
+            "period": "2023 Q4",
+            "revenue": 37978.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 168.2
+        },
+        {
+            "period": "2024 Q1",
+            "revenue": 37429.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 169.25
+        },
+        {
+            "period": "2024 Q2",
+            "revenue": 37863.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 170.18
+        },
+        {
+            "period": "2024 Q3",
+            "revenue": 36927.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 170.42
+        },
+        {
+            "period": "2024 Q4",
+            "revenue": 37748.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 171.88
+        },
+        {
+            "period": "2025 Q1",
+            "revenue": 36639.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 174.18
+        },
+        {
+            "period": "2025 Q2",
+            "revenue": 36365.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 173.07
+        },
+        {
+            "period": "2025 Q3",
+            "revenue": 36613.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 170.11
+        },
+        {
+            "period": "2025 Q4",
+            "revenue": 37125.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 175.01
+        },
+        {
+            "period": "2026 Q1",
+            "revenue": 37189.0,
+            "netIncome": 0,
+            "operatingIncome": 0,
+            "operatingExpenses": 0,
+            "subscribers": 175.3
+        }
+    ],
+    "forecast": [
+        {
+            "period": "2026 Q2",
+            "forecast": 3.6365e-05,
+            "lower_80": 3.501972724493333e-05,
+            "upper_80": 3.771027275506667e-05,
+            "target": 39048.450000000004
+        },
+        {
+            "period": "2026 Q3",
+            "forecast": 3.6613e-05,
+            "lower_80": 3.5267727244933334e-05,
+            "upper_80": 3.7958272755066666e-05,
+            "target": 41000.872500000005
+        },
+        {
+            "period": "2026 Q4",
+            "forecast": 3.7125e-05,
+            "lower_80": 3.577972724493333e-05,
+            "upper_80": 3.847027275506667e-05,
+            "target": 43050.91612500001
+        },
+        {
+            "period": "2027 Q1",
+            "forecast": 3.7189e-05,
+            "lower_80": 3.584372724493333e-05,
+            "upper_80": 3.853427275506667e-05,
+            "target": 45203.461931250014
+        }
+    ],
+    "anomalies": [],
+    "regional": [
+        {
+            "name": "Jawa",
+            "value": 20454,
+            "growth": 3.2
+        },
+        {
+            "name": "Sumatera",
+            "value": 8182,
+            "growth": -1.5
+        },
+        {
+            "name": "KTI (Timur)",
+            "value": 4835,
+            "growth": 5.8
+        },
+        {
+            "name": "Kalimantan",
+            "value": 3719,
+            "growth": 2.1
+        }
+    ],
+    "product": [
+        {
+            "name": "Telkomsel",
+            "value": 22313,
+            "growth": 1.5
+        },
+        {
+            "name": "IndiHome",
+            "value": 9297,
+            "growth": 7.2
+        },
+        {
+            "name": "Enterprise",
+            "value": 3719,
+            "growth": -4.0
+        },
+        {
+            "name": "WIFI.ID / Lainnya",
+            "value": 1859,
+            "growth": 2.0
+        }
+    ],
+    "insights": [
+        "Revenue Enterprise diprediksi turun 8% pada kuartal berikutnya (Mock Insight).",
+        "Cost Network meningkat abnormal 15% dibanding historical trend di Regional Sumatera.",
+        "Produk IndiHome memiliki growth tertinggi selama 12 bulan terakhir.",
+        "Regional Sumatera memiliki risiko tidak mencapai target EBITDA sebesar 5%."
+    ]
+}
