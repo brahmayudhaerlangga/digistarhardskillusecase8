@@ -25591,24 +25591,29 @@
     ],
     "regional": [
         {
-            "name": "Jawa",
-            "value": 20454,
-            "growth": 3.2
-        },
-        {
-            "name": "Sumatera",
-            "value": 7438,
+            "name": "Regional I (Sumatera)",
+            "value": 5578,
             "growth": 4.1
         },
         {
-            "name": "KTI",
-            "value": 5578,
-            "growth": 5.5
+            "name": "Regional II (Jkt & Jabar)",
+            "value": 14876,
+            "growth": 3.2
         },
         {
-            "name": "Kalimantan",
-            "value": 3719,
+            "name": "Regional III (Jtg, Jtm & Balnus)",
+            "value": 9297,
+            "growth": 3.5
+        },
+        {
+            "name": "Regional IV (Kalimantan)",
+            "value": 2975,
             "growth": 2.8
+        },
+        {
+            "name": "Regional V (KTI)",
+            "value": 4463,
+            "growth": 5.5
         }
     ],
     "product": [
