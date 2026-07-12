@@ -424,11 +424,11 @@ function DashboardTab({ data, metric, ciVisibility }) {
           <div className="card-title">Regional Share</div>
           <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
-              <BarChart data={data.regional || []} layout="vertical">
+              <BarChart data={data.regional || []} layout="vertical" margin={{ left: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" horizontal={true} vertical={false} />
                 <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" width={80} />
-                <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} cursor={{fill: 'rgba(255,255,255,0.05)'}} />
+                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" width={160} tick={{fontSize: 11}} />
+                <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} cursor={{fill: 'rgba(255,255,255,0.05)'}} formatter={(val) => formatIDR(val)} />
                 <Bar dataKey="value" fill="var(--accent-blue)" radius={[0, 4, 4, 0]}>
                   {data.regional && data.regional.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -445,12 +445,24 @@ function DashboardTab({ data, metric, ciVisibility }) {
           <div style={{ width: '100%', height: 250 }}>
             <ResponsiveContainer>
               <PieChart>
-                <Pie data={data.product || []} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value" stroke="none">
+                <Pie 
+                  data={data.product || []} 
+                  innerRadius={50} 
+                  outerRadius={80} 
+                  paddingAngle={5} 
+                  dataKey="value" 
+                  stroke="none"
+                  label={({percent}) => `${(percent * 100).toFixed(0)}%`}
+                  labelLine={false}
+                >
                   {data.product && data.product.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} />
+                <RechartsTooltip 
+                  contentStyle={{backgroundColor: 'var(--bg-dark)'}} 
+                  formatter={(value, name) => [`${value} Juta Pelanggan`, name]} 
+                />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
