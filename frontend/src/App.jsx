@@ -6,7 +6,7 @@ import {
 import { 
   TrendingUp, TrendingDown, AlertTriangle, AlertCircle, Activity, 
   DollarSign, Users, Target, LayoutDashboard, Database, Settings,
-  ShieldAlert, FileText, Info
+  ShieldAlert, FileText, Info, BarChart2
 } from 'lucide-react';
 import './index.css';
 
@@ -131,7 +131,6 @@ function DashboardTab({ data, metric, ciVisibility }) {
   
   const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))];
   
-  // When metric changes, or on initial load, default to the first available model
   useEffect(() => {
     if (availableModels.length > 0) {
       if (!availableModels.includes(model)) {
@@ -140,11 +139,25 @@ function DashboardTab({ data, metric, ciVisibility }) {
     } else {
       setModel('');
     }
-  }, [metric, data]); // removed 'model' from dependency to prevent infinite loops, but react to 'metric' changes
+  }, [metric, data]);
 
-  // Manual handler for dropdown to ensure state updates
   const handleModelChange = (e) => {
     setModel(e.target.value);
+  };
+
+  // KPI Target Inputs State (For the Gap Analysis section)
+  const [targets, setTargets] = useState({});
+  useEffect(() => {
+    const initialTargets = {};
+    ['revenue', 'ebitda', 'netinc'].forEach(m => {
+      const h = data.historical.filter(d => d.metric_id === m);
+      if (h.length > 0) initialTargets[m] = h[h.length - 1].value_scaled * 1.05; // default 5% growth
+    });
+    setTargets(initialTargets);
+  }, [data]);
+
+  const handleTargetChange = (m, val) => {
+    setTargets(prev => ({...prev, [m]: parseFloat(val)}));
   };
 
   // 1. KPI Cards
@@ -159,13 +172,15 @@ function DashboardTab({ data, metric, ciVisibility }) {
   const hist = data.historical.filter(d => d.metric_id === metric);
   const fc = data.forecast.filter(d => d.metric_id === metric && d.model === model);
 
-  // Merge historical and forecast perfectly
+  // Generate a target line for the selected metric
+  const currentTarget = targets[metric] || (hist.length > 0 ? hist[hist.length-1].value_scaled * 1.05 : 0);
+
   let combined = hist.map(d => ({ 
     period: d.period, 
-    Actual: d.value_scaled 
+    Actual: d.value_scaled,
+    Target: null
   }));
   
-  // To connect the line smoothly, we append the LAST historical point to the forecast series
   if (hist.length > 0 && fc.length > 0) {
     const lastHist = hist[hist.length - 1];
     fc.unshift({ 
@@ -176,6 +191,9 @@ function DashboardTab({ data, metric, ciVisibility }) {
       lower_95: lastHist.value_scaled, 
       upper_95: lastHist.value_scaled 
     });
+    
+    // Connect target from last historical point
+    combined[combined.length-1].Target = lastHist.value_scaled;
   }
   
   fc.forEach(f => {
@@ -189,7 +207,8 @@ function DashboardTab({ data, metric, ciVisibility }) {
         period: f.period, 
         Forecast: f.forecast, 
         L80: f.lower_80, U80: f.upper_80, 
-        L95: f.lower_95, U95: f.upper_95 
+        L95: f.lower_95, U95: f.upper_95,
+        Target: currentTarget
       });
     }
   });
@@ -197,6 +216,41 @@ function DashboardTab({ data, metric, ciVisibility }) {
   // Settings visibility
   const show95 = ciVisibility.includes('95%');
   const show80 = ciVisibility.includes('80%');
+
+  // Revenue Growth Data (Section 5)
+  const revHist = data.historical.filter(d => d.metric_id === 'revenue');
+  const revFc = data.forecast.filter(d => d.metric_id === 'revenue' && d.model === (availableModels[0] || 'Naive Seasonal'));
+  const growthData = [];
+  
+  revHist.forEach((h, i) => {
+    let qoq = 0;
+    if (i > 0) qoq = ((h.value_scaled - revHist[i-1].value_scaled) / Math.abs(revHist[i-1].value_scaled)) * 100;
+    growthData.push({ period: h.period, Revenue: h.value_scaled, Growth: qoq });
+  });
+  
+  if (revFc.length > 0 && revHist.length > 0) {
+    let prevVal = revHist[revHist.length-1].value_scaled;
+    revFc.forEach(f => {
+      let qoq = ((f.forecast - prevVal) / Math.abs(prevVal)) * 100;
+      growthData.push({ period: f.period, ForecastRev: f.forecast, Growth: qoq });
+      prevVal = f.forecast;
+    });
+  }
+
+  // Target Table logic
+  const targetResults = ['revenue', 'ebitda', 'netinc'].map(m => {
+    const mFc = data.forecast.filter(d => d.metric_id === m);
+    if (mFc.length === 0) return null;
+    const modelFc = mFc.filter(d => d.model === mFc[0].model);
+    const nextQ = modelFc[0]; 
+    const t = targets[m] || 0;
+    const gap = t !== 0 ? ((nextQ.forecast - t) / Math.abs(t)) * 100 : 0;
+    let status = "OFF-TRACK";
+    let statusColor = "var(--danger)";
+    if (nextQ.forecast >= t) { status = "ON-TRACK"; statusColor = "var(--success)"; }
+    else if (nextQ.upper_95 >= t) { status = "AT-RISK"; statusColor = "var(--warning)"; }
+    return { m, nextQ, t, gap, status, statusColor };
+  }).filter(Boolean);
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
@@ -232,7 +286,7 @@ function DashboardTab({ data, metric, ciVisibility }) {
       {/* SECTION: Insights */}
       {data.insights && data.insights.length > 0 && (
         <div className="glass-card">
-          <div className="card-title"><Activity size={18}/> AI Predictive Insights</div>
+          <div className="card-title"><Activity size={18}/> Financial Summary & Predictive Insights</div>
           <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
             {data.insights.slice(0, 3).map((ins, i) => (
               <div key={i} className={`alert-box ${ins.severity === 'CRITICAL' ? '' : ins.severity === 'WARNING' ? 'warning' : 'info'}`} style={{marginBottom: 0, padding: '0.75rem'}}>
@@ -243,34 +297,95 @@ function DashboardTab({ data, metric, ciVisibility }) {
         </div>
       )}
 
+      {/* SECTION: TARGET TABLE (Gap Analysis) */}
+      <div className="glass-card">
+        <div className="card-title"><Target size={18}/> Forecast vs Target (Gap Analysis)</div>
+        <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.85rem'}}>
+          Ubah nilai Target pada kolom input untuk melakukan simulasi pencapaian secara instan.
+        </p>
+        <div className="data-table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Metrik Utama</th>
+                <th>AI Forecast Kuartal Depan</th>
+                <th>Target Perusahaan (Input)</th>
+                <th>Kesenjangan (Gap %)</th>
+                <th>Status Pencapaian</th>
+              </tr>
+            </thead>
+            <tbody>
+              {targetResults.map(res => (
+                <tr key={res.m}>
+                  <td><strong>{res.m.toUpperCase()}</strong></td>
+                  <td>{formatIDR(res.nextQ.forecast)}</td>
+                  <td>
+                    <input type="number" className="form-input" style={{width: '140px'}} value={(targets[res.m] || 0).toFixed(1)} onChange={(e) => handleTargetChange(res.m, e.target.value)} />
+                  </td>
+                  <td style={{color: res.gap >= 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 'bold'}}>
+                    {res.gap > 0 ? '+' : ''}{res.gap.toFixed(1)}%
+                  </td>
+                  <td><span className="badge" style={{backgroundColor: res.statusColor, color: '#fff'}}>{res.status}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* SECTION: MAIN FORECAST CHART */}
       <div className="glass-card">
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem'}}>
-          <div className="card-title" style={{marginBottom: 0}}>AI Forecast vs Target ({metric.toUpperCase()})</div>
+          <div className="card-title" style={{marginBottom: 0}}>
+            <ChartIcon size={18}/> Prediksi AI: {metric.toUpperCase()} Actual vs Forecast vs Target
+          </div>
           
           <div className="metric-select-wrapper" style={{padding: '0.25rem 0.75rem', background: 'rgba(0,0,0,0.2)'}}>
-            <label>Model AI Prediksi:</label>
+            <label>Model Prediksi:</label>
             <select className="metric-select" style={{color: 'var(--accent-blue)'}} value={model} onChange={handleModelChange}>
               {availableModels.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
         </div>
         
-        <div style={{ width: '100%', height: 400 }}>
+        <div style={{ width: '100%', height: 450 }}>
           <ResponsiveContainer>
             <ComposedChart data={combined}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
               <XAxis dataKey="period" stroke="var(--text-muted)" />
               <YAxis stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
-              <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} formatter={(val) => formatIDR(val)} />
-              <Legend />
-              {show95 && <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.05)" stroke="none" name="Upper 95%" />}
-              {show95 && <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95%" />}
-              {show80 && <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.15)" stroke="none" name="Upper 80%" />}
-              {show80 && <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80%" />}
+              <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)', borderRadius: '8px', border: '1px solid var(--border-glass)'}} formatter={(val) => formatIDR(val)} />
+              <Legend verticalAlign="top" height={36}/>
               
-              <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={2} dot={{r:3}} />
-              <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={2} strokeDasharray="5 5" />
+              {/* Highlighted Confidence Intervals - opacity increased */}
+              {show95 && <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.25)" stroke="none" name="Upper 95% CI" />}
+              {show95 && <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95% CI (Mask)" legendType="none" />}
+              {show80 && <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.45)" stroke="none" name="Upper 80% CI" />}
+              {show80 && <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80% CI (Mask)" legendType="none" />}
+              
+              <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={3} dot={{r:4}} />
+              <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={3} strokeDasharray="5 5" />
+              <Line type="stepAfter" dataKey="Target" stroke="#ec4899" strokeWidth={2} strokeDasharray="3 3" />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* SECTION: Revenue Growth Projection */}
+      <div className="glass-card">
+        <div className="card-title"><BarChart2 size={18}/> Revenue Growth Projection (Kuartal ke Kuartal)</div>
+        <div style={{ width: '100%', height: 350 }}>
+          <ResponsiveContainer>
+            <ComposedChart data={growthData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
+              <XAxis dataKey="period" stroke="var(--text-muted)" />
+              <YAxis yAxisId="left" stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
+              <YAxis yAxisId="right" orientation="right" stroke="var(--accent-purple)" tickFormatter={val => `${val}%`} />
+              <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-dark)'}} />
+              <Legend verticalAlign="top" height={36}/>
+              <Bar yAxisId="left" dataKey="Revenue" fill="#3b82f6" opacity={0.8} radius={[4, 4, 0, 0]} />
+              <Bar yAxisId="left" dataKey="ForecastRev" fill="#f59e0b" opacity={0.8} name="Forecast Revenue" radius={[4, 4, 0, 0]} />
+              <Line yAxisId="right" type="monotone" dataKey="Growth" stroke="#c084fc" strokeWidth={3} dot={{r: 4, fill: '#c084fc'}} name="QoQ Growth (%)" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
@@ -356,6 +471,11 @@ function DashboardTab({ data, metric, ciVisibility }) {
   );
 }
 
+// ChartIcon for React component
+function ChartIcon({ size }) {
+  return <TrendingUp size={size} />;
+}
+
 // ==========================================
 // TAB 2: DATA & MODELS
 // ==========================================
@@ -408,7 +528,6 @@ function DataTab({ data }) {
                   <tr key={i}>
                     <td><strong>{b.metric_id.toUpperCase()}</strong></td>
                     <td style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>{b.best_model}</td>
-                    {/* Fixed: Use b.best_MAPE instead of b.MAPE based on CSV column */}
                     <td>{b.best_MAPE !== undefined ? b.best_MAPE.toFixed(2) : 'N/A'}%</td>
                   </tr>
                 ))}
