@@ -146,18 +146,29 @@ function DashboardTab({ data, metric, ciVisibility }) {
   };
 
   // KPI Target Inputs State (For the Gap Analysis section)
+  // Fix: We store raw strings here to prevent formatting bugs during user typing
   const [targets, setTargets] = useState({});
   useEffect(() => {
     const initialTargets = {};
     ['revenue', 'ebitda', 'netinc'].forEach(m => {
       const h = data.historical.filter(d => d.metric_id === m);
-      if (h.length > 0) initialTargets[m] = h[h.length - 1].value_scaled * 1.05; // default 5% growth
+      if (h.length > 0) {
+        const valInBillions = h[h.length - 1].value_scaled * 1.05; // 5% growth
+        initialTargets[m] = (valInBillions / 1000).toFixed(2); // Store as Trillions string
+      }
     });
     setTargets(initialTargets);
   }, [data]);
 
   const handleTargetChange = (m, val) => {
-    setTargets(prev => ({...prev, [m]: parseFloat(val)}));
+    // Store raw string without formatting
+    setTargets(prev => ({...prev, [m]: val}));
+  };
+
+  const getNumericTarget = (m) => {
+    const raw = targets[m];
+    if (!raw || isNaN(parseFloat(raw))) return 0;
+    return parseFloat(raw) * 1000; // Convert Trillions to Billions
   };
 
   // 1. KPI Cards
@@ -172,8 +183,8 @@ function DashboardTab({ data, metric, ciVisibility }) {
   const hist = data.historical.filter(d => d.metric_id === metric);
   const fc = data.forecast.filter(d => d.metric_id === metric && d.model === model);
 
-  // Generate a target line for the selected metric
-  const currentTarget = targets[metric] || (hist.length > 0 ? hist[hist.length-1].value_scaled * 1.05 : 0);
+  // Generate target line
+  const currentTarget = getNumericTarget(metric) || (hist.length > 0 ? hist[hist.length-1].value_scaled * 1.05 : 0);
 
   let combined = hist.map(d => ({ 
     period: d.period, 
@@ -243,7 +254,7 @@ function DashboardTab({ data, metric, ciVisibility }) {
     if (mFc.length === 0) return null;
     const modelFc = mFc.filter(d => d.model === mFc[0].model);
     const nextQ = modelFc[0]; 
-    const t = targets[m] || 0;
+    const t = getNumericTarget(m);
     const gap = t !== 0 ? ((nextQ.forecast - t) / Math.abs(t)) * 100 : 0;
     let status = "OFF-TRACK";
     let statusColor = "var(--danger)";
@@ -326,8 +337,8 @@ function DashboardTab({ data, metric, ciVisibility }) {
                         type="number" 
                         className="form-input" 
                         style={{width: '70px', textAlign: 'right', padding: '0.15rem'}} 
-                        value={((targets[res.m] || 0) / 1000).toFixed(2)} 
-                        onChange={(e) => handleTargetChange(res.m, parseFloat(e.target.value) * 1000)} 
+                        value={targets[res.m] !== undefined ? targets[res.m] : ''} 
+                        onChange={(e) => handleTargetChange(res.m, e.target.value)} 
                         step="0.1"
                       />
                       <span style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}>T</span>
@@ -539,6 +550,7 @@ function DataTab({ data }) {
                   <tr key={i}>
                     <td><strong>{b.metric_id.toUpperCase()}</strong></td>
                     <td style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>{b.best_model}</td>
+                    {/* Fixed: Use b.best_MAPE instead of b.MAPE based on CSV column */}
                     <td>{b.best_MAPE !== undefined ? b.best_MAPE.toFixed(2) : 'N/A'}%</td>
                   </tr>
                 ))}
