@@ -400,7 +400,7 @@ function DashboardTab({ data, metric, ciVisibility }) {
               
               <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={3} dot={{r:4}} />
               <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={3} strokeDasharray="5 5" />
-              <Line type="stepAfter" dataKey="Target" stroke="#ec4899" strokeWidth={2} strokeDasharray="3 3" />
+              <Line type="linear" dataKey="Target" stroke="#ec4899" strokeWidth={2} strokeDasharray="3 3" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
