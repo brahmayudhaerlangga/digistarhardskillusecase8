@@ -2,237 +2,237 @@
     "historical": [
         {
             "period": "2021 Q2",
-            "revenue": 35535.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 161.39
+            "revenue": 35535000000000.0,
+            "netIncome": 6437000000000.0,
+            "operatingIncome": 18982000000000.0,
+            "operatingExpenses": 9856000000000.0,
+            "subscribers": 161.76
         },
         {
             "period": "2021 Q3",
-            "revenue": 36563.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 160.55
+            "revenue": 36563000000000.0,
+            "netIncome": 6421000000000.0,
+            "operatingIncome": 20142000000000.0,
+            "operatingExpenses": 11545000000000.0,
+            "subscribers": 162.03
         },
         {
             "period": "2021 Q4",
-            "revenue": 37167.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 161.61
+            "revenue": 37167000000000.0,
+            "netIncome": 5888000000000.0,
+            "operatingIncome": 10898000000000.0,
+            "operatingExpenses": 14719000000000.0,
+            "subscribers": 162.06
         },
         {
             "period": "2022 Q1",
-            "revenue": 35208.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 163.83
+            "revenue": 35208000000000.0,
+            "netIncome": 6118000000000.0,
+            "operatingIncome": 18102000000000.0,
+            "operatingExpenses": 10740000000000.0,
+            "subscribers": 163.02
         },
         {
             "period": "2022 Q2",
-            "revenue": 36775.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 162.88
+            "revenue": 36775000000000.0,
+            "netIncome": 7192000000000.0,
+            "operatingIncome": 18727000000000.0,
+            "operatingExpenses": 12269000000000.0,
+            "subscribers": 162.78
         },
         {
             "period": "2022 Q3",
-            "revenue": 36891.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 164.64
+            "revenue": 36891000000000.0,
+            "netIncome": 3271000000000.0,
+            "operatingIncome": 18356000000000.0,
+            "operatingExpenses": 11827000000000.0,
+            "subscribers": 165.48
         },
         {
             "period": "2022 Q4",
-            "revenue": 38432.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 164.03
+            "revenue": 38432000000000.0,
+            "netIncome": 4155000000000.0,
+            "operatingIncome": 15857000000000.0,
+            "operatingExpenses": 12610000000000.0,
+            "subscribers": 164.39
         },
         {
             "period": "2023 Q1",
-            "revenue": 36090.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 165.97
+            "revenue": 36090000000000.0,
+            "netIncome": 6424000000000.0,
+            "operatingIncome": 17596000000000.0,
+            "operatingExpenses": 10595000000000.0,
+            "subscribers": 165.03
         },
         {
             "period": "2023 Q2",
-            "revenue": 37388.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 167.6
+            "revenue": 37388000000000.0,
+            "netIncome": 6332000000000.0,
+            "operatingIncome": 18381000000000.0,
+            "operatingExpenses": 11858000000000.0,
+            "subscribers": 167.32
         },
         {
             "period": "2023 Q3",
-            "revenue": 37760.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 168.23
+            "revenue": 37760000000000.0,
+            "netIncome": 6743000000000.0,
+            "operatingIncome": 19394000000000.0,
+            "operatingExpenses": 8705000000000.0,
+            "subscribers": 166.99
         },
         {
             "period": "2023 Q4",
-            "revenue": 37978.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 168.2
+            "revenue": 37978000000000.0,
+            "netIncome": 5061000000000.0,
+            "operatingIncome": 14683000000000.0,
+            "operatingExpenses": 14935000000000.0,
+            "subscribers": 168.09
         },
         {
             "period": "2024 Q1",
-            "revenue": 37429.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 169.25
+            "revenue": 37429000000000.0,
+            "netIncome": 6053000000000.0,
+            "operatingIncome": 18018000000000.0,
+            "operatingExpenses": 10443000000000.0,
+            "subscribers": 171.35
         },
         {
             "period": "2024 Q2",
-            "revenue": 37863.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 170.18
+            "revenue": 37863000000000.0,
+            "netIncome": 5708000000000.0,
+            "operatingIncome": 18847000000000.0,
+            "operatingExpenses": 11635000000000.0,
+            "subscribers": 170.76
         },
         {
             "period": "2024 Q3",
-            "revenue": 36927.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 170.42
+            "revenue": 36927000000000.0,
+            "netIncome": 5914000000000.0,
+            "operatingIncome": 17295000000000.0,
+            "operatingExpenses": 9160000000000.0,
+            "subscribers": 170.5
         },
         {
             "period": "2024 Q4",
-            "revenue": 37748.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 171.88
+            "revenue": 37748000000000.0,
+            "netIncome": 4728000000000.0,
+            "operatingIncome": 13444000000000.0,
+            "operatingExpenses": 17205000000000.0,
+            "subscribers": 171.13
         },
         {
             "period": "2025 Q1",
-            "revenue": 36639.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 174.18
+            "revenue": 36639000000000.0,
+            "netIncome": 5549000000000.0,
+            "operatingIncome": 16741000000000.0,
+            "operatingExpenses": 11865000000000.0,
+            "subscribers": 171.22
         },
         {
             "period": "2025 Q2",
-            "revenue": 36365.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 173.07
+            "revenue": 36365000000000.0,
+            "netIncome": 5165000000000.0,
+            "operatingIncome": 16016000000000.0,
+            "operatingExpenses": 11887000000000.0,
+            "subscribers": 172.5
         },
         {
             "period": "2025 Q3",
-            "revenue": 36613.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 170.11
+            "revenue": 36613000000000.0,
+            "netIncome": 4809000000000.0,
+            "operatingIncome": 15933000000000.0,
+            "operatingExpenses": 9898000000000.0,
+            "subscribers": 172.63
         },
         {
             "period": "2025 Q4",
-            "revenue": 37125.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 175.01
+            "revenue": 37125000000000.0,
+            "netIncome": 2030000000000.0,
+            "operatingIncome": 16481000000000.0,
+            "operatingExpenses": 19782000000000.0,
+            "subscribers": 171.79
         },
         {
             "period": "2026 Q1",
-            "revenue": 37189.0,
-            "netIncome": 0,
-            "operatingIncome": 0,
-            "operatingExpenses": 0,
-            "subscribers": 175.3
+            "revenue": 37189000000000.0,
+            "netIncome": 4344000000000.0,
+            "operatingIncome": 15684000000000.0,
+            "operatingExpenses": 12253000000000.0,
+            "subscribers": 175.68
         }
     ],
     "forecast": [
         {
             "period": "2026 Q2",
-            "forecast": 3.6365e-05,
-            "lower_80": 3.501972724493333e-05,
-            "upper_80": 3.771027275506667e-05,
-            "target": 39048.450000000004
+            "forecast": 36365.0,
+            "lower_80": 35019.72724493333,
+            "upper_80": 37710.27275506667,
+            "target": 39048450000000.0
         },
         {
             "period": "2026 Q3",
-            "forecast": 3.6613e-05,
-            "lower_80": 3.5267727244933334e-05,
-            "upper_80": 3.7958272755066666e-05,
-            "target": 41000.872500000005
+            "forecast": 36613.0,
+            "lower_80": 35267.72724493333,
+            "upper_80": 37958.27275506667,
+            "target": 41000872500000.0
         },
         {
             "period": "2026 Q4",
-            "forecast": 3.7125e-05,
-            "lower_80": 3.577972724493333e-05,
-            "upper_80": 3.847027275506667e-05,
-            "target": 43050.91612500001
+            "forecast": 37125.0,
+            "lower_80": 35779.72724493333,
+            "upper_80": 38470.27275506667,
+            "target": 43050916125000.0
         },
         {
             "period": "2027 Q1",
-            "forecast": 3.7189e-05,
-            "lower_80": 3.584372724493333e-05,
-            "upper_80": 3.853427275506667e-05,
-            "target": 45203.461931250014
+            "forecast": 37189.0,
+            "lower_80": 35843.72724493333,
+            "upper_80": 38534.27275506667,
+            "target": 45203461931250.0
         }
     ],
     "anomalies": [],
     "regional": [
         {
             "name": "Jawa",
-            "value": 20454,
+            "value": 20453950000000,
             "growth": 3.2
         },
         {
             "name": "Sumatera",
-            "value": 8182,
+            "value": 8181580000000,
             "growth": -1.5
         },
         {
             "name": "KTI (Timur)",
-            "value": 4835,
+            "value": 4834570000000,
             "growth": 5.8
         },
         {
             "name": "Kalimantan",
-            "value": 3719,
+            "value": 3718900000000,
             "growth": 2.1
         }
     ],
     "product": [
         {
             "name": "Telkomsel",
-            "value": 22313,
+            "value": 22313400000000,
             "growth": 1.5
         },
         {
             "name": "IndiHome",
-            "value": 9297,
+            "value": 9297250000000,
             "growth": 7.2
         },
         {
             "name": "Enterprise",
-            "value": 3719,
+            "value": 3718900000000,
             "growth": -4.0
         },
         {
             "name": "WIFI.ID / Lainnya",
-            "value": 1859,
+            "value": 1859450000000,
             "growth": 2.0
         }
     ],

@@ -9,7 +9,7 @@ def generate_mock_data():
     df_hist = pd.read_csv('data/tlkm_quarterly_tidy.csv')
     
     # Filter only important metrics
-    metrics = ['revenue', 'netIncome', 'totalAssets', 'totalLiabilities', 'totalEquity', 'operatingIncome', 'operatingExpenses']
+    metrics = ['revenue', 'netinc', 'assets', 'liabilities', 'equity', 'ebitda', 'opex']
     df_filtered = df_hist[df_hist['metric_id'].isin(metrics)].copy()
     
     # Pivot to get periods as rows and metrics as columns
@@ -21,13 +21,13 @@ def generate_mock_data():
     
     historical_data = []
     for _, row in df_pivot.iterrows():
-        # Convert values from absolute Rupiah to Billions (Miliar Rupiah) for readability
+        # Values are already in Billions (Miliar Rupiah)
         item = {
             "period": row['period'],
-            "revenue": row.get('revenue', 0) / 1e9 if pd.notna(row.get('revenue')) else 0,
-            "netIncome": row.get('netIncome', 0) / 1e9 if pd.notna(row.get('netIncome')) else 0,
-            "operatingIncome": row.get('operatingIncome', 0) / 1e9 if pd.notna(row.get('operatingIncome')) else 0,
-            "operatingExpenses": row.get('operatingExpenses', 0) / 1e9 if pd.notna(row.get('operatingExpenses')) else 0,
+            "revenue": row.get('revenue', 0) if pd.notna(row.get('revenue')) else 0,
+            "netIncome": row.get('netinc', 0) if pd.notna(row.get('netinc')) else 0,
+            "operatingIncome": row.get('ebitda', 0) if pd.notna(row.get('ebitda')) else 0,
+            "operatingExpenses": row.get('opex', 0) if pd.notna(row.get('opex')) else 0,
         }
         # Add mock Subscribers (in Millions)
         # Starting around 160M, growing slightly
@@ -56,9 +56,9 @@ def generate_mock_data():
         for _, row in df_fc[df_fc['metric_id'] == 'revenue'].iterrows():
             forecast_data.append({
                 "period": row['period'],
-                "forecast": row['forecast'] / 1e9,
-                "lower_80": row['lower_80'] / 1e9,
-                "upper_80": row['upper_80'] / 1e9,
+                "forecast": row['forecast'],
+                "lower_80": row['lower_80'],
+                "upper_80": row['upper_80'],
                 "target": current_target
             })
             current_target *= target_growth
