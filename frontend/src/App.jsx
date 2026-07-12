@@ -320,7 +320,18 @@ function DashboardTab({ data, metric, ciVisibility }) {
                   <td><strong>{res.m.toUpperCase()}</strong></td>
                   <td>{formatIDR(res.nextQ.forecast)}</td>
                   <td>
-                    <input type="number" className="form-input" style={{width: '140px'}} value={(targets[res.m] || 0).toFixed(1)} onChange={(e) => handleTargetChange(res.m, e.target.value)} />
+                    <div style={{display: 'flex', alignItems: 'center', gap: '0.35rem'}}>
+                      <span style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}>Rp</span>
+                      <input 
+                        type="number" 
+                        className="form-input" 
+                        style={{width: '70px', textAlign: 'right', padding: '0.15rem'}} 
+                        value={((targets[res.m] || 0) / 1000).toFixed(2)} 
+                        onChange={(e) => handleTargetChange(res.m, parseFloat(e.target.value) * 1000)} 
+                        step="0.1"
+                      />
+                      <span style={{color: 'var(--text-muted)', fontSize: '0.85rem'}}>T</span>
+                    </div>
                   </td>
                   <td style={{color: res.gap >= 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 'bold'}}>
                     {res.gap > 0 ? '+' : ''}{res.gap.toFixed(1)}%
@@ -358,9 +369,9 @@ function DashboardTab({ data, metric, ciVisibility }) {
               <Legend verticalAlign="top" height={36}/>
               
               {/* Highlighted Confidence Intervals - opacity increased */}
-              {show95 && <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.25)" stroke="none" name="Upper 95% CI" />}
+              {show95 && <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.25)" stroke="#f59e0b" strokeWidth={0} name="Upper 95% CI" />}
               {show95 && <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95% CI (Mask)" legendType="none" />}
-              {show80 && <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.45)" stroke="none" name="Upper 80% CI" />}
+              {show80 && <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.45)" stroke="#f59e0b" strokeWidth={0} name="Upper 80% CI" />}
               {show80 && <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80% CI (Mask)" legendType="none" />}
               
               <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={3} dot={{r:4}} />
