@@ -1,0 +1,26 @@
+﻿category,metric,severity,insight
+Forecast,Revenue,WARNING,Revenue diprediksi mengalami penurunan ringan sebesar 0.8% pada Q2 2026 dibandingkan Q1 2026. Proyeksi: Rp 36.9 triliun (model terbaik: Random Forest).
+Forecast,EBITDA,INFO,EBITDA diprediksi mengalami pertumbuhan sebesar 4.0% pada Q2 2026 dibandingkan Q1 2026. Proyeksi: Rp 16.3 triliun (model terbaik: LSTM).
+Forecast Uncertainty,EBITDA,INFO,Prediction interval 95% untuk EBITDA cukup lebar (35.1% dari nilai forecast). Ini mencerminkan ketidakpastian yang tinggi akibat short time-series (20 kuartal).
+Forecast,Laba Bersih,INFO,Laba Bersih diprediksi mengalami pertumbuhan signifikan sebesar 14.0% pada Q2 2026 dibandingkan Q1 2026. Proyeksi: Rp 5.0 triliun (model terbaik: Holt-Winters).
+Forecast Uncertainty,Laba Bersih,INFO,Prediction interval 95% untuk Laba Bersih cukup lebar (68.4% dari nilai forecast). Ini mencerminkan ketidakpastian yang tinggi akibat short time-series (20 kuartal).
+Forecast,Operating Income,WARNING,Operating Income diprediksi mengalami penurunan signifikan sebesar 6.6% pada Q2 2026 dibandingkan Q1 2026. Proyeksi: Rp 8.5 triliun (model terbaik: Holt-Winters).
+Forecast Uncertainty,Operating Income,INFO,Prediction interval 95% untuk Operating Income cukup lebar (39.0% dari nilai forecast). Ini mencerminkan ketidakpastian yang tinggi akibat short time-series (20 kuartal).
+Anomaly Detection,Umum,CRITICAL,"Terdeteksi 26 anomali KRITIS pada kinerja keuangan. Metrik terdampak: EBITDA Margin, Operating Margin, Debt to Equity Ratio, Cost of Revenue. Diperlukan investigasi segera."
+Anomaly Detection,Umum,WARNING,Terdeteksi 46 anomali WARNING pada indikator keuangan. Pemantauan berkelanjutan diperlukan.
+Anomaly Detail,Current Ratio,WARNING,Current Ratio berada di 92.1% pada Q1 2026 (di bawah threshold 100%). Risiko likuiditas jangka pendek.
+Anomaly Detail,Quick Ratio,WARNING,Quick Ratio berada di 0.91 pada Q1 2026 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.
+Anomaly Detail,Net Income,INFO,QoQ growth netinc sebesar 114.0% berada di luar rentang IQR normal.
+Anomaly Detail,Operating Income,INFO,QoQ growth opinc sebesar 48.6% berada di luar rentang IQR normal.
+Anomaly Detail,Free Cash Flow,INFO,QoQ growth fcf sebesar 71.0% berada di luar rentang IQR normal.
+Profitabilitas,Gross Margin,INFO,Gross Margin terakhir: 57.5% (rata-rata historis: 61.1%). Tren 4 kuartal terakhir menunjukkan tren positif (meningkat).
+Profitabilitas,Operating Margin,WARNING,Operating Margin terakhir: 24.6% (rata-rata historis: 28.2%). Tren 4 kuartal terakhir menunjukkan tren negatif (menurun).
+Profitabilitas,EBITDA Margin,WARNING,EBITDA Margin terakhir: 42.2% (rata-rata historis: 46.0%). Tren 4 kuartal terakhir menunjukkan tren negatif (menurun).
+Profitabilitas,Profit Margin,WARNING,Profit Margin terakhir: 11.7% (rata-rata historis: 14.7%). Tren 4 kuartal terakhir menunjukkan tren negatif (menurun).
+Profitabilitas,Return on Assets,WARNING,Return on Assets terakhir: 1.5% (rata-rata historis: 1.9%). Tren 4 kuartal terakhir menunjukkan tren negatif (menurun).
+Profitabilitas,Return on Equity,WARNING,Return on Equity terakhir: 2.8% (rata-rata historis: 3.7%). Tren 4 kuartal terakhir menunjukkan tren negatif (menurun).
+Efisiensi Biaya,Cost of Revenue Ratio,WARNING,Rasio Cost of Revenue terhadap Revenue saat ini: 42.5% (rata-rata historis: 38.9%). Efisiensi biaya perlu perhatian karena tren meningkat.
+Efisiensi Biaya,Opex to Revenue Ratio,INFO,Rasio Operating Expenses terhadap Revenue: 32.9% (rata-rata historis: 32.9%). Monitoring efisiensi operasional diperlukan untuk mempertahankan margin.
+Risiko Target,Revenue,CRITICAL,"Status pencapaian target Revenue: [OFF-TRACK]. Proyeksi: Rp 36.9 triliun, Target: Rp 39.0 triliun (gap: -5.6%). Diperlukan aksi korektif untuk mencapai target."
+Risiko Target,EBITDA,WARNING,"Status pencapaian target EBITDA: [AT-RISK]. Proyeksi: Rp 16.3 triliun, Target: Rp 16.5 triliun (gap: -0.9%). Diperlukan aksi korektif untuk mencapai target."
+Risiko Target,Laba Bersih,INFO,"Status pencapaian target Laba Bersih: [ON-TRACK]. Proyeksi: Rp 5.0 triliun, Target: Rp 4.6 triliun (gap: +8.6%). Proyeksi menunjukkan pencapaian target realistis."

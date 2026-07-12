@@ -1,0 +1,17 @@
+metric_id,best_model,best_MAPE
+Current_Ratio,Holt-Winters,5.753726419065263
+DAR,Naive Seasonal,2.541068719310229
+DER,Naive Seasonal,4.820145313852086
+ROA,Holt-Winters,18.469157275653757
+ROE,Holt-Winters,22.32316576427256
+ebitda,LSTM,7.431878991340104
+ebitdaMargin,LSTM,6.808592591817668
+fcf,Random Forest,23.21982057966367
+gp,Naive Seasonal,3.797773427669598
+grossMargin,Naive Seasonal,3.99238046325852
+ncfo,LSTM,8.132488830819023
+netinc,Holt-Winters,21.429215229236302
+operatingMargin,Holt-Winters,7.924550464726347
+opinc,Holt-Winters,9.42214243741154
+profitMargin,Holt-Winters,20.90573536122731
+revenue,Random Forest,1.1250468833460359

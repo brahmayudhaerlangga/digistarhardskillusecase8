@@ -1,0 +1,122 @@
+year,quarter,metric_id,metric_name,type,severity,description,value
+2021,2,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 65.8% pada Q2 2021 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,65.82538340780098
+2021,2,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.65 pada Q2 2021 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.6474404716162958
+2021,3,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 59.8% pada Q3 2021 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,59.774452586774316
+2021,3,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.59 pada Q3 2021 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.5856773004519724
+2021,3,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 40.4% berada di luar rentang IQR normal.,40.44007956240676
+2021,4,cor,Cost of Revenue,Rule-based,WARNING,Cost of Revenue meningkat 13.0% QoQ pada Q4 2021. Perlu investigasi komponen biaya jaringan dan operasional.,13.032926138661916
+2021,4,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 88.6% pada Q4 2021 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,88.63896081352794
+2021,4,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.88 pada Q4 2021 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.8751211468082336
+2021,4,ebitda,EBITDA,Statistical (IQR QoQ),INFO,QoQ growth ebitda sebesar -45.9% berada di luar rentang IQR normal.,-45.89415152417834
+2021,4,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar -30.6% berada di luar rentang IQR normal.,-30.592192617509074
+2021,4,ebitdaMargin,EBITDA Margin,Statistical (IQR QoQ),INFO,QoQ growth ebitdaMargin sebesar -46.8% berada di luar rentang IQR normal.,-46.772436828347374
+2021,4,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 2576.6 poin persen QoQ pada Q4 2021. Perlu evaluasi efisiensi operasional.,-2576.6000000000004
+2021,4,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 1181.2 poin persen QoQ pada Q4 2021. Perlu evaluasi efisiensi operasional.,-1181.1999999999998
+2022,1,revenue,Revenue,Rule-based,WARNING,Revenue turun 5.3% QoQ pada Q1 2022. Penurunan ini di luar pola musiman normal.,-5.2708047461457745
+2022,1,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 92.6% pada Q1 2022 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,92.59952024673025
+2022,1,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.91 pada Q1 2022 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.912687760580273
+2022,1,ebitda,EBITDA,Statistical (IQR QoQ),INFO,QoQ growth ebitda sebesar 66.1% berada di luar rentang IQR normal.,66.10387227014132
+2022,1,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 39.7% berada di luar rentang IQR normal.,39.73982910343068
+2022,1,operatingMargin,Operating Margin,Statistical (IQR QoQ),INFO,QoQ growth operatingMargin sebesar 41.2% berada di luar rentang IQR normal.,41.17079587809691
+2022,1,ebitdaMargin,EBITDA Margin,Statistical (IQR QoQ),INFO,QoQ growth ebitdaMargin sebesar 75.3% berada di luar rentang IQR normal.,75.3427460609781
+2022,2,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 79.9% pada Q2 2022 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,79.88346534524692
+2022,2,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.79 pada Q2 2022 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.7853343217969228
+2022,2,DER,Debt to Equity Ratio,Rule-based,WARNING,DER meningkat 13.4 poin persen QoQ pada Q2 2022. Risiko leverage meningkat.,13.41987698093962
+2022,2,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar -30.6% berada di luar rentang IQR normal.,-30.555809071826236
+2022,2,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 49.1 poin persen QoQ pada Q2 2022. Perlu evaluasi efisiensi operasional.,-49.100000000000676
+2022,2,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 215.2 poin persen QoQ pada Q2 2022. Perlu evaluasi efisiensi operasional.,-215.2000000000001
+2022,3,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 82.3% pada Q3 2022 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,82.31258058574323
+2022,3,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.80 pada Q3 2022 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.8049978510468472
+2022,3,netinc,Net Income,Statistical (IQR QoQ),INFO,QoQ growth netinc sebesar -54.5% berada di luar rentang IQR normal.,-54.51890989988877
+2022,3,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 18.9% berada di luar rentang IQR normal.,18.911814955973185
+2022,3,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 116.6 poin persen QoQ pada Q3 2022. Perlu evaluasi efisiensi operasional.,-116.59999999999968
+2022,4,cor,Cost of Revenue,Rule-based,WARNING,Cost of Revenue meningkat 12.2% QoQ pada Q4 2022. Perlu investigasi komponen biaya jaringan dan operasional.,12.226843100189043
+2022,4,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 78.4% pada Q4 2022 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,78.41247241403858
+2022,4,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.77 pada Q4 2022 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.767836548729266
+2022,4,ebitda,EBITDA,Statistical (Z-score YoY),INFO,YoY growth ebitda sebesar 45.5% merupakan outlier statistik (z-score > 2.0).,45.503762158194164
+2022,4,opinc,Operating Income,Statistical (Z-score YoY),INFO,YoY growth opinc sebesar 29.5% merupakan outlier statistik (z-score > 2.0).,29.542236904200102
+2022,4,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 18.6% berada di luar rentang IQR normal.,18.58974358974359
+2022,4,ncfo,Operating Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth ncfo sebesar 41.2% berada di luar rentang IQR normal.,41.238537872126614
+2022,4,operatingMargin,Operating Margin,Statistical (Z-score YoY),INFO,YoY growth operatingMargin sebesar 25.3% merupakan outlier statistik (z-score > 2.0).,25.279543959657968
+2022,4,ebitdaMargin,EBITDA Margin,Statistical (Z-score YoY),INFO,YoY growth ebitdaMargin sebesar 40.7% merupakan outlier statistik (z-score > 2.0).,40.713457472205185
+2022,4,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 849.7 poin persen QoQ pada Q4 2022. Perlu evaluasi efisiensi operasional.,-849.6999999999992
+2022,4,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 352.2 poin persen QoQ pada Q4 2022. Perlu evaluasi efisiensi operasional.,-352.1999999999998
+2023,1,revenue,Revenue,Rule-based,WARNING,Revenue turun 6.1% QoQ pada Q1 2023. Penurunan ini di luar pola musiman normal.,-6.0938800999167375
+2023,1,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 84.9% pada Q1 2023 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,84.85261256849
+2023,1,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.83 pada Q1 2023 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.829425449202608
+2023,1,revenue,Revenue,Statistical (IQR QoQ),INFO,QoQ growth revenue sebesar -6.1% berada di luar rentang IQR normal.,-6.0938800999167375
+2023,1,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar -74.3% berada di luar rentang IQR normal.,-74.30568499534016
+2023,1,ncfo,Operating Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth ncfo sebesar -45.0% berada di luar rentang IQR normal.,-44.9617573817147
+2023,1,ebitdaMargin,EBITDA Margin,Statistical (IQR QoQ),INFO,QoQ growth ebitdaMargin sebesar 18.2% berada di luar rentang IQR normal.,18.167716917110987
+2023,2,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 69.1% pada Q2 2023 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,69.10330361824856
+2023,2,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.68 pada Q2 2023 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.6793078133193498
+2023,2,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 196.4% berada di luar rentang IQR normal.,196.4454116793616
+2023,2,DER,Debt to Equity Ratio,Rule-based,CRITICAL,DER meningkat 30.3 poin persen QoQ pada Q2 2023. Risiko leverage meningkat.,30.315918197818434
+2023,3,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 71.8% pada Q3 2023 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,71.75613551170521
+2023,3,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.70 pada Q3 2023 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.6966970790013438
+2023,3,netinc,Net Income,Statistical (Z-score YoY),INFO,YoY growth netinc sebesar 106.1% merupakan outlier statistik (z-score > 2.0).,106.14490981351268
+2023,3,fcf,Free Cash Flow,Statistical (Z-score YoY),INFO,YoY growth fcf sebesar 230.6% merupakan outlier statistik (z-score > 2.0).,230.57671381936888
+2023,3,fcf,Free Cash Flow,Statistical (Z-score YoY),INFO,YoY growth fcf sebesar 230.6% merupakan outlier statistik (z-score > 2.0).,230.57671381936888
+2023,3,cor,Cost of Revenue,Statistical (Z-score YoY),INFO,YoY growth cor sebesar 25.4% merupakan outlier statistik (z-score > 2.0).,25.353497164461245
+2023,3,opex,Operating Expenses,Statistical (Z-score YoY),INFO,YoY growth opex sebesar -26.4% merupakan outlier statistik (z-score > 2.0).,-26.39722668470449
+2023,3,grossMargin,Gross Margin,Statistical (Z-score YoY),INFO,YoY growth grossMargin sebesar -12.6% merupakan outlier statistik (z-score > 2.0).,-12.556312450312534
+2023,3,cor,Cost of Revenue,Rule-based,CRITICAL,Cost of Revenue meningkat 18.7% QoQ pada Q3 2023. Perlu investigasi komponen biaya jaringan dan operasional.,18.70256336817986
+2023,4,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 77.7% pada Q4 2023 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,77.70651687905209
+2023,4,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.76 pada Q4 2023 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.763134361725911
+2023,4,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar -23.9% berada di luar rentang IQR normal.,-23.8973008558262
+2023,4,ebitdaMargin,EBITDA Margin,Statistical (IQR QoQ),INFO,QoQ growth ebitdaMargin sebesar -24.7% berada di luar rentang IQR normal.,-24.72498588423123
+2023,4,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 1269.9 poin persen QoQ pada Q4 2023. Perlu evaluasi efisiensi operasional.,-1269.9000000000005
+2023,4,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 713.3 poin persen QoQ pada Q4 2023. Perlu evaluasi efisiensi operasional.,-713.3
+2024,1,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 86.6% pada Q1 2024 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,86.55613146424785
+2024,1,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.85 pada Q1 2024 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.8498203557545059
+2024,1,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 49.4% berada di luar rentang IQR normal.,49.42329873125721
+2024,1,ebitdaMargin,EBITDA Margin,Statistical (IQR QoQ),INFO,QoQ growth ebitdaMargin sebesar 24.5% berada di luar rentang IQR normal.,24.51244115669131
+2024,1,cor,Cost of Revenue,Rule-based,CRITICAL,Cost of Revenue meningkat 18.8% QoQ pada Q1 2024. Perlu investigasi komponen biaya jaringan dan operasional.,18.836628039082036
+2024,2,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 65.8% pada Q2 2024 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,65.80621115025309
+2024,2,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.65 pada Q2 2024 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.6456061462253375
+2024,2,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar -32.2% berada di luar rentang IQR normal.,-32.236588189888074
+2024,2,DER,Debt to Equity Ratio,Rule-based,CRITICAL,DER meningkat 19.0 poin persen QoQ pada Q2 2024. Risiko leverage meningkat.,19.00095982509478
+2024,3,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 69.8% pada Q3 2024 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,69.84582144095602
+2024,3,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.69 pada Q3 2024 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.6864146816399477
+2024,3,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 43.6% berada di luar rentang IQR normal.,43.571123451516435
+2024,3,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 294.1 poin persen QoQ pada Q3 2024. Perlu evaluasi efisiensi operasional.,-294.10000000000025
+2024,3,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 364.7 poin persen QoQ pada Q3 2024. Perlu evaluasi efisiensi operasional.,-364.7000000000002
+2024,3,cor,Cost of Revenue,Rule-based,CRITICAL,Cost of Revenue meningkat 22.7% QoQ pada Q3 2024. Perlu investigasi komponen biaya jaringan dan operasional.,22.69619712291697
+2024,4,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 82.2% pada Q4 2024 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,82.1707243998072
+2024,4,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.81 pada Q4 2024 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.807430276030065
+2024,4,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar -19.4% berada di luar rentang IQR normal.,-19.418823762769023
+2024,4,opex,Operating Expenses,Statistical (IQR QoQ),INFO,QoQ growth opex sebesar 87.8% berada di luar rentang IQR normal.,87.82751091703057
+2024,4,ebitdaMargin,EBITDA Margin,Statistical (IQR QoQ),INFO,QoQ growth ebitdaMargin sebesar -24.0% berada di luar rentang IQR normal.,-23.958066444615245
+2024,4,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 1122.1 poin persen QoQ pada Q4 2024. Perlu evaluasi efisiensi operasional.,-1122.0999999999997
+2024,4,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 868.4 poin persen QoQ pada Q4 2024. Perlu evaluasi efisiensi operasional.,-868.4000000000001
+2025,1,cor,Cost of Revenue,Rule-based,WARNING,Cost of Revenue meningkat 15.0% QoQ pada Q1 2025. Perlu investigasi komponen biaya jaringan dan operasional.,14.989654379645945
+2025,1,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 88.5% pada Q1 2025 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,88.53293538444373
+2025,1,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.87 pada Q1 2025 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.8695694620716586
+2025,1,ebitda,EBITDA,Statistical (IQR QoQ),INFO,QoQ growth ebitda sebesar 24.5% berada di luar rentang IQR normal.,24.523951204998507
+2025,1,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 43.7% berada di luar rentang IQR normal.,43.69230769230769
+2025,1,operatingMargin,Operating Margin,Statistical (IQR QoQ),INFO,QoQ growth operatingMargin sebesar 34.3% berada di luar rentang IQR normal.,34.30212058630935
+2025,1,ebitdaMargin,EBITDA Margin,Statistical (IQR QoQ),INFO,QoQ growth ebitdaMargin sebesar 28.3% berada di luar rentang IQR normal.,28.294258037343802
+2025,2,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 71.0% pada Q2 2025 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,71.03210550464112
+2025,2,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.70 pada Q2 2025 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.6988035434877237
+2025,2,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 165.0 poin persen QoQ pada Q2 2025. Perlu evaluasi efisiensi operasional.,-165.00000000000057
+2025,2,DER,Debt to Equity Ratio,Rule-based,CRITICAL,DER meningkat 22.1 poin persen QoQ pada Q2 2025. Risiko leverage meningkat.,22.136058738528163
+2025,3,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 77.2% pada Q3 2025 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,77.17249124661426
+2025,3,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.76 pada Q3 2025 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.7573891788333224
+2025,3,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 52.5 poin persen QoQ pada Q3 2025. Perlu evaluasi efisiensi operasional.,-52.49999999999915
+2025,3,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 213.3 poin persen QoQ pada Q3 2025. Perlu evaluasi efisiensi operasional.,-213.30000000000027
+2025,3,cor,Cost of Revenue,Rule-based,CRITICAL,Cost of Revenue meningkat 20.3% QoQ pada Q3 2025. Perlu investigasi komponen biaya jaringan dan operasional.,20.29723407183157
+2025,4,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 83.5% pada Q4 2025 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,83.52626169740898
+2025,4,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.82 pada Q4 2025 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.8230783794017418
+2025,4,netinc,Net Income,Statistical (IQR QoQ),INFO,QoQ growth netinc sebesar -57.8% berada di luar rentang IQR normal.,-57.78748180494906
+2025,4,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar -29.9% berada di luar rentang IQR normal.,-29.947070294363453
+2025,4,opex,Operating Expenses,Statistical (IQR QoQ),INFO,QoQ growth opex sebesar 99.9% berada di luar rentang IQR normal.,99.85855728429986
+2025,4,grossMargin,Gross Margin,Statistical (IQR QoQ),INFO,QoQ growth grossMargin sebesar 33.7% berada di luar rentang IQR normal.,33.70592964054664
+2025,4,operatingMargin,Operating Margin,Rule-based,CRITICAL,Operating Margin turun 864.1 poin persen QoQ pada Q4 2025. Perlu evaluasi efisiensi operasional.,-864.1000000000001
+2026,1,Current_Ratio,Current Ratio,Rule-based,WARNING,Current Ratio berada di 92.1% pada Q1 2026 (di bawah threshold 100%). Risiko likuiditas jangka pendek.,92.06663966819814
+2026,1,Quick_Ratio,Quick Ratio,Rule-based,WARNING,Quick Ratio berada di 0.91 pada Q1 2026 (di bawah threshold 1.0). Likuiditas tanpa inventori kurang memadai.,0.908908098144088
+2026,1,netinc,Net Income,Statistical (IQR QoQ),INFO,QoQ growth netinc sebesar 114.0% berada di luar rentang IQR normal.,113.99014778325123
+2026,1,opinc,Operating Income,Statistical (IQR QoQ),INFO,QoQ growth opinc sebesar 48.6% berada di luar rentang IQR normal.,48.60208062418725
+2026,1,fcf,Free Cash Flow,Statistical (IQR QoQ),INFO,QoQ growth fcf sebesar 71.0% berada di luar rentang IQR normal.,70.98356309650053
+2026,1,operatingMargin,Operating Margin,Statistical (IQR QoQ),INFO,QoQ growth operatingMargin sebesar 48.3% berada di luar rentang IQR normal.,48.349526280852096
+2026,1,ebitdaMargin,EBITDA Margin,Rule-based,CRITICAL,EBITDA Margin turun 221.9 poin persen QoQ pada Q1 2026. Perlu evaluasi efisiensi operasional.,-221.90000000000012
+2026,1,cor,Cost of Revenue,Rule-based,CRITICAL,Cost of Revenue meningkat 41.1% QoQ pada Q1 2026. Perlu investigasi komponen biaya jaringan dan operasional.,41.13126619605039

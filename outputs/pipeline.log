@@ -549,3 +549,154 @@ Evaluation report disimpan ke C:\usecase\BE\fpis\outputs\evaluation_report.csv (
 2026-07-08 00:27:06,100 [INFO] FPIS —   > forecast_results.csv
 2026-07-08 00:27:06,100 [INFO] FPIS —   > insights_report.csv
 2026-07-08 00:27:06,100 [INFO] FPIS —   > data/fpis.db (SQLite)
+2026-07-12 14:15:56,934 [INFO] FPIS — ======================================================================
+2026-07-12 14:15:56,934 [INFO] FPIS —   FPIS — Financial Performance Intelligence System
+2026-07-12 14:15:56,934 [INFO] FPIS —   Telkom Indonesia (TLKM) — Pipeline End-to-End
+2026-07-12 14:15:56,934 [INFO] FPIS — ======================================================================
+2026-07-12 14:15:56,934 [INFO] src.data_loader — ============================================================
+2026-07-12 14:15:56,934 [INFO] src.data_loader — LANGKAH 1: Pengumpulan Data
+2026-07-12 14:15:56,934 [INFO] src.data_loader — ============================================================
+2026-07-12 14:15:56,934 [INFO] src.data_loader — Memuat data kuartalan dari C:\Users\Pongo\digistarhardskillusecase8\data\tlkm_quarterly_tidy.csv
+2026-07-12 14:15:56,934 [INFO] src.data_loader — Data kuartalan: 20 periode, 135 metrik, 2503 baris
+2026-07-12 14:15:57,079 [INFO] src.data_loader — Memuat data tahunan dari C:\Users\Pongo\digistarhardskillusecase8\data\tlkm_annual_tidy.csv
+2026-07-12 14:15:57,082 [INFO] src.data_loader — Data tahunan: 5 tahun (2021–2025), 132 metrik, 649 baris
+2026-07-12 14:15:57,176 [INFO] src.data_loader — Metrics catalog: 267 entries
+2026-07-12 14:15:57,329 [INFO] src.data_loader — Data disimpan ke SQLite: C:\Users\Pongo\digistarhardskillusecase8\data\fpis.db
+2026-07-12 14:15:57,329 [INFO] src.data_loader — Langkah 1 selesai
+2026-07-12 14:15:57,329 [INFO] src.preprocessing — ============================================================
+2026-07-12 14:15:57,329 [INFO] src.preprocessing — LANGKAH 2: Pre-processing
+2026-07-12 14:15:57,329 [INFO] src.preprocessing — ============================================================
+2026-07-12 14:15:57,329 [INFO] src.preprocessing — Konversi nominal ke Miliar Rupiah...
+2026-07-12 14:15:57,339 [INFO] src.preprocessing — Konversi ke Miliar Rupiah: 1987 baris dikonversi, 516 baris skip (rasio/per-share/count)
+2026-07-12 14:15:57,339 [INFO] src.preprocessing — Konversi ke Miliar Rupiah: 510 baris dikonversi, 139 baris skip (rasio/per-share/count)
+2026-07-12 14:15:57,339 [INFO] src.preprocessing — Handling missing values...
+2026-07-12 14:15:57,543 [INFO] src.preprocessing — Menghitung rasio turunan (DAR, DER, CR, QR, ROA, ROE, Firm Size)...
+2026-07-12 14:15:57,543 [INFO] src.preprocessing — Rasio turunan dihitung: 140 baris baru (7 rasio)
+2026-07-12 14:15:57,565 [INFO] src.preprocessing — Rasio turunan (annual): 35 baris baru
+2026-07-12 14:15:57,565 [INFO] src.preprocessing — Standardisasi margin/persentase...
+2026-07-12 14:15:57,565 [INFO] src.preprocessing — Standardisasi profitMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,569 [INFO] src.preprocessing — Standardisasi ebitMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,571 [INFO] src.preprocessing — Standardisasi grossMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,573 [INFO] src.preprocessing — Standardisasi ebitdaMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,575 [INFO] src.preprocessing — Standardisasi taxrate: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,575 [INFO] src.preprocessing — Standardisasi operatingMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,577 [INFO] src.preprocessing — Standardisasi fcfMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,580 [INFO] src.preprocessing — Standardisasi profitMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,580 [INFO] src.preprocessing — Standardisasi ebitMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,584 [INFO] src.preprocessing — Standardisasi grossMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,586 [INFO] src.preprocessing — Standardisasi ebitdaMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,587 [INFO] src.preprocessing — Standardisasi taxrate: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,589 [INFO] src.preprocessing — Standardisasi operatingMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,592 [INFO] src.preprocessing — Standardisasi fcfMargin: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,592 [INFO] src.preprocessing — Standardisasi payoutratio: dikalikan 100 (format desimal -> persen)
+2026-07-12 14:15:57,592 [INFO] src.preprocessing — Validasi margin pipeline vs data asli...
+2026-07-12 14:15:57,600 [INFO] src.preprocessing — Margin validation: grossMargin OK (max diff = 0.000512)
+2026-07-12 14:15:57,600 [INFO] src.preprocessing — Margin validation: operatingMargin OK (max diff = 0.000462)
+2026-07-12 14:15:57,600 [INFO] src.preprocessing — Margin validation: profitMargin OK (max diff = 0.000479)
+2026-07-12 14:15:57,600 [INFO] src.preprocessing — Feature engineering time-series...
+2026-07-12 14:15:58,286 [INFO] src.preprocessing — Feature engineering selesai: 2643 baris, fitur baru: lag_1-4, rolling_mean_4Q, yoy_growth, qoq_growth, Q1-Q4, time_idx
+2026-07-12 14:15:58,399 [INFO] src.preprocessing — Preprocessed data disimpan ke SQLite
+2026-07-12 14:15:58,399 [INFO] src.preprocessing — Langkah 2 selesai
+2026-07-12 14:15:58,399 [INFO] src.segmentation — ============================================================
+2026-07-12 14:15:58,399 [INFO] src.segmentation — LANGKAH 3: Labeling dan Segmentasi
+2026-07-12 14:15:58,399 [INFO] src.segmentation — ============================================================
+2026-07-12 14:15:58,413 [INFO] src.segmentation — Segmentasi kuartalan:
+2026-07-12 14:15:58,413 [INFO] src.segmentation —   Lainnya: 71 metrik, 1177 baris
+2026-07-12 14:15:58,413 [INFO] src.segmentation —   Profitabilitas: 23 metrik, 460 baris
+2026-07-12 14:15:58,413 [INFO] src.segmentation —   Cash Flow: 14 metrik, 326 baris
+2026-07-12 14:15:58,413 [INFO] src.segmentation —   Likuiditas: 12 metrik, 240 baris
+2026-07-12 14:15:58,413 [INFO] src.segmentation —   Leverage: 12 metrik, 240 baris
+2026-07-12 14:15:58,413 [INFO] src.segmentation —   Ukuran: 6 metrik, 120 baris
+2026-07-12 14:15:58,413 [INFO] src.segmentation —   Biaya: 4 metrik, 80 baris
+2026-07-12 14:15:58,413 [INFO] src.segmentation — Catatan: Segmentasi regional/produk/customer = future work (data tidak tersedia)
+2026-07-12 14:15:58,413 [INFO] src.segmentation — Langkah 3 selesai
+2026-07-12 14:15:58,413 [INFO] src.models — ============================================================
+2026-07-12 14:15:58,413 [INFO] src.models — LANGKAH 4: Integrasi AI Model — Forecasting
+2026-07-12 14:15:58,413 [INFO] src.models — ============================================================
+2026-07-12 14:15:58,421 [INFO] src.models —   Forecasting: revenue (20 titik data)
+2026-07-12 14:16:01,679 [WARNING] tensorflow — TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+2026-07-12 14:16:05,156 [INFO] src.models —   Forecasting: ebitda (20 titik data)
+2026-07-12 14:16:08,607 [INFO] src.models —   Forecasting: netinc (20 titik data)
+2026-07-12 14:16:11,876 [WARNING] tensorflow — 5 out of the last 11 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x000001F9C0C919E0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2026-07-12 14:16:12,175 [WARNING] tensorflow — 5 out of the last 11 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x000001F9C0C919E0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+2026-07-12 14:16:12,211 [INFO] src.models —   Forecasting: opinc (20 titik data)
+2026-07-12 14:16:15,599 [INFO] src.models —   Forecasting: fcf (40 titik data)
+2026-07-12 14:16:19,227 [INFO] src.models —   Forecasting: gp (20 titik data)
+2026-07-12 14:16:22,859 [INFO] src.models —   Forecasting: ncfo (20 titik data)
+2026-07-12 14:16:26,126 [INFO] src.models —   Forecasting: grossMargin (20 titik data)
+2026-07-12 14:16:29,759 [INFO] src.models —   Forecasting: operatingMargin (20 titik data)
+2026-07-12 14:16:33,418 [INFO] src.models —   Forecasting: ebitdaMargin (20 titik data)
+2026-07-12 14:16:37,047 [INFO] src.models —   Forecasting: profitMargin (20 titik data)
+2026-07-12 14:16:40,390 [INFO] src.models —   Forecasting: DAR (20 titik data)
+2026-07-12 14:16:43,877 [INFO] src.models —   Forecasting: DER (20 titik data)
+2026-07-12 14:16:47,284 [INFO] src.models —   Forecasting: Current_Ratio (20 titik data)
+2026-07-12 14:16:50,835 [INFO] src.models —   Forecasting: ROA (20 titik data)
+2026-07-12 14:16:54,210 [INFO] src.models —   Forecasting: ROE (20 titik data)
+2026-07-12 14:16:57,549 [INFO] src.models — Forecast disimpan ke C:\Users\Pongo\digistarhardskillusecase8\outputs\forecast_results.csv (448 baris)
+2026-07-12 14:16:57,695 [INFO] src.models — Agregasi FY 2026 disimpan ke C:\Users\Pongo\digistarhardskillusecase8\outputs\forecast_fy2026.csv
+2026-07-12 14:16:57,695 [INFO] src.models — Langkah 4 (Forecasting) selesai
+2026-07-12 14:16:57,695 [INFO] src.evaluation — ============================================================
+2026-07-12 14:16:57,695 [INFO] src.evaluation — LANGKAH 7: Evaluasi Model
+2026-07-12 14:16:57,695 [INFO] src.evaluation — ============================================================
+2026-07-12 14:32:38,669 [INFO] src.evaluation — 
+Model terbaik per metrik (MAPE terendah):
+2026-07-12 14:32:38,669 [INFO] src.evaluation —   Current_Ratio: Holt-Winters (MAPE: 5.75%)
+2026-07-12 14:32:38,669 [INFO] src.evaluation —   DAR: Naive Seasonal (MAPE: 2.54%)
+2026-07-12 14:32:38,670 [INFO] src.evaluation —   DER: Naive Seasonal (MAPE: 4.82%)
+2026-07-12 14:32:38,670 [INFO] src.evaluation —   ROA: Holt-Winters (MAPE: 18.47%)
+2026-07-12 14:32:38,670 [INFO] src.evaluation —   ROE: Holt-Winters (MAPE: 22.32%)
+2026-07-12 14:32:38,670 [INFO] src.evaluation —   ebitda: LSTM (MAPE: 7.43%)
+2026-07-12 14:32:38,670 [INFO] src.evaluation —   ebitdaMargin: LSTM (MAPE: 6.81%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   fcf: Random Forest (MAPE: 23.22%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   gp: Naive Seasonal (MAPE: 3.80%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   grossMargin: Naive Seasonal (MAPE: 3.99%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   ncfo: LSTM (MAPE: 8.13%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   netinc: Holt-Winters (MAPE: 21.43%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   operatingMargin: Holt-Winters (MAPE: 7.92%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   opinc: Holt-Winters (MAPE: 9.42%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   profitMargin: Holt-Winters (MAPE: 20.91%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation —   revenue: Random Forest (MAPE: 1.13%)
+2026-07-12 14:32:38,671 [INFO] src.evaluation — 
+Evaluation report disimpan ke C:\Users\Pongo\digistarhardskillusecase8\outputs\evaluation_report.csv (112 entries)
+2026-07-12 14:32:38,675 [INFO] src.evaluation — Best models disimpan ke C:\Users\Pongo\digistarhardskillusecase8\outputs\best_models.csv
+2026-07-12 14:32:38,675 [INFO] src.evaluation — Langkah 7 selesai
+2026-07-12 14:32:38,675 [INFO] src.anomaly — ============================================================
+2026-07-12 14:32:38,675 [INFO] src.anomaly — LANGKAH 4: Anomaly Detection
+2026-07-12 14:32:38,675 [INFO] src.anomaly — ============================================================
+2026-07-12 14:32:38,676 [INFO] src.anomaly — Menjalankan rule-based anomaly detection...
+2026-07-12 14:32:38,684 [INFO] src.anomaly —   Rule-based anomalies: 72
+2026-07-12 14:32:38,684 [INFO] src.anomaly — Menjalankan statistical anomaly detection...
+2026-07-12 14:32:38,717 [INFO] src.anomaly —   Statistical anomalies: 49
+2026-07-12 14:32:38,724 [INFO] src.anomaly — Anomaly report disimpan ke C:\Users\Pongo\digistarhardskillusecase8\outputs\anomaly_report.csv (121 anomalies)
+2026-07-12 14:32:38,731 [INFO] src.anomaly —   INFO: 49
+2026-07-12 14:32:38,731 [INFO] src.anomaly —   WARNING: 46
+2026-07-12 14:32:38,731 [INFO] src.anomaly —   CRITICAL: 26
+2026-07-12 14:32:38,731 [INFO] src.anomaly — Langkah 4 (Anomaly Detection) selesai
+2026-07-12 14:32:38,731 [INFO] src.analysis — ============================================================
+2026-07-12 14:32:38,731 [INFO] src.analysis — LANGKAH 5: Analisis Hasil
+2026-07-12 14:32:38,731 [INFO] src.analysis — ============================================================
+2026-07-12 14:32:38,731 [INFO] src.analysis — Generating forecast insights...
+2026-07-12 14:32:38,740 [INFO] src.analysis — Generating anomaly insights...
+2026-07-12 14:32:38,743 [INFO] src.analysis — Generating profitability insights...
+2026-07-12 14:32:38,754 [INFO] src.analysis — Generating cost efficiency insights...
+2026-07-12 14:32:38,759 [INFO] src.analysis — Generating target risk insights...
+2026-07-12 14:32:38,766 [INFO] src.analysis — Insights disimpan ke C:\Users\Pongo\digistarhardskillusecase8\outputs\insights_report.csv (25 insights)
+2026-07-12 14:32:38,766 [INFO] src.analysis —   Forecast: 4 insights
+2026-07-12 14:32:38,766 [INFO] src.analysis —   Forecast Uncertainty: 3 insights
+2026-07-12 14:32:38,766 [INFO] src.analysis —   Anomaly Detection: 2 insights
+2026-07-12 14:32:38,773 [INFO] src.analysis —   Anomaly Detail: 5 insights
+2026-07-12 14:32:38,773 [INFO] src.analysis —   Profitabilitas: 6 insights
+2026-07-12 14:32:38,773 [INFO] src.analysis —   Efisiensi Biaya: 2 insights
+2026-07-12 14:32:38,773 [INFO] src.analysis —   Risiko Target: 3 insights
+2026-07-12 14:32:38,773 [INFO] src.analysis — Langkah 5 selesai
+2026-07-12 14:32:38,773 [INFO] FPIS — ======================================================================
+2026-07-12 14:32:38,773 [INFO] FPIS —   PIPELINE SELESAI — Total waktu: 1001.8 detik
+2026-07-12 14:32:38,775 [INFO] FPIS — ======================================================================
+2026-07-12 14:32:38,775 [INFO] FPIS — Output files:
+2026-07-12 14:32:38,775 [INFO] FPIS —   > anomaly_report.csv
+2026-07-12 14:32:38,775 [INFO] FPIS —   > best_models.csv
+2026-07-12 14:32:38,775 [INFO] FPIS —   > evaluation_report.csv
+2026-07-12 14:32:38,775 [INFO] FPIS —   > forecast_fy2026.csv
+2026-07-12 14:32:38,776 [INFO] FPIS —   > forecast_results.csv
+2026-07-12 14:32:38,776 [INFO] FPIS —   > insights_report.csv
+2026-07-12 14:32:38,776 [INFO] FPIS —   > data/fpis.db (SQLite)
