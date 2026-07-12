@@ -1,6 +1,8 @@
 # FPIS — Financial Performance Intelligence System
 ## Telkom Indonesia (TLKM) — Usecase 8, Digistar Class Intern 2026
 
+🚀 **Live Enterprise Dashboard:** [https://digistarhardskillusecase8.vercel.app/](https://digistarhardskillusecase8.vercel.app/)
+
 ---
 
 ## Ringkasan
@@ -16,7 +18,7 @@
 | 3 | Labeling & Segmentasi | `src/segmentation.py` — Kategorisasi 135 metrik ke 6 segment |
 | 4 | Integrasi AI Model | `src/models.py` + `src/anomaly.py` — 7 model forecasting + anomaly detection |
 | 5 | Analisis Hasil | `src/analysis.py` — 5 kategori insight otomatis (Bahasa Indonesia) |
-| 6 | Dashboard | `app.py` — Streamlit, 7 section, dark theme, Plotly interaktif |
+| 6 | Dashboard | `frontend/` — React/Vite Dashboard, Dark Theme, Recharts interaktif |
 | 7 | Evaluasi Model | `src/evaluation.py` — Walk-forward backtest, RMSE/MAE/MAPE |
 
 ---
@@ -52,10 +54,12 @@ Pipeline akan mengeksekusi Langkah 1–7 secara berurutan dan menghasilkan:
 - `outputs/best_models.csv` — Model terbaik per metrik
 - `outputs/insights_report.csv` — Insight otomatis
 
-### 3. Jalankan Dashboard
+### 3. Jalankan Dashboard (React Frontend)
 
 ```bash
-streamlit run app.py
+cd frontend
+npm install
+npm run dev
 ```
 
 ### 4. Jalankan Unit Tests
@@ -127,8 +131,8 @@ Sistem **DILARANG** mencakup:
 - **Metrik pasar**: EPS, shares, dividend hanya digunakan sebagai konteks performa internal, **BUKAN** untuk prediksi harga saham.
 - **Simulasi Segmentasi (Mock Data)**: Karena data asli konsolidasi Telkom dari sumber publik (BEI/Stockbit) **tidak memiliki rincian segmentasi (Regional, Produk, Budget, Subscribers)**, maka kami menggunakan **Mock Data (Data Simulasi)** khusus untuk bagian visualisasi *Frontend* tersebut. 
   - **Mengapa ini dilakukan?** Untuk membuktikan bahwa arsitektur AI dan *dashboard* kami sudah 100% siap untuk menampung data segmentasi nyata jika kelak diberikan akses internal oleh perusahaan.
-  - **Variabel Dummy:** *Revenue per Regional* (Jawa, Sumatera, KTI, Kalimantan), *Revenue per Produk* (Telkomsel, IndiHome, Enterprise, WIFI.ID), *Target Budget* (Asumsi Growth 5%), dan jumlah *Subscribers*.
-  - **Catatan Validitas:** Total kumulatif dari data tiruan ini **sama persis** dengan total data finansial riil Telkom, sehingga metrik level-perusahaan tetap akurat 100%.
+  - **Variabel Dummy:** *Revenue per Regional* (5 Regional Resmi Telkom), *Revenue per Produk* (3 Pilar Bisnis: Digital Connectivity, Digital Platform, Digital Services), dan nilai *Target*.
+  - **Catatan Validitas:** Prediksi level agregat (Nasional) tetap akurat 100% menggunakan model AI historis, sementara chart segmentasi berfungsi sebagai *architectural showcase*.
 
 ### Future Work
 
@@ -160,7 +164,9 @@ fpis/
 ├── outputs/                             # CSV outputs
 ├── tests/
 │   └── test_ratios.py                  # Unit tests
-├── app.py                               # Streamlit dashboard (Langkah 6)
+├── frontend/                            # React & Vite Dashboard Frontend
+├── scripts/
+│   └── generate_mock_data.py            # Generator data simulasi JSON ke Frontend
 ├── run_pipeline.py                      # Pipeline orchestrator
 ├── requirements.txt                     # Dependencies
 └── README.md                           # Dokumentasi ini
@@ -179,11 +185,12 @@ fpis/
 | Prophet | [v] | Time-series forecasting |
 | XGBoost | [v] | ML regression |
 | Matplotlib | [v] | Chart di notebook EDA |
-| Streamlit | [v] | Dashboard interaktif |
+| React & Vite | [v] | Dashboard frontend modern (pengganti Streamlit) |
+| Recharts | [v] | Visualisasi grafik interaktif di frontend |
 | SQL (SQLite) | [v] | Storage layer |
-| Jupyter Notebook | [v] | EDA walkthrough |
+| Node.js & npm | [v] | Build system untuk frontend |
 
-Plus: Statsmodels (SARIMA/Holt-Winters), Plotly (chart dashboard).
+Plus: Statsmodels (SARIMA/Holt-Winters).
 
 ---
 
