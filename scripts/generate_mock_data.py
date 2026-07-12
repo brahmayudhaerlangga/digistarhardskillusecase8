@@ -90,10 +90,11 @@ def generate_mock_data():
         last_revenue = 35000
         
     output_data['regional'] = [
-        {"name": "Jawa", "value": round(last_revenue * 0.55), "growth": 3.2},
-        {"name": "Sumatera", "value": round(last_revenue * 0.20), "growth": 4.1},
-        {"name": "KTI", "value": round(last_revenue * 0.15), "growth": 5.5},
-        {"name": "Kalimantan", "value": round(last_revenue * 0.10), "growth": 2.8}
+        {"name": "Regional I (Sumatera)", "value": round(last_revenue * 0.15), "growth": 4.1},
+        {"name": "Regional II (Jkt & Jabar)", "value": round(last_revenue * 0.40), "growth": 3.2},
+        {"name": "Regional III (Jtg, Jtm & Balnus)", "value": round(last_revenue * 0.25), "growth": 3.5},
+        {"name": "Regional IV (Kalimantan)", "value": round(last_revenue * 0.08), "growth": 2.8},
+        {"name": "Regional V (KTI)", "value": round(last_revenue * 0.12), "growth": 5.5}
     ]
     output_data['product'] = [
         {"name": "Telkomsel", "value": 65},
