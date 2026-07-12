@@ -482,7 +482,7 @@ function DashboardTab({ data, metric, ciVisibility }) {
                     <td>{a.period}</td>
                     <td>{a.metric_id || a.metric_name}</td>
                     <td>
-                      <span className={`badge ${a.severity === 'CRITICAL' ? 'badge-critical' : 'badge-warning'}`}>
+                      <span className={`badge ${a.severity === 'CRITICAL' ? 'badge-critical' : a.severity === 'WARNING' ? 'badge-warning' : 'badge-info'}`}>
                         {a.severity}
                       </span>
                     </td>
