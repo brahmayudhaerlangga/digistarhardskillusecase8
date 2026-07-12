@@ -464,7 +464,8 @@ function DashboardTab({ data, metric, ciVisibility }) {
           <div style={{marginBottom: '1rem', fontSize: '0.75rem', color: 'var(--text-muted)'}}>
             <strong>SOP Tindakan:</strong><br/>
             <span style={{color: 'var(--danger)'}}>● CRITICAL:</span> Penurunan ekstrem di luar margin batas bawah, perlu eskalasi segera ke BOD.<br/>
-            <span style={{color: 'var(--warning)'}}>● WARNING:</span> Penyimpangan minor, instruksikan FP&A lokal untuk meninjau kuartal depan.
+            <span style={{color: 'var(--warning)'}}>● WARNING:</span> Penyimpangan minor, instruksikan FP&A lokal untuk meninjau kuartal depan.<br/>
+            <span style={{color: 'var(--info)'}}>● INFO:</span> Anomali positif atau kewajaran data, sekadar pelaporan tanpa perlu tindakan.
           </div>
 
           <div style={{maxHeight: '180px', overflowY: 'auto'}}>
