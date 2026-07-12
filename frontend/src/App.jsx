@@ -207,19 +207,32 @@ function DashboardTab({ data, metric, ciVisibility }) {
     combined[combined.length-1].Target = lastHist.value_scaled;
   }
   
-  fc.forEach(f => {
+  const lastHistVal = hist.length > 0 ? hist[hist.length-1].value_scaled : 0;
+  let targetGrowthRate = 0;
+  if (lastHistVal !== 0 && currentTarget !== 0) {
+    targetGrowthRate = (currentTarget - lastHistVal) / Math.abs(lastHistVal);
+  }
+
+  fc.forEach((f, i) => {
+    // Calculate compound growth for target line so it's not a flat line
+    let stepTarget = currentTarget;
+    if (lastHistVal !== 0) {
+      stepTarget = lastHistVal * Math.pow(1 + targetGrowthRate, i + 1);
+    }
+
     const existing = combined.find(c => c.period === f.period);
     if (existing) {
       existing.Forecast = f.forecast;
       existing.L80 = f.lower_80; existing.U80 = f.upper_80;
       existing.L95 = f.lower_95; existing.U95 = f.upper_95;
+      existing.Target = stepTarget;
     } else {
       combined.push({ 
         period: f.period, 
         Forecast: f.forecast, 
         L80: f.lower_80, U80: f.upper_80, 
         L95: f.lower_95, U95: f.upper_95,
-        Target: currentTarget
+        Target: stepTarget
       });
     }
   });
