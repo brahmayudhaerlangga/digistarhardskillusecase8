@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
-  BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, ComposedChart, Scatter
+  BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, ComposedChart, ScatterChart, Scatter, ZAxis
 } from 'recharts';
 import { 
   TrendingUp, TrendingDown, AlertTriangle, AlertCircle, Activity, 
   DollarSign, Users, Target, LayoutDashboard, Database, Settings,
   ShieldAlert, FileText, Info, BarChart2, MessageSquare, X, Send, Bot, 
-  LineChart as LineChartIcon, Sliders, AlertOctagon, Zap
+  LineChart as LineChartIcon, Sliders, AlertOctagon, Zap, ChevronDown
 } from 'lucide-react';
 import './index.css';
 
 const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#0ea5e9', '#ec4899', '#14b8a6', '#84cc16'];
+const CORE_METRICS = ['revenue', 'ebitda', 'netinc', 'opinc', 'opex', 'ncfo', 'fcf'];
 
 const formatIDR = (val, isPercentage = false) => {
   if (val === undefined || val === null) return 'N/A';
@@ -22,8 +23,82 @@ const formatIDR = (val, isPercentage = false) => {
 };
 
 // ==========================================
-// AI CHATBOT COMPONENT
+// CUSTOM COMPONENTS
 // ==========================================
+
+function MultiSelectDropdown({ options, selected, onChange, placeholder }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  
+  const toggle = (val) => {
+    if (selected.includes(val)) {
+      if (selected.length > 1) onChange(selected.filter(x => x !== val));
+    } else {
+      onChange([...selected, val]);
+    }
+  };
+
+  return (
+    <div ref={containerRef} style={{ position: 'relative', width: '350px' }}>
+      <div 
+        onClick={() => setOpen(!open)}
+        style={{
+          background: 'var(--bg-main)', border: '1px solid var(--border-glass)',
+          padding: '0.6rem 1rem', borderRadius: '8px', cursor: 'pointer',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+        }}
+      >
+        <span style={{color: selected.length ? 'white' : 'var(--text-muted)', fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+          {selected.length > 0 ? selected.map(s => s.toUpperCase()).join(', ') : placeholder}
+        </span>
+        <ChevronDown size={16} color="var(--text-muted)" />
+      </div>
+      {open && (
+        <div style={{
+          position: 'absolute', top: '100%', left: 0, right: 0,
+          background: 'var(--bg-card)', border: '1px solid var(--border-glass-bright)',
+          borderRadius: '8px', marginTop: '0.5rem', zIndex: 50,
+          maxHeight: '300px', overflowY: 'auto', boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+          backdropFilter: 'blur(20px)'
+        }}>
+          {options.map(opt => (
+            <div 
+              key={opt}
+              onClick={() => toggle(opt)}
+              style={{
+                padding: '0.75rem 1rem', cursor: 'pointer',
+                background: selected.includes(opt) ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+                display: 'flex', alignItems: 'center', gap: '0.75rem',
+                borderBottom: '1px solid var(--border-glass)',
+                fontSize: '0.85rem', fontWeight: 500
+              }}
+            >
+              <div style={{
+                width: '18px', height: '18px', border: '1px solid var(--accent-blue)', 
+                borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: selected.includes(opt) ? 'var(--accent-blue)' : 'transparent'
+              }}>
+                {selected.includes(opt) && <span style={{color: 'white', fontSize: '12px'}}>✓</span>}
+              </div>
+              {opt.toUpperCase()}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -99,9 +174,6 @@ function AIChatbot() {
   );
 }
 
-// ==========================================
-// AUTO-INSIGHT BOX COMPONENT
-// ==========================================
 function AutoInsight({ title, content }) {
   return (
     <div className="glass-card" style={{ marginBottom: '1.5rem', background: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
@@ -131,7 +203,6 @@ export default function App() {
   const [error, setError] = useState(null);
   const [activeMenu, setActiveMenu] = useState('1');
   
-  // States that apply globally
   const [globalMetric, setGlobalMetric] = useState('revenue');
   const [ciVisibility, setCiVisibility] = useState('80% & 95% (Default)');
 
@@ -151,9 +222,6 @@ export default function App() {
   if (loading) return <div className="dashboard-container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><h2>Loading AI Pipeline Data...</h2></div>;
   if (error) return <div className="dashboard-container"><h2>Error: {error}</h2></div>;
   if (!data) return null;
-
-  // Derive ALL unique metrics from historical data
-  const allMetrics = [...new Set(data.historical.map(d => d.metric_id))].sort();
 
   return (
     <div className="app-layout">
@@ -189,7 +257,6 @@ export default function App() {
           </div>
         </div>
         <div style={{marginTop: 'auto', borderTop: '1px solid var(--border-glass)', paddingTop: '1rem'}}>
-          <p style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>Ready for Investors</p>
           <p style={{fontSize: '0.75rem', color: 'var(--accent-blue)', fontWeight: 600}}>Telkom Usecase 8</p>
         </div>
       </aside>
@@ -208,12 +275,12 @@ export default function App() {
               {activeMenu === '7' && 'Model Limitations & Evaluation'}
             </h1>
           </div>
-          {['2', '3'].includes(activeMenu) && (
+          {['3'].includes(activeMenu) && (
             <div className="topbar-controls">
               <div className="metric-select-wrapper">
                 <label>Primary Metric:</label>
                 <select className="metric-select" value={globalMetric} onChange={(e) => setGlobalMetric(e.target.value)}>
-                  {allMetrics.map(m => (
+                  {CORE_METRICS.map(m => (
                     <option key={m} value={m}>{m.toUpperCase()}</option>
                   ))}
                 </select>
@@ -224,16 +291,15 @@ export default function App() {
 
         <div className="dashboard-container">
           {activeMenu === '1' && <Section1 data={data} />}
-          {activeMenu === '2' && <Section2 data={data} allMetrics={allMetrics} />}
+          {activeMenu === '2' && <Section2 data={data} />}
           {activeMenu === '3' && <Section3 data={data} metric={globalMetric} ciVisibility={ciVisibility} setCiVisibility={setCiVisibility} />}
-          {activeMenu === '4' && <Section4 data={data} allMetrics={allMetrics} />}
+          {activeMenu === '4' && <Section4 data={data} />}
           {activeMenu === '5' && <Section5 data={data} />}
           {activeMenu === '6' && <Section6 data={data} />}
           {activeMenu === '7' && <Section7 data={data} />}
         </div>
       </main>
 
-      {/* AI CHATBOT PERSISTENT WIDGET */}
       <AIChatbot />
     </div>
   );
@@ -334,17 +400,9 @@ function Section1({ data }) {
   );
 }
 
-function Section2({ data, allMetrics }) {
+function Section2({ data }) {
   const [selectedMetrics, setSelectedMetrics] = useState(['revenue', 'ebitda']);
   const [aggregation, setAggregation] = useState('Quarterly');
-  
-  const toggleMetric = (m) => {
-    if (selectedMetrics.includes(m)) {
-      if(selectedMetrics.length > 1) setSelectedMetrics(selectedMetrics.filter(x => x !== m));
-    } else {
-      if(selectedMetrics.length < 5) setSelectedMetrics([...selectedMetrics, m]);
-    }
-  };
 
   const chartData = useMemo(() => {
     let processed = [];
@@ -359,9 +417,9 @@ function Section2({ data, allMetrics }) {
         return obj;
       });
     } else {
-      // Annual Aggregation (sum by year)
+      // Annual
       const periods = [...new Set(data.historical.map(d => d.period))];
-      const years = [...new Set(periods.map(p => p.split(' ')[0]))]; // e.g., "2023 Q1" -> "2023"
+      const years = [...new Set(periods.map(p => p.split(' ')[0]))]; 
       processed = years.map(y => {
         let obj = { period: y };
         selectedMetrics.forEach(m => {
@@ -378,11 +436,11 @@ function Section2({ data, allMetrics }) {
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title="Historical Trend Analysis" 
-        content={`Mode Agregasi ${aggregation} aktif. Anda membandingkan ${selectedMetrics.length} metrik secara bersamaan. Trend secara umum memperlihatkan pola musiman pada kuartal ke-4 yang kuat.`} 
+        content={`Mode Agregasi ${aggregation} aktif. Anda membandingkan ${selectedMetrics.length} metrik Core. Trend secara umum memperlihatkan pola musiman pada kuartal ke-4 yang kuat.`} 
       />
 
       <div className="glass-card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem'}}>
           <div className="card-title" style={{marginBottom: 0}}><Sliders size={18}/> Multi-Metric Comparison</div>
           <div className="radio-group">
             <div className={`radio-label ${aggregation === 'Quarterly' ? 'active' : ''}`} onClick={() => setAggregation('Quarterly')}>Quarterly</div>
@@ -390,22 +448,16 @@ function Section2({ data, allMetrics }) {
           </div>
         </div>
 
-        <p style={{fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem'}}>
-          Pilih hingga 5 metrik dari seluruh daftar rasio keuangan untuk dikomparasi secara visual.
-        </p>
-        <div style={{display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
-          {allMetrics.map(m => (
-            <button key={m} onClick={() => toggleMetric(m)} style={{
-              background: selectedMetrics.includes(m) ? 'var(--accent-blue)' : 'var(--bg-sidebar)',
-              color: selectedMetrics.includes(m) ? 'white' : 'var(--text-muted)', 
-              border: '1px solid', borderColor: selectedMetrics.includes(m) ? 'var(--accent-blue)' : 'var(--border-glass)',
-              padding: '0.4rem 1rem', borderRadius: '20px', cursor: 'pointer', fontSize: '0.8rem',
-              transition: 'all 0.2s'
-            }}>
-              {m.toUpperCase()}
-            </button>
-          ))}
+        <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem'}}>
+          <span style={{fontSize: '0.9rem', color: 'var(--text-muted)'}}>Pilih Metrik (Streamlit Style):</span>
+          <MultiSelectDropdown 
+            options={CORE_METRICS} 
+            selected={selectedMetrics} 
+            onChange={setSelectedMetrics} 
+            placeholder="Select metrics..." 
+          />
         </div>
+
         <div style={{ width: '100%', height: 500 }}>
           <ResponsiveContainer>
             <LineChart data={chartData}>
@@ -427,6 +479,7 @@ function Section2({ data, allMetrics }) {
 
 function Section3({ data, metric, ciVisibility, setCiVisibility }) {
   const [model, setModel] = useState('');
+  const [aggregation, setAggregation] = useState('Quarterly');
   const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))];
   
   useEffect(() => {
@@ -436,38 +489,59 @@ function Section3({ data, metric, ciVisibility, setCiVisibility }) {
   const hist = data.historical.filter(d => d.metric_id === metric);
   const fc = data.forecast.filter(d => d.metric_id === metric && d.model === model);
 
-  let combined = hist.map(d => ({ period: d.period, Actual: d.value_scaled }));
-  if (hist.length > 0 && fc.length > 0) {
-    const lastHist = hist[hist.length - 1];
-    fc.unshift({ period: lastHist.period, forecast: lastHist.value_scaled, lower_80: lastHist.value_scaled, upper_80: lastHist.value_scaled, lower_95: lastHist.value_scaled, upper_95: lastHist.value_scaled });
-  }
-
-  fc.forEach(f => {
-    const existing = combined.find(c => c.period === f.period);
-    if (existing) {
-      existing.Forecast = f.forecast; existing.L80 = f.lower_80; existing.U80 = f.upper_80; existing.L95 = f.lower_95; existing.U95 = f.upper_95;
-    } else {
-      combined.push({ period: f.period, Forecast: f.forecast, L80: f.lower_80, U80: f.upper_80, L95: f.lower_95, U95: f.upper_95 });
+  const combined = useMemo(() => {
+    let raw = hist.map(d => ({ period: d.period, Actual: d.value_scaled }));
+    if (hist.length > 0 && fc.length > 0) {
+      const lastHist = hist[hist.length - 1];
+      fc.unshift({ period: lastHist.period, forecast: lastHist.value_scaled, lower_80: lastHist.value_scaled, upper_80: lastHist.value_scaled, lower_95: lastHist.value_scaled, upper_95: lastHist.value_scaled });
     }
-  });
+
+    fc.forEach(f => {
+      const existing = raw.find(c => c.period === f.period);
+      if (existing) {
+        existing.Forecast = f.forecast; existing.L80 = f.lower_80; existing.U80 = f.upper_80; existing.L95 = f.lower_95; existing.U95 = f.upper_95;
+      } else {
+        raw.push({ period: f.period, Forecast: f.forecast, L80: f.lower_80, U80: f.upper_80, L95: f.lower_95, U95: f.upper_95 });
+      }
+    });
+
+    if (aggregation === 'Annual') {
+      const years = [...new Set(raw.map(r => r.period.split(' ')[0]))];
+      return years.map(y => {
+        const points = raw.filter(r => r.period.startsWith(y));
+        let obj = { period: y };
+        ['Actual', 'Forecast', 'L80', 'U80', 'L95', 'U95'].forEach(k => {
+          const sum = points.reduce((acc, curr) => curr[k] !== undefined ? acc + curr[k] : acc, 0);
+          if (points.some(curr => curr[k] !== undefined)) obj[k] = sum;
+        });
+        return obj;
+      });
+    }
+    return raw;
+  }, [hist, fc, aggregation]);
 
   const show95 = ciVisibility.includes('95%');
   const show80 = ciVisibility.includes('80%');
   
-  // Exclude the stitched initial point from detailed table
   const detailedForecasts = fc.filter(f => f.period !== (hist.length > 0 ? hist[hist.length - 1].period : ''));
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title={`Proyeksi Model ${model}`} 
-        content={`Menggunakan pendekatan algoritma ${model} untuk memproyeksikan ${metric.toUpperCase()}. Confidence interval memberikan gambaran batas pesimis (lower) dan optimis (upper) dengan tingkat probabilitas 95%.`} 
+        content={`Menggunakan pendekatan algoritma ${model} untuk memproyeksikan ${metric.toUpperCase()}. Anda melihat data dalam resolusi ${aggregation}.`} 
       />
 
       <div className="glass-card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
-          <div className="card-title" style={{marginBottom: 0}}>Prediksi 4 Kuartal Kedepan</div>
-          <div style={{display: 'flex', gap: '1rem'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem'}}>
+          <div className="card-title" style={{marginBottom: 0}}>Prediksi AI Masa Depan</div>
+          
+          <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+            <div className="radio-group" style={{marginRight: '1rem'}}>
+              <div className={`radio-label ${aggregation === 'Quarterly' ? 'active' : ''}`} onClick={() => setAggregation('Quarterly')}>Quarterly</div>
+              <div className={`radio-label ${aggregation === 'Annual' ? 'active' : ''}`} onClick={() => setAggregation('Annual')}>Annual</div>
+            </div>
+            
             <select className="metric-select" style={{background: 'var(--bg-main)', border: '1px solid var(--border-glass)', padding: '0.4rem 1rem', borderRadius: '20px'}} value={ciVisibility} onChange={(e) => setCiVisibility(e.target.value)}>
               <option value="80% & 95% (Default)">Tampilkan CI 80% & 95%</option>
               <option value="95% Only">Tampilkan CI 95% Saja</option>
@@ -499,44 +573,41 @@ function Section3({ data, metric, ciVisibility, setCiVisibility }) {
         </div>
       </div>
       
-      {/* Detail Forecast Table */}
-      <div className="glass-card">
-        <div className="card-title">Tabel Rincian Prediksi ({metric.toUpperCase()})</div>
-        <div className="data-table-container">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Periode Kuartal</th>
-                <th>Nilai Prediksi Tengah</th>
-                <th>Batas Bawah (Pessimistic)</th>
-                <th>Batas Atas (Optimistic)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {detailedForecasts.map((f, i) => (
-                <tr key={i}>
-                  <td><strong>{f.period}</strong></td>
-                  <td style={{color: '#f59e0b', fontWeight: 'bold'}}>{formatIDR(f.forecast)}</td>
-                  <td style={{color: 'var(--danger)'}}>{formatIDR(f.lower_95)}</td>
-                  <td style={{color: 'var(--success)'}}>{formatIDR(f.upper_95)}</td>
+      {aggregation === 'Quarterly' && (
+        <div className="glass-card">
+          <div className="card-title">Tabel Rincian Prediksi ({metric.toUpperCase()})</div>
+          <div className="data-table-container">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Periode Kuartal</th>
+                  <th>Nilai Prediksi Tengah</th>
+                  <th>Batas Bawah (Pessimistic)</th>
+                  <th>Batas Atas (Optimistic)</th>
                 </tr>
-              ))}
-              {detailedForecasts.length === 0 && (
-                <tr><td colSpan="4" style={{textAlign: 'center'}}>Tidak ada data proyeksi untuk model ini.</td></tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {detailedForecasts.map((f, i) => (
+                  <tr key={i}>
+                    <td><strong>{f.period}</strong></td>
+                    <td style={{color: '#f59e0b', fontWeight: 'bold'}}>{formatIDR(f.forecast)}</td>
+                    <td style={{color: 'var(--danger)'}}>{formatIDR(f.lower_95)}</td>
+                    <td style={{color: 'var(--success)'}}>{formatIDR(f.upper_95)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
 
-function Section4({ data, allMetrics }) {
+function Section4({ data }) {
   const [selectedMetrics, setSelectedMetrics] = useState(['revenue', 'ebitda', 'netinc']);
   const [targets, setTargets] = useState({});
   
-  // Initialize targets based on selected metrics
   useEffect(() => {
     const initialTargets = {};
     selectedMetrics.forEach(m => {
@@ -546,20 +617,14 @@ function Section4({ data, allMetrics }) {
     setTargets(initialTargets);
   }, [data, selectedMetrics]);
 
-  const toggleMetric = (m) => {
-    if (selectedMetrics.includes(m)) setSelectedMetrics(selectedMetrics.filter(x => x !== m));
-    else setSelectedMetrics([...selectedMetrics, m]);
-  };
-
   const targetResults = selectedMetrics.map(m => {
     const mFc = data.forecast.filter(d => d.metric_id === m);
     if (mFc.length === 0) return null;
-    const modelFc = mFc.filter(d => d.model === mFc[0].model); // Get best model automatically
+    const modelFc = mFc.filter(d => d.model === mFc[0].model); 
     const nextQ = modelFc[0]; 
     const t = (parseFloat(targets[m]) || 0) * 1000;
     const gap = t !== 0 ? ((nextQ.forecast - t) / Math.abs(t)) * 100 : 0;
     
-    // Status Logic
     let status = "OFF-TRACK"; let statusColor = "var(--danger)";
     if (nextQ.forecast >= t) { status = "ON-TRACK"; statusColor = "var(--success)"; }
     else if (nextQ.upper_95 >= t) { status = "AT-RISK"; statusColor = "var(--warning)"; }
@@ -571,27 +636,23 @@ function Section4({ data, allMetrics }) {
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title="Simulasi Target Perusahaan" 
-        content="Bandingkan angka ekspektasi (Target) Anda terhadap kemampuan nyata perusahaan berdasarkan machine learning. Jika status 'AT-RISK', maka perusahaan memerlukan intervensi bisnis strategis agar batas atas prediksi (optimistic) dapat tercapai." 
+        content="Bandingkan angka ekspektasi (Target) Anda terhadap kemampuan nyata perusahaan berdasarkan machine learning. Dropdown telah disesuaikan dengan versi Streamlit asli (Hanya Core Metrics)." 
       />
 
       <div className="glass-card">
         <div className="card-title"><Target size={18}/> Gap Analysis & Target Input</div>
         <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.85rem'}}>
-          Pilih metrik yang ingin disimulasikan, lalu ubah angka di kolom Target untuk melihat Kesenjangan (Gap) dan Status seketika.
+          Pilih metrik utama melalui dropdown (gaya Streamlit), lalu ubah angka di kolom Target untuk melihat Kesenjangan (Gap) seketika.
         </p>
         
-        <div style={{display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
-          {allMetrics.map(m => (
-            <button key={m} onClick={() => toggleMetric(m)} style={{
-              background: selectedMetrics.includes(m) ? 'var(--accent-teal)' : 'transparent',
-              color: selectedMetrics.includes(m) ? 'white' : 'var(--text-muted)', 
-              border: '1px solid', borderColor: selectedMetrics.includes(m) ? 'var(--accent-teal)' : 'var(--border-glass)',
-              padding: '0.3rem 0.8rem', borderRadius: '15px', cursor: 'pointer', fontSize: '0.75rem',
-              transition: 'all 0.2s'
-            }}>
-              {m.toUpperCase()}
-            </button>
-          ))}
+        <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem'}}>
+          <span style={{fontSize: '0.9rem', color: 'var(--text-muted)'}}>Pilih Metrik Target:</span>
+          <MultiSelectDropdown 
+            options={CORE_METRICS} 
+            selected={selectedMetrics} 
+            onChange={setSelectedMetrics} 
+            placeholder="Select metrics..." 
+          />
         </div>
 
         <div className="data-table-container">
@@ -645,7 +706,6 @@ function Section4({ data, allMetrics }) {
 
 function Section5({ data }) {
   const revHist = data.historical.filter(d => d.metric_id === 'revenue');
-  // Get default model
   const models = [...new Set(data.forecast.filter(d => d.metric_id === 'revenue').map(d => d.model))];
   const modelToUse = models.length > 0 ? models[0] : '';
   const revFc = data.forecast.filter(d => d.metric_id === 'revenue' && d.model === modelToUse);
@@ -695,29 +755,34 @@ function Section5({ data }) {
 
 function Section6({ data }) {
   const [filterSeverity, setFilterSeverity] = useState('ALL');
-  
   const anomalies = data.anomalies || [];
+  
+  // Transform anomalies for the bubble chart
+  const scatterData = anomalies.map(a => {
+    // Generate a pseudo size value for visual representation based on severity
+    let sizeVal = 50;
+    if (a.severity === 'CRITICAL') sizeVal = 300;
+    if (a.severity === 'WARNING') sizeVal = 150;
+    
+    return {
+      period: a.period,
+      metric: (a.metric_id || a.metric_name || '').toUpperCase(),
+      severity: a.severity,
+      description: a.description,
+      sizeVal: sizeVal,
+      fill: a.severity === 'CRITICAL' ? '#ef4444' : a.severity === 'WARNING' ? '#f59e0b' : '#0ea5e9'
+    };
+  });
+
   const filteredAnomalies = filterSeverity === 'ALL' 
     ? anomalies 
     : anomalies.filter(a => a.severity === filterSeverity);
-
-  // Prepare Scatter data for anomalies overlaid on historical Revenue just as an example visual
-  const revHist = data.historical.filter(d => d.metric_id === 'revenue');
-  const scatterData = revHist.map(h => {
-    const isAnomaly = anomalies.find(a => a.period === h.period && (a.metric_id === 'revenue' || a.metric_name?.toLowerCase().includes('revenue')));
-    return {
-      period: h.period,
-      Revenue: h.value_scaled,
-      AnomalyValue: isAnomaly ? h.value_scaled : null,
-      Severity: isAnomaly ? isAnomaly.severity : null
-    };
-  });
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title="Manajemen Risiko & Fraud" 
-        content={`Terdapat ${anomalies.length} anomali historis yang terdeteksi secara otomatis oleh model isolation forest. ${anomalies.filter(a => a.severity==='CRITICAL').length} di antaranya berstatus CRITICAL yang wajib ditelaah oleh komite audit perusahaan.`} 
+        content={`Terdapat ${anomalies.length} anomali historis yang terdeteksi. Visualisasi ukuran (bubble) mengindikasikan tingkat keparahan pada setiap metrik, mirip dengan UI Streamlit awal.`} 
       />
 
       <div className="kpi-grid" style={{gridTemplateColumns: 'repeat(3, 1fr)'}}>
@@ -736,18 +801,34 @@ function Section6({ data }) {
       </div>
 
       <div className="glass-card">
-        <div className="card-title"><Activity size={18}/> Anomaly Distribution Mapping (Revenue Overlay)</div>
-        <div style={{ width: '100%', height: 300 }}>
+        <div className="card-title"><Activity size={18}/> Anomaly Scatter Matrix (Metric vs Period)</div>
+        <p style={{fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.5rem'}}>Sumbu Y merepresentasikan Metrik, dan Ukuran titik merepresentasikan tingkat keparahan anomali.</p>
+        <div style={{ width: '100%', height: 350 }}>
           <ResponsiveContainer>
-            <ComposedChart data={scatterData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} />
-              <XAxis dataKey="period" stroke="var(--text-muted)" />
-              <YAxis stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
-              <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)'}} />
-              <Legend />
-              <Line type="monotone" dataKey="Revenue" stroke="var(--text-dim)" strokeWidth={2} dot={false} />
-              <Scatter name="Detected Anomaly" dataKey="AnomalyValue" fill="var(--danger)" />
-            </ComposedChart>
+            <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
+              <XAxis dataKey="period" type="category" name="Period" stroke="var(--text-muted)" />
+              <YAxis dataKey="metric" type="category" name="Metric" stroke="var(--text-muted)" width={80} />
+              <ZAxis dataKey="sizeVal" range={[50, 400]} name="Severity Value" />
+              <RechartsTooltip cursor={{strokeDasharray: '3 3'}} content={({ active, payload }) => {
+                if (active && payload && payload.length) {
+                  const data = payload[0].payload;
+                  return (
+                    <div style={{background: 'var(--bg-main)', border: '1px solid var(--border-glass)', padding: '10px', borderRadius: '8px'}}>
+                      <p style={{color: data.fill, fontWeight: 'bold'}}>{data.severity}</p>
+                      <p style={{color: 'white', fontSize: '0.85rem'}}>{data.period} - {data.metric}</p>
+                      <p style={{color: 'var(--text-muted)', fontSize: '0.8rem', maxWidth: '250px', marginTop: '4px'}}>{data.description}</p>
+                    </div>
+                  );
+                }
+                return null;
+              }} />
+              <Scatter name="Anomalies" data={scatterData}>
+                {scatterData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.fill} />
+                ))}
+              </Scatter>
+            </ScatterChart>
           </ResponsiveContainer>
         </div>
       </div>
