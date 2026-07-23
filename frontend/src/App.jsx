@@ -976,12 +976,11 @@ function Section7({ data }) {
         
         <div className="alert-box" style={{borderLeft: '4px solid #ffd166', background: 'rgba(26,26,46,0.8)'}}>
           <div>
-            <div className="alert-title">Limitasi Data:</div>
+            <div className="alert-title">Limitasi Data & Penggunaan Data Dummy:</div>
             <div className="alert-desc">
               • Short time-series: hanya 20 kuartal (2021 Q2 – 2026 Q1)<br/>
-              • Tidak ada segmentasi regional / produk / customer<br/>
-              • Tidak ada data budget / realisasi (target menggunakan input manual)<br/>
-              • Data konsolidasi entity-level saja
+              • <strong>Segmentasi Dummy:</strong> Alokasi persebaran 5 Regional dan Product Mix (Domain Digital) yang tampil di Executive Summary adalah <strong>data dummy/simulasi</strong> murni untuk mendemonstrasikan kapabilitas visualisasi. Data historis riil yang diproses model AI hanya berupa konsolidasi agregat tingkat perusahaan (entity-level).<br/>
+              • Tidak ada data budget / target perusahaan yang riil (sehingga simulasi Gap Analysis mengharuskan input target manual)<br/>
             </div>
           </div>
         </div>
