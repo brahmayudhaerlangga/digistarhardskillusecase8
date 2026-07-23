@@ -512,8 +512,10 @@ function Section2({ data }) {
 }
 
 function Section3({ data }) {
-  // Replicating Streamlit Forecast logic exactly
-  const availableMetrics = [...new Set(data.forecast.map(d => d.metric_id))].sort();
+  // Filter available metrics to ensure they exist in both forecast and historical
+  const availableMetrics = [...new Set(data.forecast.map(d => d.metric_id))]
+    .filter(m => data.historical.some(h => h.metric_id === m))
+    .sort();
   const [metric, setMetric] = useState(availableMetrics[0] || 'revenue');
   
   const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))].sort();
@@ -815,17 +817,17 @@ function Section6({ data }) {
       />
 
       <div className="kpi-grid" style={{gridTemplateColumns: 'repeat(3, 1fr)'}}>
-        <div className="glass-card" style={{marginBottom: 0, textAlign: 'center'}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>CRITICAL</h3>
-          <p style={{fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)'}}>{anomalies.filter(a => a.severity === 'CRITICAL').length}</p>
+        <div className="glass-card" style={{borderLeft: '4px solid var(--danger)', marginBottom: 0}}>
+          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Critical Alerts</h3>
+          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--danger)'}}>{anomalies.filter(a => a.severity === 'CRITICAL').length}</p>
         </div>
-        <div className="glass-card" style={{marginBottom: 0, textAlign: 'center'}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>WARNING</h3>
-          <p style={{fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)'}}>{anomalies.filter(a => a.severity === 'WARNING').length}</p>
+        <div className="glass-card" style={{borderLeft: '4px solid var(--warning)', marginBottom: 0}}>
+          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Warning Alerts</h3>
+          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--warning)'}}>{anomalies.filter(a => a.severity === 'WARNING').length}</p>
         </div>
-        <div className="glass-card" style={{marginBottom: 0, textAlign: 'center'}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>INFO</h3>
-          <p style={{fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)'}}>{anomalies.filter(a => a.severity === 'INFO').length}</p>
+        <div className="glass-card" style={{borderLeft: '4px solid var(--info)', marginBottom: 0}}>
+          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Info / Deviations</h3>
+          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--info)'}}>{anomalies.filter(a => a.severity === 'INFO').length}</p>
         </div>
       </div>
 
@@ -845,11 +847,11 @@ function Section6({ data }) {
         
         <div style={{ width: '100%', height: 400 }}>
           <ResponsiveContainer>
-            <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 100 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
-              <XAxis dataKey="period" type="category" name="Period" stroke="var(--text-muted)" />
-              <YAxis dataKey="metric" type="category" name="Metric" stroke="var(--text-muted)" />
-              <ZAxis dataKey="sizeVal" range={[50, 600]} name="Value (Abs)" />
+            <ScatterChart margin={{ top: 20, right: 30, bottom: 40, left: 140 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} horizontal={true} />
+              <XAxis dataKey="period" type="category" name="Period" stroke="var(--text-muted)" tick={{fontSize: 11, angle: -45, textAnchor: 'end'}} />
+              <YAxis dataKey="metric" type="category" name="Metric" stroke="var(--text-muted)" tick={{fontSize: 11}} />
+              <ZAxis dataKey="sizeVal" range={[100, 1000]} name="Value (Abs)" />
               <RechartsTooltip cursor={{strokeDasharray: '3 3'}} content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
