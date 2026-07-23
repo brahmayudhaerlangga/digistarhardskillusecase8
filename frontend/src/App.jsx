@@ -830,8 +830,8 @@ function Section6({ data }) {
           <ResponsiveContainer>
             <ScatterChart margin={{ top: 20, right: 30, bottom: 40, left: 140 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} horizontal={true} />
-              <XAxis dataKey="period" type="category" name="Period" stroke="var(--text-muted)" tick={{fontSize: 11, angle: -45, textAnchor: 'end'}} />
-              <YAxis dataKey="metric" type="category" name="Metric" stroke="var(--text-muted)" tick={{fontSize: 11}} />
+              <XAxis dataKey="period" type="category" allowDuplicatedCategory={false} name="Period" stroke="var(--text-muted)" tick={{fontSize: 11, angle: -45, textAnchor: 'end'}} />
+              <YAxis dataKey="metric" type="category" allowDuplicatedCategory={false} name="Metric" stroke="var(--text-muted)" tick={{fontSize: 11}} width={140} />
               <ZAxis dataKey="sizeVal" range={[100, 1000]} name="Value (Abs)" />
               <RechartsTooltip cursor={{strokeDasharray: '3 3'}} content={({ active, payload }) => {
                 if (active && payload && payload.length) {
