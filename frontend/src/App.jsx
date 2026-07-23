@@ -4,15 +4,39 @@ import {
   BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, ComposedChart, ScatterChart, Scatter, ZAxis
 } from 'recharts';
 import { 
-  TrendingUp, TrendingDown, AlertTriangle, AlertCircle, Activity, 
-  DollarSign, Users, Target, LayoutDashboard, Database, Settings,
-  ShieldAlert, FileText, Info, BarChart2, MessageSquare, X, Send, Bot, 
+  TrendingUp, TrendingDown, Activity, Target, LayoutDashboard, Database, 
+  ShieldAlert, Info, BarChart2, MessageSquare, X, Send, Bot, 
   LineChart as LineChartIcon, Sliders, AlertOctagon, Zap, ChevronDown
 } from 'lucide-react';
 import './index.css';
 
 const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#0ea5e9', '#ec4899', '#14b8a6', '#84cc16'];
-const CORE_METRICS = ['revenue', 'ebitda', 'netinc', 'opinc', 'opex', 'ncfo', 'fcf'];
+
+const SEGMENT_MAP = {
+  "revenue": "Profitabilitas", "revenueGrowth": "Profitabilitas", "gp": "Profitabilitas",
+  "grossMargin": "Profitabilitas", "opinc": "Profitabilitas", "operatingMargin": "Profitabilitas",
+  "ebit": "Profitabilitas", "ebitMargin": "Profitabilitas", "ebitda": "Profitabilitas",
+  "ebitdaMargin": "Profitabilitas", "netinc": "Profitabilitas", "netinccmn": "Profitabilitas",
+  "netIncomeGrowth": "Profitabilitas", "profitMargin": "Profitabilitas", "pretax": "Profitabilitas",
+  "taxexp": "Profitabilitas", "taxrate": "Profitabilitas", "ROA": "Profitabilitas",
+  "ROE": "Profitabilitas", "epsBasic": "Profitabilitas", "epsdil": "Profitabilitas",
+  "epsGrowth": "Profitabilitas", "earningContinuing": "Profitabilitas",
+  "assetsc": "Likuiditas", "currentLiabilities": "Likuiditas", "Current_Ratio": "Likuiditas",
+  "Quick_Ratio": "Likuiditas", "cashneq": "Likuiditas", "totalcash": "Likuiditas",
+  "cashGrowth": "Likuiditas", "workingcapital": "Likuiditas", "inventory": "Likuiditas",
+  "accountsReceivable": "Likuiditas", "accountsPayable": "Likuiditas", "receivables": "Likuiditas",
+  "debt": "Leverage", "debtc": "Leverage", "debtnc": "Leverage", "DAR": "Leverage",
+  "DER": "Leverage", "liabilities": "Leverage", "equity": "Leverage", "interestExpense": "Leverage",
+  "currentPortDebt": "Leverage", "capitalLeases": "Leverage", "netcash": "Leverage", "netDebtIssued": "Leverage",
+  "ncfo": "Cash Flow", "ncfi": "Cash Flow", "ncff": "Cash Flow", "ncf": "Cash Flow",
+  "fcf": "Cash Flow", "fcfGrowth": "Cash Flow", "fcfMargin": "Cash Flow", "fcfps": "Cash Flow",
+  "ocfGrowth": "Cash Flow", "capex": "Cash Flow", "leveredFCF": "Cash Flow", "unleveredFCF": "Cash Flow",
+  "commonDividendCF": "Cash Flow", "totalDepAmorCF": "Cash Flow",
+  "assets": "Ukuran", "Firm_Size": "Ukuran", "netPPE": "Ukuran", "totalCommonEquity": "Ukuran",
+  "tangibleBookValue": "Ukuran", "bvps": "Ukuran",
+  "cor": "Biaya", "opex": "Biaya", "sgna": "Biaya", "otheropex": "Biaya",
+};
+const SEGMENTS = [...new Set(Object.values(SEGMENT_MAP))];
 
 const formatIDR = (val, isPercentage = false) => {
   if (val === undefined || val === null) return 'N/A';
@@ -144,7 +168,7 @@ function AIChatbot() {
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <h3><Bot size={18} /> AI Assistant (Investor Desk)</h3>
+            <h3><Bot size={18} /> AI Assistant</h3>
             <button className="chatbot-close" onClick={() => setIsOpen(false)}><X size={18}/></button>
           </div>
           <div className="chatbot-messages">
@@ -202,9 +226,6 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeMenu, setActiveMenu] = useState('1');
-  
-  const [globalMetric, setGlobalMetric] = useState('revenue');
-  const [ciVisibility, setCiVisibility] = useState('80% & 95% (Default)');
 
   useEffect(() => {
     fetch('/data/dashboard.json')
@@ -241,23 +262,24 @@ export default function App() {
             <LineChartIcon size={18} /><span>2. Performance Trend</span>
           </div>
           <div className={`menu-item ${activeMenu === '3' ? 'active' : ''}`} onClick={() => setActiveMenu('3')}>
-            <Activity size={18} /><span>3. AI Forecasting</span>
+            <Activity size={18} /><span>3. Forecast</span>
           </div>
           <div className={`menu-item ${activeMenu === '4' ? 'active' : ''}`} onClick={() => setActiveMenu('4')}>
-            <Target size={18} /><span>4. Target Gap Analysis</span>
+            <Target size={18} /><span>4. Forecast vs Target</span>
           </div>
           <div className={`menu-item ${activeMenu === '5' ? 'active' : ''}`} onClick={() => setActiveMenu('5')}>
             <BarChart2 size={18} /><span>5. Revenue Growth</span>
           </div>
           <div className={`menu-item ${activeMenu === '6' ? 'active' : ''}`} onClick={() => setActiveMenu('6')}>
-            <ShieldAlert size={18} /><span>6. Anomaly & Risk</span>
+            <ShieldAlert size={18} /><span>6. Anomaly Alert</span>
           </div>
           <div className={`menu-item ${activeMenu === '7' ? 'active' : ''}`} onClick={() => setActiveMenu('7')}>
-            <Database size={18} /><span>7. Model Transparency</span>
+            <Database size={18} /><span>7. Model Limitations</span>
           </div>
         </div>
         <div style={{marginTop: 'auto', borderTop: '1px solid var(--border-glass)', paddingTop: '1rem'}}>
-          <p style={{fontSize: '0.75rem', color: 'var(--accent-blue)', fontWeight: 600}}>Telkom Usecase 8</p>
+          <p style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>Digistar Intern 2026</p>
+          <p style={{fontSize: '0.75rem', color: 'var(--accent-blue)', fontWeight: 600}}>Usecase 8 — AI Team</p>
         </div>
       </aside>
 
@@ -266,33 +288,21 @@ export default function App() {
         <header className="top-bar">
           <div className="page-title">
             <h1>
-              {activeMenu === '1' && 'Executive Summary & Segmentations'}
-              {activeMenu === '2' && 'Historical Performance Trend'}
-              {activeMenu === '3' && 'AI Predictive Forecasting'}
-              {activeMenu === '4' && 'Target Simulation & Gap Analysis'}
+              {activeMenu === '1' && 'Executive Financial Summary'}
+              {activeMenu === '2' && 'Financial Performance Trend'}
+              {activeMenu === '3' && 'Forecast — Proyeksi 4 Kuartal'}
+              {activeMenu === '4' && 'Forecast vs Target'}
               {activeMenu === '5' && 'Revenue Growth Projection'}
-              {activeMenu === '6' && 'Anomaly & Risk Detection System'}
-              {activeMenu === '7' && 'Model Limitations & Evaluation'}
+              {activeMenu === '6' && 'Anomaly Alert'}
+              {activeMenu === '7' && 'Model Limitations & Disclaimer'}
             </h1>
           </div>
-          {['3'].includes(activeMenu) && (
-            <div className="topbar-controls">
-              <div className="metric-select-wrapper">
-                <label>Primary Metric:</label>
-                <select className="metric-select" value={globalMetric} onChange={(e) => setGlobalMetric(e.target.value)}>
-                  {CORE_METRICS.map(m => (
-                    <option key={m} value={m}>{m.toUpperCase()}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          )}
         </header>
 
         <div className="dashboard-container">
           {activeMenu === '1' && <Section1 data={data} />}
           {activeMenu === '2' && <Section2 data={data} />}
-          {activeMenu === '3' && <Section3 data={data} metric={globalMetric} ciVisibility={ciVisibility} setCiVisibility={setCiVisibility} />}
+          {activeMenu === '3' && <Section3 data={data} />}
           {activeMenu === '4' && <Section4 data={data} />}
           {activeMenu === '5' && <Section5 data={data} />}
           {activeMenu === '6' && <Section6 data={data} />}
@@ -336,8 +346,8 @@ function Section1({ data }) {
             <div className="glass-card" key={kpi.id} style={{marginBottom: 0}}>
               <div className="card-title">
                 {kpi.label}
-                {isAnomaly ? <span className="badge badge-critical" style={{marginLeft: 'auto'}}>ANOMALY DETECTED</span> 
-                           : <span className="badge badge-healthy" style={{marginLeft: 'auto'}}>STABLE</span>}
+                {isAnomaly ? <span className="badge badge-critical" style={{marginLeft: 'auto'}}>ANOMALI</span> 
+                           : <span className="badge badge-healthy" style={{marginLeft: 'auto'}}>SEHAT</span>}
               </div>
               <div className="kpi-value">{formatIDR(last.value_scaled, false)}</div>
               <div className={`kpi-trend ${qoq >= 0 ? 'trend-up' : 'trend-down'}`}>
@@ -401,8 +411,17 @@ function Section1({ data }) {
 }
 
 function Section2({ data }) {
-  const [selectedMetrics, setSelectedMetrics] = useState(['revenue', 'ebitda']);
+  const [selectedSegment, setSelectedSegment] = useState(SEGMENTS[0]);
+  const [selectedMetrics, setSelectedMetrics] = useState([]);
   const [aggregation, setAggregation] = useState('Quarterly');
+
+  // Filter available metrics based on selected category from SEGMENT_MAP
+  const availableMetrics = Object.keys(SEGMENT_MAP).filter(m => SEGMENT_MAP[m] === selectedSegment);
+  
+  useEffect(() => {
+    // Set default metrics when category changes (first 3)
+    setSelectedMetrics(availableMetrics.slice(0, 3));
+  }, [selectedSegment]);
 
   const chartData = useMemo(() => {
     let processed = [];
@@ -417,7 +436,6 @@ function Section2({ data }) {
         return obj;
       });
     } else {
-      // Annual
       const periods = [...new Set(data.historical.map(d => d.period))];
       const years = [...new Set(periods.map(p => p.split(' ')[0]))]; 
       processed = years.map(y => {
@@ -436,29 +454,45 @@ function Section2({ data }) {
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title="Historical Trend Analysis" 
-        content={`Mode Agregasi ${aggregation} aktif. Anda membandingkan ${selectedMetrics.length} metrik Core. Trend secara umum memperlihatkan pola musiman pada kuartal ke-4 yang kuat.`} 
+        content={`Mode Agregasi ${aggregation} aktif pada kategori ${selectedSegment}. Anda membandingkan ${selectedMetrics.length} metrik secara bersamaan.`} 
       />
 
       <div className="glass-card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem'}}>
-          <div className="card-title" style={{marginBottom: 0}}><Sliders size={18}/> Multi-Metric Comparison</div>
-          <div className="radio-group">
-            <div className={`radio-label ${aggregation === 'Quarterly' ? 'active' : ''}`} onClick={() => setAggregation('Quarterly')}>Quarterly</div>
-            <div className={`radio-label ${aggregation === 'Annual' ? 'active' : ''}`} onClick={() => setAggregation('Annual')}>Annual</div>
+        <div style={{display: 'flex', gap: '2rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-end'}}>
+          
+          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Kategori</label>
+            <select 
+              className="form-select" 
+              style={{padding: '0.6rem 1rem', width: '250px'}} 
+              value={selectedSegment} 
+              onChange={(e) => setSelectedSegment(e.target.value)}
+            >
+              {SEGMENTS.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
           </div>
+
+          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Tampilan</label>
+            <div className="radio-group" style={{padding: '0.2rem', margin: 0}}>
+              <div className={`radio-label ${aggregation === 'Quarterly' ? 'active' : ''}`} onClick={() => setAggregation('Quarterly')}>Quarterly</div>
+              <div className={`radio-label ${aggregation === 'Annual' ? 'active' : ''}`} onClick={() => setAggregation('Annual')}>Annual</div>
+            </div>
+          </div>
+
+          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Pilih Metrik</label>
+            <MultiSelectDropdown 
+              options={availableMetrics} 
+              selected={selectedMetrics} 
+              onChange={setSelectedMetrics} 
+              placeholder="Pilih metrik..." 
+            />
+          </div>
+          
         </div>
 
-        <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem'}}>
-          <span style={{fontSize: '0.9rem', color: 'var(--text-muted)'}}>Pilih Metrik (Streamlit Style):</span>
-          <MultiSelectDropdown 
-            options={CORE_METRICS} 
-            selected={selectedMetrics} 
-            onChange={setSelectedMetrics} 
-            placeholder="Select metrics..." 
-          />
-        </div>
-
-        <div style={{ width: '100%', height: 500 }}>
+        <div style={{ width: '100%', height: 450 }}>
           <ResponsiveContainer>
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} />
@@ -477,10 +511,13 @@ function Section2({ data }) {
   );
 }
 
-function Section3({ data, metric, ciVisibility, setCiVisibility }) {
+function Section3({ data }) {
+  // Replicating Streamlit Forecast logic exactly
+  const availableMetrics = [...new Set(data.forecast.map(d => d.metric_id))].sort();
+  const [metric, setMetric] = useState(availableMetrics[0] || 'revenue');
+  
+  const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))].sort();
   const [model, setModel] = useState('');
-  const [aggregation, setAggregation] = useState('Quarterly');
-  const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))];
   
   useEffect(() => {
     if (availableModels.length > 0 && !availableModels.includes(model)) setModel(availableModels[0]);
@@ -489,70 +526,59 @@ function Section3({ data, metric, ciVisibility, setCiVisibility }) {
   const hist = data.historical.filter(d => d.metric_id === metric);
   const fc = data.forecast.filter(d => d.metric_id === metric && d.model === model);
 
-  const combined = useMemo(() => {
-    let raw = hist.map(d => ({ period: d.period, Actual: d.value_scaled }));
-    if (hist.length > 0 && fc.length > 0) {
-      const lastHist = hist[hist.length - 1];
-      fc.unshift({ period: lastHist.period, forecast: lastHist.value_scaled, lower_80: lastHist.value_scaled, upper_80: lastHist.value_scaled, lower_95: lastHist.value_scaled, upper_95: lastHist.value_scaled });
+  let combined = hist.map(d => ({ period: d.period, Actual: d.value_scaled }));
+  if (hist.length > 0 && fc.length > 0) {
+    const lastHist = hist[hist.length - 1];
+    fc.unshift({ period: lastHist.period, forecast: lastHist.value_scaled, lower_80: lastHist.value_scaled, upper_80: lastHist.value_scaled, lower_95: lastHist.value_scaled, upper_95: lastHist.value_scaled });
+  }
+
+  fc.forEach(f => {
+    const existing = combined.find(c => c.period === f.period);
+    if (existing) {
+      existing.Forecast = f.forecast; existing.L80 = f.lower_80; existing.U80 = f.upper_80; existing.L95 = f.lower_95; existing.U95 = f.upper_95;
+    } else {
+      combined.push({ period: f.period, Forecast: f.forecast, L80: f.lower_80, U80: f.upper_80, L95: f.lower_95, U95: f.upper_95 });
     }
+  });
 
-    fc.forEach(f => {
-      const existing = raw.find(c => c.period === f.period);
-      if (existing) {
-        existing.Forecast = f.forecast; existing.L80 = f.lower_80; existing.U80 = f.upper_80; existing.L95 = f.lower_95; existing.U95 = f.upper_95;
-      } else {
-        raw.push({ period: f.period, Forecast: f.forecast, L80: f.lower_80, U80: f.upper_80, L95: f.lower_95, U95: f.upper_95 });
-      }
-    });
-
-    if (aggregation === 'Annual') {
-      const years = [...new Set(raw.map(r => r.period.split(' ')[0]))];
-      return years.map(y => {
-        const points = raw.filter(r => r.period.startsWith(y));
-        let obj = { period: y };
-        ['Actual', 'Forecast', 'L80', 'U80', 'L95', 'U95'].forEach(k => {
-          const sum = points.reduce((acc, curr) => curr[k] !== undefined ? acc + curr[k] : acc, 0);
-          if (points.some(curr => curr[k] !== undefined)) obj[k] = sum;
-        });
-        return obj;
-      });
-    }
-    return raw;
-  }, [hist, fc, aggregation]);
-
-  const show95 = ciVisibility.includes('95%');
-  const show80 = ciVisibility.includes('80%');
-  
   const detailedForecasts = fc.filter(f => f.period !== (hist.length > 0 ? hist[hist.length - 1].period : ''));
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title={`Proyeksi Model ${model}`} 
-        content={`Menggunakan pendekatan algoritma ${model} untuk memproyeksikan ${metric.toUpperCase()}. Anda melihat data dalam resolusi ${aggregation}.`} 
+        content={`Menggunakan pendekatan algoritma ${model} untuk memproyeksikan ${metric.toUpperCase()}. Confidence interval memberikan gambaran batas pesimis (lower) dan optimis (upper) dengan tingkat probabilitas 95%.`} 
       />
 
       <div className="glass-card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem'}}>
-          <div className="card-title" style={{marginBottom: 0}}>Prediksi AI Masa Depan</div>
-          
-          <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
-            <div className="radio-group" style={{marginRight: '1rem'}}>
-              <div className={`radio-label ${aggregation === 'Quarterly' ? 'active' : ''}`} onClick={() => setAggregation('Quarterly')}>Quarterly</div>
-              <div className={`radio-label ${aggregation === 'Annual' ? 'active' : ''}`} onClick={() => setAggregation('Annual')}>Annual</div>
-            </div>
-            
-            <select className="metric-select" style={{background: 'var(--bg-main)', border: '1px solid var(--border-glass)', padding: '0.4rem 1rem', borderRadius: '20px'}} value={ciVisibility} onChange={(e) => setCiVisibility(e.target.value)}>
-              <option value="80% & 95% (Default)">Tampilkan CI 80% & 95%</option>
-              <option value="95% Only">Tampilkan CI 95% Saja</option>
-              <option value="Hidden">Sembunyikan Interval (Flat)</option>
+        
+        <div style={{display: 'flex', gap: '2rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-end'}}>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Pilih Metrik</label>
+            <select 
+              className="form-select" 
+              style={{padding: '0.6rem 1rem', width: '250px'}} 
+              value={metric} 
+              onChange={(e) => setMetric(e.target.value)}
+            >
+              {availableMetrics.map(m => <option key={m} value={m}>{m.toUpperCase()}</option>)}
             </select>
-            <select className="metric-select" style={{background: 'var(--accent-blue)', padding: '0.4rem 1rem', borderRadius: '20px'}} value={model} onChange={(e) => setModel(e.target.value)}>
+          </div>
+
+          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
+            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Pilih Model</label>
+            <select 
+              className="form-select" 
+              style={{padding: '0.6rem 1rem', width: '250px'}} 
+              value={model} 
+              onChange={(e) => setModel(e.target.value)}
+            >
               {availableModels.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
         </div>
-        <div style={{ width: '100%', height: 450 }}>
+
+        <div style={{ width: '100%', height: 500 }}>
           <ResponsiveContainer>
             <ComposedChart data={combined}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} />
@@ -561,66 +587,78 @@ function Section3({ data, metric, ciVisibility, setCiVisibility }) {
               <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)'}} formatter={(val) => formatIDR(val)} />
               <Legend verticalAlign="top" height={36}/>
               
-              {show95 && <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.15)" stroke="none" name="Upper 95% CI" />}
-              {show95 && <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95% CI (Mask)" legendType="none" />}
-              {show80 && <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.25)" stroke="none" name="Upper 80% CI" />}
-              {show80 && <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80% CI (Mask)" legendType="none" />}
+              <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.15)" stroke="none" name="CI 95%" />
+              <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95% CI (Mask)" legendType="none" />
+              <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.25)" stroke="none" name="CI 80%" />
+              <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80% CI (Mask)" legendType="none" />
               
-              <Line type="monotone" dataKey="Actual" stroke="#14b8a6" strokeWidth={3} dot={{r:4}} />
-              <Line type="monotone" dataKey="Forecast" stroke="#f59e0b" strokeWidth={3} strokeDasharray="5 5" dot={{r: 4}} />
+              <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={2} dot={{r:4}} />
+              <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={2} strokeDasharray="5 5" dot={{symbol: 'diamond', r: 5}} />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
       </div>
       
-      {aggregation === 'Quarterly' && (
-        <div className="glass-card">
-          <div className="card-title">Tabel Rincian Prediksi ({metric.toUpperCase()})</div>
-          <div className="data-table-container">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Periode Kuartal</th>
-                  <th>Nilai Prediksi Tengah</th>
-                  <th>Batas Bawah (Pessimistic)</th>
-                  <th>Batas Atas (Optimistic)</th>
+      {/* Detail Forecast Table */}
+      <div className="glass-card">
+        <div className="card-title">Detail Forecast:</div>
+        <div className="data-table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Tahun</th>
+                <th>Kuartal</th>
+                <th>Forecast</th>
+                <th>Lower 95%</th>
+                <th>Upper 95%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {detailedForecasts.map((f, i) => (
+                <tr key={i}>
+                  <td><strong>{f.period.split(' ')[1]}</strong></td>
+                  <td><strong>{f.period.split(' ')[0].replace('Q','')}</strong></td>
+                  <td style={{color: '#f59e0b', fontWeight: 'bold'}}>{formatIDR(f.forecast)}</td>
+                  <td style={{color: 'var(--danger)'}}>{formatIDR(f.lower_95)}</td>
+                  <td style={{color: 'var(--success)'}}>{formatIDR(f.upper_95)}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {detailedForecasts.map((f, i) => (
-                  <tr key={i}>
-                    <td><strong>{f.period}</strong></td>
-                    <td style={{color: '#f59e0b', fontWeight: 'bold'}}>{formatIDR(f.forecast)}</td>
-                    <td style={{color: 'var(--danger)'}}>{formatIDR(f.lower_95)}</td>
-                    <td style={{color: 'var(--success)'}}>{formatIDR(f.upper_95)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+              {detailedForecasts.length === 0 && (
+                <tr><td colSpan="5" style={{textAlign: 'center'}}>Tidak ada data proyeksi untuk model ini.</td></tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      )}
+      </div>
     </div>
   );
 }
 
 function Section4({ data }) {
-  const [selectedMetrics, setSelectedMetrics] = useState(['revenue', 'ebitda', 'netinc']);
+  // Target metrics exactly like Streamlit
+  const target_metrics = ["revenue", "ebitda", "netinc", "opinc", "fcf"];
   const [targets, setTargets] = useState({});
   
   useEffect(() => {
     const initialTargets = {};
-    selectedMetrics.forEach(m => {
+    target_metrics.forEach(m => {
       const h = data.historical.filter(d => d.metric_id === m);
       if (h.length > 0) initialTargets[m] = ((h[h.length - 1].value_scaled * 1.05) / 1000).toFixed(2);
     });
     setTargets(initialTargets);
-  }, [data, selectedMetrics]);
+  }, [data]);
 
-  const targetResults = selectedMetrics.map(m => {
+  const targetResults = target_metrics.map(m => {
     const mFc = data.forecast.filter(d => d.metric_id === m);
     if (mFc.length === 0) return null;
-    const modelFc = mFc.filter(d => d.model === mFc[0].model); 
+    
+    // Find best model like Streamlit did
+    const bestModelsDf = data.best_models || [];
+    const bestModelRow = bestModelsDf.find(b => b.metric_id === m);
+    const bestModel = bestModelRow ? bestModelRow.best_model : mFc[0].model;
+    
+    const modelFc = mFc.filter(d => d.model === bestModel); 
+    if(modelFc.length === 0) return null;
     const nextQ = modelFc[0]; 
     const t = (parseFloat(targets[m]) || 0) * 1000;
     const gap = t !== 0 ? ((nextQ.forecast - t) / Math.abs(t)) * 100 : 0;
@@ -629,62 +667,53 @@ function Section4({ data }) {
     if (nextQ.forecast >= t) { status = "ON-TRACK"; statusColor = "var(--success)"; }
     else if (nextQ.upper_95 >= t) { status = "AT-RISK"; statusColor = "var(--warning)"; }
     
-    return { m, nextQ, t, gap, status, statusColor, modelName: mFc[0].model };
+    return { m, nextQ, t, gap, status, statusColor, modelName: bestModel };
   }).filter(Boolean);
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title="Simulasi Target Perusahaan" 
-        content="Bandingkan angka ekspektasi (Target) Anda terhadap kemampuan nyata perusahaan berdasarkan machine learning. Dropdown telah disesuaikan dengan versi Streamlit asli (Hanya Core Metrics)." 
+        content="Bandingkan angka ekspektasi (Target) Anda terhadap kemampuan nyata perusahaan berdasarkan machine learning. Sesuai Streamlit, 5 metrik fundamental utama siap disimulasikan." 
       />
 
       <div className="glass-card">
-        <div className="card-title"><Target size={18}/> Gap Analysis & Target Input</div>
         <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.85rem'}}>
-          Pilih metrik utama melalui dropdown (gaya Streamlit), lalu ubah angka di kolom Target untuk melihat Kesenjangan (Gap) seketika.
+          *Target default = nilai terakhir + 5% growth (dapat disesuaikan):*
         </p>
         
-        <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem'}}>
-          <span style={{fontSize: '0.9rem', color: 'var(--text-muted)'}}>Pilih Metrik Target:</span>
-          <MultiSelectDropdown 
-            options={CORE_METRICS} 
-            selected={selectedMetrics} 
-            onChange={setSelectedMetrics} 
-            placeholder="Select metrics..." 
-          />
+        <div style={{display: 'flex', gap: '1.5rem', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
+          {target_metrics.map(m => (
+            <div key={m} style={{display: 'flex', flexDirection: 'column', gap: '0.35rem'}}>
+              <label style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>Target {m}</label>
+              <input type="number" className="form-input" style={{width: '120px', padding: '0.4rem'}} 
+                     value={targets[m] !== undefined ? targets[m] : ''} 
+                     onChange={(e) => setTargets(prev => ({...prev, [m]: e.target.value}))} step="0.1" />
+            </div>
+          ))}
         </div>
 
         <div className="data-table-container">
           <table className="data-table">
             <thead>
               <tr>
-                <th>Metrik (Model)</th>
-                <th>AI Forecast (Kuartal Depan)</th>
-                <th>Target Manual (Triliun Rp)</th>
-                <th>Gap / Kesenjangan (%)</th>
+                <th>Metrik</th>
+                <th>Model</th>
+                <th>Forecast</th>
+                <th>Target</th>
+                <th>Gap (%)</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {targetResults.map(res => (
                 <tr key={res.m}>
-                  <td>
-                    <strong>{res.m.toUpperCase()}</strong><br/>
-                    <span style={{fontSize: '0.7rem', color: 'var(--text-muted)'}}>{res.modelName}</span>
-                  </td>
-                  <td style={{fontWeight: 600, color: 'white'}}>{formatIDR(res.nextQ.forecast)}</td>
-                  <td>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                      <span style={{color: 'var(--text-dim)', fontSize: '0.85rem'}}>Rp</span>
-                      <input type="number" className="form-input" style={{width: '90px', textAlign: 'right', padding: '0.4rem'}} 
-                             value={targets[res.m] !== undefined ? targets[res.m] : ''} 
-                             onChange={(e) => setTargets(prev => ({...prev, [res.m]: e.target.value}))} step="0.1" />
-                      <span style={{color: 'var(--text-dim)', fontSize: '0.85rem'}}>T</span>
-                    </div>
-                  </td>
-                  <td style={{color: res.gap >= 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 'bold', fontSize: '1.1rem'}}>
-                    {res.gap > 0 ? '+' : ''}{res.gap.toFixed(2)}%
+                  <td><strong>{res.m}</strong></td>
+                  <td>{res.modelName}</td>
+                  <td>{formatIDR(res.nextQ.forecast)}</td>
+                  <td>{formatIDR(res.t)}</td>
+                  <td style={{color: res.gap >= 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 'bold'}}>
+                    {res.gap > 0 ? '+' : ''}{res.gap.toFixed(1)}%
                   </td>
                   <td>
                     <span className="badge" style={{backgroundColor: res.statusColor, color: '#fff', padding: '0.4rem 0.8rem'}}>
@@ -693,9 +722,6 @@ function Section4({ data }) {
                   </td>
                 </tr>
               ))}
-              {targetResults.length === 0 && (
-                <tr><td colSpan="5" style={{textAlign: 'center'}}>Pilih minimal satu metrik di atas untuk mensimulasikan target.</td></tr>
-              )}
             </tbody>
           </table>
         </div>
@@ -732,7 +758,6 @@ function Section5({ data }) {
         content="Pertumbuhan kuartal ke kuartal (QoQ Growth) diproyeksikan akan mengalami akselerasi minor pada akhir tahun, mengindikasikan momentum penjualan enterprise berjalan sesuai track." 
       />
       <div className="glass-card">
-        <div className="card-title"><BarChart2 size={18}/> Revenue Growth Projection (Kuartal ke Kuartal)</div>
         <div style={{ width: '100%', height: 450 }}>
           <ResponsiveContainer>
             <ComposedChart data={growthData}>
@@ -742,9 +767,9 @@ function Section5({ data }) {
               <YAxis yAxisId="right" orientation="right" stroke="var(--accent-purple)" tickFormatter={val => `${val}%`} />
               <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)'}} />
               <Legend verticalAlign="top" height={36}/>
-              <Bar yAxisId="left" dataKey="Revenue" fill="var(--accent-blue)" opacity={0.9} radius={[6, 6, 0, 0]} />
-              <Bar yAxisId="left" dataKey="ForecastRev" fill="var(--warning)" opacity={0.9} name="AI Proyeksi Revenue" radius={[6, 6, 0, 0]} />
-              <Line yAxisId="right" type="monotone" dataKey="Growth" stroke="#c084fc" strokeWidth={3} dot={{r: 4, fill: '#c084fc'}} name="QoQ Growth (%)" />
+              <Bar yAxisId="left" dataKey="Revenue" fill="#64ffda" opacity={0.7} radius={[4, 4, 0, 0]} />
+              <Bar yAxisId="left" dataKey="ForecastRev" fill="#ffd166" opacity={0.7} name="Forecast Revenue" radius={[4, 4, 0, 0]} />
+              <Line yAxisId="right" type="monotone" dataKey="Growth" stroke="#a78bfa" strokeWidth={2} dot={{r: 5}} name="QoQ Growth %" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
@@ -754,62 +779,77 @@ function Section5({ data }) {
 }
 
 function Section6({ data }) {
-  const [filterSeverity, setFilterSeverity] = useState('ALL');
+  const [filterSeverity, setFilterSeverity] = useState(['CRITICAL', 'WARNING']);
   const anomalies = data.anomalies || [];
+
+  const handleToggleFilter = (sev) => {
+    if (filterSeverity.includes(sev)) {
+      setFilterSeverity(filterSeverity.filter(x => x !== sev));
+    } else {
+      setFilterSeverity([...filterSeverity, sev]);
+    }
+  };
   
-  // Transform anomalies for the bubble chart
-  const scatterData = anomalies.map(a => {
-    // Generate a pseudo size value for visual representation based on severity
-    let sizeVal = 50;
-    if (a.severity === 'CRITICAL') sizeVal = 300;
-    if (a.severity === 'WARNING') sizeVal = 150;
-    
+  const filteredAnomalies = anomalies.filter(a => filterSeverity.includes(a.severity));
+
+  // Transform anomalies for the bubble chart (Timeline Anomali like Streamlit)
+  // X = period, Y = metric_name, Size = value.abs()
+  const scatterData = filteredAnomalies.map(a => {
+    const absVal = Math.abs(a.value);
+    const sizeVal = absVal < 1 ? 1 : absVal; // clip lower=1
     return {
       period: a.period,
-      metric: (a.metric_id || a.metric_name || '').toUpperCase(),
+      metric: a.metric_name || a.metric_id,
       severity: a.severity,
       description: a.description,
-      sizeVal: sizeVal,
-      fill: a.severity === 'CRITICAL' ? '#ef4444' : a.severity === 'WARNING' ? '#f59e0b' : '#0ea5e9'
+      sizeVal: sizeVal, // Maps to Z-Axis in Scatter
+      fill: a.severity === 'CRITICAL' ? '#ff6b6b' : a.severity === 'WARNING' ? '#ffd166' : '#64ffda'
     };
   });
-
-  const filteredAnomalies = filterSeverity === 'ALL' 
-    ? anomalies 
-    : anomalies.filter(a => a.severity === filterSeverity);
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
       <AutoInsight 
         title="Manajemen Risiko & Fraud" 
-        content={`Terdapat ${anomalies.length} anomali historis yang terdeteksi. Visualisasi ukuran (bubble) mengindikasikan tingkat keparahan pada setiap metrik, mirip dengan UI Streamlit awal.`} 
+        content={`Terdapat ${anomalies.length} anomali historis. Visualisasi di bawah kini sama persis dengan 'Timeline Anomali' di Streamlit, di mana ukuran bubble berdasarkan absolute value.`} 
       />
 
       <div className="kpi-grid" style={{gridTemplateColumns: 'repeat(3, 1fr)'}}>
-        <div className="glass-card" style={{borderLeft: '4px solid var(--danger)', marginBottom: 0}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Critical Alerts</h3>
-          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--danger)'}}>{anomalies.filter(a => a.severity === 'CRITICAL').length}</p>
+        <div className="glass-card" style={{marginBottom: 0, textAlign: 'center'}}>
+          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>CRITICAL</h3>
+          <p style={{fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)'}}>{anomalies.filter(a => a.severity === 'CRITICAL').length}</p>
         </div>
-        <div className="glass-card" style={{borderLeft: '4px solid var(--warning)', marginBottom: 0}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Warning Alerts</h3>
-          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--warning)'}}>{anomalies.filter(a => a.severity === 'WARNING').length}</p>
+        <div className="glass-card" style={{marginBottom: 0, textAlign: 'center'}}>
+          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>WARNING</h3>
+          <p style={{fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)'}}>{anomalies.filter(a => a.severity === 'WARNING').length}</p>
         </div>
-        <div className="glass-card" style={{borderLeft: '4px solid var(--info)', marginBottom: 0}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Info / Deviations</h3>
-          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--info)'}}>{anomalies.filter(a => a.severity === 'INFO').length}</p>
+        <div className="glass-card" style={{marginBottom: 0, textAlign: 'center'}}>
+          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>INFO</h3>
+          <p style={{fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)'}}>{anomalies.filter(a => a.severity === 'INFO').length}</p>
         </div>
       </div>
 
       <div className="glass-card">
-        <div className="card-title"><Activity size={18}/> Anomaly Scatter Matrix (Metric vs Period)</div>
-        <p style={{fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.5rem'}}>Sumbu Y merepresentasikan Metrik, dan Ukuran titik merepresentasikan tingkat keparahan anomali.</p>
-        <div style={{ width: '100%', height: 350 }}>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem'}}>
+          <div className="card-title" style={{marginBottom: 0}}>Timeline Anomali</div>
+          <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
+            <span style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Filter Severity</span>
+            <MultiSelectDropdown 
+              options={['CRITICAL', 'WARNING', 'INFO']} 
+              selected={filterSeverity} 
+              onChange={setFilterSeverity} 
+              placeholder="Pilih severity..." 
+            />
+          </div>
+        </div>
+        
+        <div style={{ width: '100%', height: 400 }}>
           <ResponsiveContainer>
-            <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 20 }}>
+            <ScatterChart margin={{ top: 20, right: 30, bottom: 20, left: 100 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" />
               <XAxis dataKey="period" type="category" name="Period" stroke="var(--text-muted)" />
-              <YAxis dataKey="metric" type="category" name="Metric" stroke="var(--text-muted)" width={80} />
-              <ZAxis dataKey="sizeVal" range={[50, 400]} name="Severity Value" />
+              <YAxis dataKey="metric" type="category" name="Metric" stroke="var(--text-muted)" />
+              <ZAxis dataKey="sizeVal" range={[50, 600]} name="Value (Abs)" />
               <RechartsTooltip cursor={{strokeDasharray: '3 3'}} content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
@@ -834,42 +874,40 @@ function Section6({ data }) {
       </div>
 
       <div className="glass-card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
-          <div className="card-title" style={{marginBottom: 0}}><ShieldAlert size={18} color="var(--danger)"/> Anomaly Log</div>
-          <div className="radio-group">
-            <div className={`radio-label ${filterSeverity === 'ALL' ? 'active' : ''}`} onClick={() => setFilterSeverity('ALL')}>All</div>
-            <div className={`radio-label ${filterSeverity === 'CRITICAL' ? 'active' : ''}`} onClick={() => setFilterSeverity('CRITICAL')}>Critical</div>
-            <div className={`radio-label ${filterSeverity === 'WARNING' ? 'active' : ''}`} onClick={() => setFilterSeverity('WARNING')}>Warning</div>
-          </div>
-        </div>
-        
         <div className="data-table-container">
           <table className="data-table">
             <thead>
               <tr>
-                <th>Periode</th>
+                <th>Tahun</th>
+                <th>Kuartal</th>
                 <th>Metrik Keuangan</th>
-                <th>Jenis Penyimpangan</th>
                 <th>Tingkat Keparahan</th>
+                <th>Tipe</th>
                 <th>Deskripsi Diagnostik</th>
               </tr>
             </thead>
             <tbody>
-              {filteredAnomalies.map((a, i) => (
-                <tr key={i}>
-                  <td>{a.period}</td>
-                  <td><strong>{a.metric_id?.toUpperCase() || a.metric_name}</strong></td>
-                  <td>{a.type}</td>
-                  <td>
-                    <span className={`badge ${a.severity === 'CRITICAL' ? 'badge-critical' : a.severity === 'WARNING' ? 'badge-warning' : 'badge-info'}`}>
-                      {a.severity}
-                    </span>
-                  </td>
-                  <td style={{fontSize: '0.8rem', lineHeight: 1.4}}>{a.description}</td>
-                </tr>
-              ))}
+              {filteredAnomalies.map((a, i) => {
+                const parts = a.period.split(' ');
+                const q = parts[0].replace('Q', '');
+                const y = parts[1];
+                return (
+                  <tr key={i}>
+                    <td>{y}</td>
+                    <td>{q}</td>
+                    <td>{a.metric_name || a.metric_id}</td>
+                    <td>
+                      <span style={{color: a.severity === 'CRITICAL' ? '#ff6b6b' : a.severity === 'WARNING' ? '#ffd166' : '#64ffda', fontWeight: 'bold'}}>
+                        {a.severity}
+                      </span>
+                    </td>
+                    <td>{a.type}</td>
+                    <td style={{fontSize: '0.8rem', lineHeight: 1.4}}>{a.description}</td>
+                  </tr>
+                );
+              })}
               {filteredAnomalies.length === 0 && (
-                <tr><td colSpan="5" style={{textAlign: 'center'}}>Tidak ada anomali untuk filter ini.</td></tr>
+                <tr><td colSpan="6" style={{textAlign: 'center'}}>Tidak ada anomali untuk filter ini.</td></tr>
               )}
             </tbody>
           </table>
@@ -882,15 +920,8 @@ function Section6({ data }) {
 function Section7({ data }) {
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-      <AutoInsight 
-        title="Evaluasi Algoritma" 
-        content="Dashboard ini tidak asal tebak. Model dievaluasi menggunakan metode 'Walk-Forward Backtest' secara ketat (RMSE dan MAPE) membuktikan akurasi tertinggi untuk penggunaan di tataran Enterprise." 
-      />
       <div className="glass-card">
-        <div className="card-title">Backtest Result (MAPE & RMSE)</div>
-        <p style={{fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.5rem'}}>
-          Tabel di bawah memperlihatkan seluruh model yang diuji coba secara sistematis pada time-series historis.
-        </p>
+        <div className="card-title">Evaluasi Model (Walk-Forward Backtest)</div>
         <div className="data-table-container">
           <table className="data-table">
             <thead>
@@ -906,7 +937,7 @@ function Section7({ data }) {
                 <tr key={i}>
                   <td><strong>{e.metric_id.toUpperCase()}</strong></td>
                   <td>{e.model}</td>
-                  <td style={{color: e.MAPE < 5 ? 'var(--success)' : 'white'}}>{e.MAPE !== undefined ? e.MAPE.toFixed(2) : 'N/A'}%</td>
+                  <td>{e.MAPE !== undefined ? e.MAPE.toFixed(2) : 'N/A'}</td>
                   <td>{e.RMSE !== undefined ? e.RMSE.toFixed(2) : 'N/A'}</td>
                 </tr>
               ))}
@@ -914,46 +945,63 @@ function Section7({ data }) {
           </table>
         </div>
       </div>
-      <div className="split-grid">
-        <div className="glass-card" style={{marginBottom: 0}}>
-          <div className="card-title">Seleksi Model Terbaik</div>
-          <div className="data-table-container">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Metrik</th>
-                  <th>Model Final</th>
-                  <th>Akurasi Error (%)</th>
+      
+      <div className="glass-card">
+        <div className="card-title">Model Terbaik per Metrik (MAPE Terendah):</div>
+        <div className="data-table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Metrik</th>
+                <th>Model Final</th>
+                <th>MAPE (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.best_models.map((b, i) => (
+                <tr key={i}>
+                  <td><strong>{b.metric_id.toUpperCase()}</strong></td>
+                  <td style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>{b.best_model}</td>
+                  <td>{b.best_MAPE !== undefined ? b.best_MAPE.toFixed(2) : 'N/A'}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {data.best_models.map((b, i) => (
-                  <tr key={i}>
-                    <td><strong>{b.metric_id.toUpperCase()}</strong></td>
-                    <td style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>{b.best_model}</td>
-                    <td>{b.best_MAPE !== undefined ? b.best_MAPE.toFixed(2) : 'N/A'}%</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div className="glass-card" style={{marginBottom: 0}}>
-          <div className="card-title"><AlertOctagon size={18}/> Limitasi & Disclaimer B2B</div>
-          <div className="alert-box warning">
-            <div>
-              <div className="alert-title">Dataset Keuangan Terbatas (Short Time-Series)</div>
-              <div className="alert-desc">
-                Data internal B2B umumnya memiliki jumlah observasi kuartal yang terbatas. Oleh karenanya, metode klasik (Holt-Winters/ARIMA) seringkali lebih tangguh dan tidak mudah overfit dibanding Deep Learning murni.
-              </div>
+      </div>
+
+      <div className="glass-card">
+        <div className="card-title">Batasan Sistem</div>
+        <div className="alert-box" style={{borderLeft: '4px solid #64ffda', background: 'rgba(26,26,46,0.8)'}}>
+          <div>
+            <div className="alert-title">Batasan Usecase (WAJIB DIPATUHI):</div>
+            <div className="alert-desc">
+              Sistem ini <strong>HANYA</strong> mencakup analisis performa keuangan internal perusahaan.<br/><br/>
+              <strong>DILARANG:</strong> Prediksi harga saham, analisis market sentiment, prediksi IHSG/kapitalisasi pasar, rekomendasi trading (buy/sell/hold), analisis perilaku investor.
             </div>
           </div>
-          <div className="alert-box info">
-            <div>
-              <div className="alert-title">Pembatasan Usecase FPIS</div>
-              <div className="alert-desc">
-                Sistem dashboard prediktif ini ditujukan hanya untuk keperluan FP&A internal perusahaan dan perumusan target manajerial. Dilarang menggunakannya untuk analisa pergerakan harga saham eksternal.
-              </div>
+        </div>
+        
+        <div className="alert-box" style={{borderLeft: '4px solid #ffd166', background: 'rgba(26,26,46,0.8)'}}>
+          <div>
+            <div className="alert-title">Limitasi Data:</div>
+            <div className="alert-desc">
+              • Short time-series: hanya 20 kuartal (2021 Q2 – 2026 Q1)<br/>
+              • Tidak ada segmentasi regional / produk / customer<br/>
+              • Tidak ada data budget / realisasi (target menggunakan input manual)<br/>
+              • Data konsolidasi entity-level saja
+            </div>
+          </div>
+        </div>
+        
+        <div className="alert-box" style={{borderLeft: '4px solid #64ffda', background: 'rgba(26,26,46,0.8)'}}>
+          <div>
+            <div className="alert-title">Catatan Model:</div>
+            <div className="alert-desc">
+              • 20 kuartal tergolong short series — model kompleks (LSTM) WAJIB dibandingkan head-to-head dengan baseline sederhana lewat walk-forward backtest<br/>
+              • Jika LSTM kalah dari baseline, baseline menjadi model default<br/>
+              • Prediction interval mencerminkan uncertainty yang jujur dari short series<br/>
+              • Semua data traceable ke CSV sumber — TIDAK ADA fabrikasi data
             </div>
           </div>
         </div>
