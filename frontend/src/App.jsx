@@ -254,7 +254,7 @@ export default function App() {
         </div>
         
         <div className="sidebar-menu">
-          <div className="sidebar-section-title">Navigasi Enterprise</div>
+
           <div className={`menu-item ${activeMenu === '1' ? 'active' : ''}`} onClick={() => setActiveMenu('1')}>
             <LayoutDashboard size={18} /><span>1. Executive Summary</span>
           </div>
