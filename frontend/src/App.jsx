@@ -512,10 +512,8 @@ function Section2({ data }) {
 }
 
 function Section3({ data }) {
-  // Filter available metrics to ensure they exist in both forecast and historical
-  const availableMetrics = [...new Set(data.forecast.map(d => d.metric_id))]
-    .filter(m => data.historical.some(h => h.metric_id === m))
-    .sort();
+  // Replicating Streamlit Forecast logic exactly
+  const availableMetrics = [...new Set(data.forecast.map(d => d.metric_id))].sort();
   const [metric, setMetric] = useState(availableMetrics[0] || 'revenue');
   
   const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))].sort();
@@ -781,22 +779,16 @@ function Section5({ data }) {
 }
 
 function Section6({ data }) {
-  const [filterSeverity, setFilterSeverity] = useState(['CRITICAL', 'WARNING']);
+  const [filterSeverity, setFilterSeverity] = useState('ALL');
   const anomalies = data.anomalies || [];
 
-  const handleToggleFilter = (sev) => {
-    if (filterSeverity.includes(sev)) {
-      setFilterSeverity(filterSeverity.filter(x => x !== sev));
-    } else {
-      setFilterSeverity([...filterSeverity, sev]);
-    }
-  };
-  
-  const filteredAnomalies = anomalies.filter(a => filterSeverity.includes(a.severity));
+  const filteredAnomalies = filterSeverity === 'ALL' 
+    ? anomalies 
+    : anomalies.filter(a => a.severity === filterSeverity);
 
   // Transform anomalies for the bubble chart (Timeline Anomali like Streamlit)
   // X = period, Y = metric_name, Size = value.abs()
-  const scatterData = filteredAnomalies.map(a => {
+  const scatterData = anomalies.map(a => {
     const absVal = Math.abs(a.value);
     const sizeVal = absVal < 1 ? 1 : absVal; // clip lower=1
     return {
@@ -832,18 +824,7 @@ function Section6({ data }) {
       </div>
 
       <div className="glass-card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem'}}>
-          <div className="card-title" style={{marginBottom: 0}}>Timeline Anomali</div>
-          <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
-            <span style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Filter Severity</span>
-            <MultiSelectDropdown 
-              options={['CRITICAL', 'WARNING', 'INFO']} 
-              selected={filterSeverity} 
-              onChange={setFilterSeverity} 
-              placeholder="Pilih severity..." 
-            />
-          </div>
-        </div>
+        <div className="card-title" style={{marginBottom: '1.5rem'}}>Timeline Anomali</div>
         
         <div style={{ width: '100%', height: 400 }}>
           <ResponsiveContainer>
@@ -876,6 +857,15 @@ function Section6({ data }) {
       </div>
 
       <div className="glass-card">
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
+          <div className="card-title" style={{marginBottom: 0}}>Detail Anomali</div>
+          <div className="radio-group" style={{margin: 0}}>
+            <div className={`radio-label ${filterSeverity === 'ALL' ? 'active' : ''}`} onClick={() => setFilterSeverity('ALL')}>Semua</div>
+            <div className={`radio-label ${filterSeverity === 'CRITICAL' ? 'active' : ''}`} onClick={() => setFilterSeverity('CRITICAL')}>Critical</div>
+            <div className={`radio-label ${filterSeverity === 'WARNING' ? 'active' : ''}`} onClick={() => setFilterSeverity('WARNING')}>Warning</div>
+            <div className={`radio-label ${filterSeverity === 'INFO' ? 'active' : ''}`} onClick={() => setFilterSeverity('INFO')}>Info</div>
+          </div>
+        </div>
         <div className="data-table-container">
           <table className="data-table">
             <thead>
