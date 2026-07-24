@@ -706,3 +706,30 @@ h1, h2, h3, h4, h5, h6 {
   0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
   40% { transform: scale(1); opacity: 1; }
 }
+
+/* Markdown Styling for Chat */
+.chat-bubble p {
+  margin: 0 0 0.5rem 0;
+}
+.chat-bubble p:last-child {
+  margin-bottom: 0;
+}
+.chat-bubble ul, .chat-bubble ol {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+.chat-bubble li {
+  margin-bottom: 0.25rem;
+}
+.chat-bubble h1, .chat-bubble h2, .chat-bubble h3, .chat-bubble h4 {
+  margin: 0.75rem 0 0.5rem 0;
+  font-size: 1.05rem;
+}
+.chat-bubble hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0.75rem 0;
+}
+.chat-msg.user .chat-bubble hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}

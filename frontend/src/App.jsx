@@ -9,6 +9,7 @@ import {
   LineChart as LineChartIcon, Sliders, AlertOctagon, Zap, ChevronDown
 } from 'lucide-react';
 import './index.css';
+import ReactMarkdown from 'react-markdown';
 
 const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#0ea5e9', '#ec4899', '#14b8a6', '#84cc16'];
 
@@ -184,7 +185,9 @@ function AIChatbot() {
           <div className="chatbot-messages">
             {messages.map((m, i) => (
               <div key={i} className={`chat-msg ${m.role}`}>
-                <div className="chat-bubble">{m.text}</div>
+                <div className="chat-bubble">
+                  <ReactMarkdown>{m.text}</ReactMarkdown>
+                </div>
               </div>
             ))}
             {isLoading && (
