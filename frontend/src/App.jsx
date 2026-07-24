@@ -162,7 +162,7 @@ function AIChatbot() {
       const data = await res.json();
       
       if (!res.ok) {
-        throw new Error(data.error || 'Gagal merespons');
+        throw new Error(data.details || data.error || 'Gagal merespons');
       }
 
       setMessages(prev => [...prev, { role: 'bot', text: data.response }]);
