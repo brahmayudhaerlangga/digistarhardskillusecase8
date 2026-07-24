@@ -28,10 +28,15 @@ export default async function handler(req, res) {
     const genAI = new GoogleGenerativeAI(apiKey);
 
     // Map messages to standard Gemini format
-    const formattedMessages = messages.map(m => ({
+    let formattedMessages = messages.map(m => ({
       role: m.role === 'bot' ? 'model' : 'user',
       parts: [{ text: m.text }]
     }));
+
+    // Gemini API STRICTLY requires the first message in the history to be from the 'user'
+    if (formattedMessages.length > 0 && formattedMessages[0].role === 'model') {
+      formattedMessages.shift(); // Remove the first message if it's from the model
+    }
 
     // Use gemini-1.5-flash (most stable and widely available free model)
     const model = genAI.getGenerativeModel({
