@@ -187,6 +187,13 @@ function AIChatbot() {
                 <div className="chat-bubble">{m.text}</div>
               </div>
             ))}
+            {isLoading && (
+              <div className="chat-msg bot">
+                <div className="chat-bubble typing-indicator">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
           <div className="chatbot-input">
