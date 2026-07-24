@@ -28,14 +28,12 @@ export default async function handler(req) {
       parts: [{ text: m.text }]
     }));
 
-    // Start a chat session using gemini-2.5-flash
-    const response = await ai.chats.sendMessage({
+    // Use models.generateContent for a stateless multi-turn conversation
+    const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: formattedMessages,
       config: {
-        systemInstruction: {
-          parts: [{ text: SYSTEM_PROMPT }]
-        }
+        systemInstruction: SYSTEM_PROMPT
       }
     });
 
