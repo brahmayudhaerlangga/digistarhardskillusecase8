@@ -1,11 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 
-export const config = {
-  runtime: 'edge', // Using Edge runtime for faster response (Vercel standard)
-};
-
-// Initialize SDK. It automatically picks up GEMINI_API_KEY from process.env
-const ai = new GoogleGenAI({});
+// Initialize SDK explicitly using the environment variable
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const SYSTEM_PROMPT = `Anda adalah "AI Financial Assistant FPIS" (Financial Performance & Insight System) untuk eksekutif Telkom.
 Tugas Anda:
