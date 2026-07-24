@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { messages } = req.body;
+    const { messages, contextData } = req.body;
 
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Format pesan tidak valid.' });
@@ -38,10 +38,16 @@ export default async function handler(req, res) {
       formattedMessages.shift(); // Remove the first message if it's from the model
     }
 
+    // Append dashboard context to the system prompt if available
+    let finalSystemPrompt = SYSTEM_PROMPT;
+    if (contextData) {
+      finalSystemPrompt += `\n\n--- KONTEKS DATA DASBOR TERKINI ---\n${contextData}\nGunakan data di atas sebagai referensi jika pengguna bertanya tentang nilai pendapatan, laba, anomali, dll saat ini.`;
+    }
+
     // User requested gemini-flash-latest
     const model = genAI.getGenerativeModel({
       model: 'gemini-flash-latest',
-      systemInstruction: SYSTEM_PROMPT,
+      systemInstruction: finalSystemPrompt,
     });
 
     const result = await model.generateContent({ contents: formattedMessages });

@@ -124,7 +124,7 @@ function MultiSelectDropdown({ options, selected, onChange, placeholder }) {
   );
 }
 
-function AIChatbot() {
+function AIChatbot({ data }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'bot', text: 'Halo! Saya AI Financial Assistant FPIS. Ada insight yang ingin Anda ketahui terkait prediksi performa, anomali, atau pencapaian target?' }
@@ -152,12 +152,27 @@ function AIChatbot() {
     setIsLoading(true);
 
     try {
+      // Create a summary of the dashboard data to give the AI context without overloading the payload
+      let dashboard_summary = "Data tidak tersedia.";
+      if (data && data.historical) {
+        const getLatest = (metric) => {
+          const hist = data.historical.filter(d => d.metric_id === metric);
+          return hist.length > 0 ? hist[hist.length - 1] : null;
+        };
+        dashboard_summary = JSON.stringify({
+          latest_revenue: getLatest('revenue'),
+          latest_ebitda: getLatest('ebitda'),
+          latest_netinc: getLatest('netinc'),
+          total_anomalies: data.anomalies ? data.anomalies.length : 0
+        });
+      }
+
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ messages: newMessages })
+        body: JSON.stringify({ messages: newMessages, contextData: dashboard_summary })
       });
 
       const data = await res.json();
@@ -334,7 +349,7 @@ export default function App() {
         </div>
       </main>
 
-      <AIChatbot />
+      <AIChatbot data={data} />
     </div>
   );
 }
