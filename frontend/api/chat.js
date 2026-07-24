@@ -38,9 +38,9 @@ export default async function handler(req, res) {
       formattedMessages.shift(); // Remove the first message if it's from the model
     }
 
-    // User requested gemini-flash-latest (as verified from their available models)
+    // User requested gemini-pro-latest (as verified from their available models)
     const model = genAI.getGenerativeModel({
-      model: 'gemini-flash-latest',
+      model: 'gemini-pro-latest',
       systemInstruction: SYSTEM_PROMPT,
     });
 
