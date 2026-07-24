@@ -167,7 +167,7 @@ function AIChatbot() {
 
       setMessages(prev => [...prev, { role: 'bot', text: data.response }]);
     } catch (err) {
-      setMessages(prev => [...prev, { role: 'bot', text: 'Maaf, terjadi kesalahan saat menghubungi server AI. Pastikan API Key Gemini Anda telah dikonfigurasi di Vercel.' }]);
+      setMessages(prev => [...prev, { role: 'bot', text: `ERROR: ${err.message}` }]);
     } finally {
       setIsLoading(false);
     }
