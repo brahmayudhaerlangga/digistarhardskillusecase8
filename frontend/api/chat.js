@@ -38,14 +38,10 @@ export default async function handler(req, res) {
       formattedMessages.shift(); // Remove the first message if it's from the model
     }
 
-    // Prepend the system prompt to the very first user message to guarantee compatibility with Gemini 1.0 Pro
-    if (formattedMessages.length > 0 && formattedMessages[0].role === 'user') {
-      formattedMessages[0].parts[0].text = SYSTEM_PROMPT + '\n\n' + formattedMessages[0].parts[0].text;
-    }
-
-    // Fallback to gemini-pro which is universally available on all API keys
+    // User requested gemini-1.5-flash-latest
     const model = genAI.getGenerativeModel({
-      model: 'gemini-pro',
+      model: 'gemini-1.5-flash-latest',
+      systemInstruction: SYSTEM_PROMPT,
     });
 
     const result = await model.generateContent({ contents: formattedMessages });
