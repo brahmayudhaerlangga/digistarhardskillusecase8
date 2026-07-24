@@ -175,13 +175,13 @@ function AIChatbot({ data }) {
         body: JSON.stringify({ messages: newMessages, contextData: dashboard_summary })
       });
 
-      const data = await res.json();
+      const responseData = await res.json();
       
       if (!res.ok) {
-        throw new Error(data.details || data.error || 'Gagal merespons');
+        throw new Error(responseData.details || responseData.error || 'Gagal merespons');
       }
 
-      setMessages(prev => [...prev, { role: 'bot', text: data.response }]);
+      setMessages(prev => [...prev, { role: 'bot', text: responseData.response }]);
     } catch (err) {
       setMessages(prev => [...prev, { role: 'bot', text: `ERROR: ${err.message}` }]);
     } finally {
