@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { 
+import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer,
   BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, ComposedChart, ScatterChart, Scatter, ZAxis
 } from 'recharts';
-import { 
-  TrendingUp, TrendingDown, Activity, Target, LayoutDashboard, Database, 
-  ShieldAlert, Info, BarChart2, MessageSquare, X, Send, Bot, 
+import {
+  TrendingUp, TrendingDown, Activity, Target, LayoutDashboard, Database,
+  ShieldAlert, Info, BarChart2, MessageSquare, X, Send, Bot,
   LineChart as LineChartIcon, Sliders, AlertOctagon, Zap, ChevronDown
 } from 'lucide-react';
 import './index.css';
@@ -63,7 +63,7 @@ function MultiSelectDropdown({ options, selected, onChange, placeholder }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-  
+
   const toggle = (val) => {
     if (selected.includes(val)) {
       if (selected.length > 1) onChange(selected.filter(x => x !== val));
@@ -74,7 +74,7 @@ function MultiSelectDropdown({ options, selected, onChange, placeholder }) {
 
   return (
     <div ref={containerRef} style={{ position: 'relative', width: '350px' }}>
-      <div 
+      <div
         onClick={() => setOpen(!open)}
         style={{
           background: 'var(--bg-main)', border: '1px solid var(--border-glass)',
@@ -82,7 +82,7 @@ function MultiSelectDropdown({ options, selected, onChange, placeholder }) {
           display: 'flex', justifyContent: 'space-between', alignItems: 'center'
         }}
       >
-        <span style={{color: selected.length ? 'white' : 'var(--text-muted)', fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>
+        <span style={{ color: selected.length ? 'white' : 'var(--text-muted)', fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
           {selected.length > 0 ? selected.map(s => s.toUpperCase()).join(', ') : placeholder}
         </span>
         <ChevronDown size={16} color="var(--text-muted)" />
@@ -96,7 +96,7 @@ function MultiSelectDropdown({ options, selected, onChange, placeholder }) {
           backdropFilter: 'blur(20px)'
         }}>
           {options.map(opt => (
-            <div 
+            <div
               key={opt}
               onClick={() => toggle(opt)}
               style={{
@@ -108,11 +108,11 @@ function MultiSelectDropdown({ options, selected, onChange, placeholder }) {
               }}
             >
               <div style={{
-                width: '18px', height: '18px', border: '1px solid var(--accent-blue)', 
+                width: '18px', height: '18px', border: '1px solid var(--accent-blue)',
                 borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 background: selected.includes(opt) ? 'var(--accent-blue)' : 'transparent'
               }}>
-                {selected.includes(opt) && <span style={{color: 'white', fontSize: '12px'}}>✓</span>}
+                {selected.includes(opt) && <span style={{ color: 'white', fontSize: '12px' }}>✓</span>}
               </div>
               {opt.toUpperCase()}
             </div>
@@ -165,11 +165,11 @@ function AIChatbot() {
 
   return (
     <div className="chatbot-widget">
-      {isOpen && (
+      {isOpen ? (
         <div className="chatbot-window">
           <div className="chatbot-header">
             <h3><Bot size={18} /> AI Assistant</h3>
-            <button className="chatbot-close" onClick={() => setIsOpen(false)}><X size={18}/></button>
+            <button className="chatbot-close" onClick={() => setIsOpen(false)}><X size={18} /></button>
           </div>
           <div className="chatbot-messages">
             {messages.map((m, i) => (
@@ -180,20 +180,21 @@ function AIChatbot() {
             <div ref={messagesEndRef} />
           </div>
           <div className="chatbot-input">
-            <input 
-              type="text" 
-              placeholder="Tanyakan analisis finansial..." 
-              value={input} 
+            <input
+              type="text"
+              placeholder="Tanyakan analisis finansial..."
+              value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleSend()}
             />
-            <button onClick={handleSend}><Send size={16}/></button>
+            <button onClick={handleSend}><Send size={16} /></button>
           </div>
         </div>
+      ) : (
+        <button className="chatbot-fab pulse" onClick={() => setIsOpen(true)}>
+          <MessageSquare size={24} />
+        </button>
       )}
-      <button className={`chatbot-fab ${!isOpen ? 'pulse' : ''}`} onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <X size={24}/> : <MessageSquare size={24}/>}
-      </button>
     </div>
   );
 }
@@ -240,7 +241,7 @@ export default function App() {
       });
   }, []);
 
-  if (loading) return <div className="dashboard-container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}><h2>Loading AI Pipeline Data...</h2></div>;
+  if (loading) return <div className="dashboard-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}><h2>Loading AI Pipeline Data...</h2></div>;
   if (error) return <div className="dashboard-container"><h2>Error: {error}</h2></div>;
   if (!data) return null;
 
@@ -252,7 +253,7 @@ export default function App() {
           <h2>FPIS</h2>
           <p>Financial Performance Intelligence System</p>
         </div>
-        
+
         <div className="sidebar-menu">
 
           <div className={`menu-item ${activeMenu === '1' ? 'active' : ''}`} onClick={() => setActiveMenu('1')}>
@@ -277,9 +278,9 @@ export default function App() {
             <Database size={18} /><span>7. Model Limitations</span>
           </div>
         </div>
-        <div style={{marginTop: 'auto', borderTop: '1px solid var(--border-glass)', paddingTop: '1rem'}}>
-          <p style={{fontSize: '0.75rem', color: 'var(--text-muted)'}}>Digistar Intern 2026</p>
-          <p style={{fontSize: '0.75rem', color: 'var(--accent-blue)', fontWeight: 600}}>Usecase 8 — AI Team</p>
+        <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border-glass)', paddingTop: '1rem' }}>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Digistar Intern 2026</p>
+          <p style={{ fontSize: '0.75rem', color: 'var(--accent-blue)', fontWeight: 600 }}>Usecase 8 — AI Team</p>
         </div>
       </aside>
 
@@ -328,10 +329,10 @@ function Section1({ data }) {
   ];
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-      <AutoInsight 
-        title="Top-Level Summary" 
-        content="Performa kuartal terakhir menunjukkan ketahanan fundamental yang solid. Mayoritas top-line metrics stabil dengan sedikit tekanan di bottom-line akibat dinamika OPEX. Segmentasi didominasi Digital Connectivity (71%), mempertegas posisi kepemimpinan pasar." 
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <AutoInsight
+        title="Top-Level Summary"
+        content="Performa kuartal terakhir menunjukkan ketahanan fundamental yang solid. Mayoritas top-line metrics stabil dengan sedikit tekanan di bottom-line akibat dinamika OPEX. Segmentasi didominasi Digital Connectivity (71%), mempertegas posisi kepemimpinan pasar."
       />
 
       <div className="kpi-grid">
@@ -343,15 +344,15 @@ function Section1({ data }) {
           const qoq = prev.value_scaled !== 0 ? ((last.value_scaled - prev.value_scaled) / Math.abs(prev.value_scaled)) * 100 : 0;
           const isAnomaly = data.anomalies.some(a => a.metric_id === kpi.id && a.period === last.period && a.severity === 'CRITICAL');
           return (
-            <div className="glass-card" key={kpi.id} style={{marginBottom: 0}}>
+            <div className="glass-card" key={kpi.id} style={{ marginBottom: 0 }}>
               <div className="card-title">
                 {kpi.label}
-                {isAnomaly ? <span className="badge badge-critical" style={{marginLeft: 'auto'}}>ANOMALI</span> 
-                           : <span className="badge badge-healthy" style={{marginLeft: 'auto'}}>SEHAT</span>}
+                {isAnomaly ? <span className="badge badge-critical" style={{ marginLeft: 'auto' }}>ANOMALI</span>
+                  : <span className="badge badge-healthy" style={{ marginLeft: 'auto' }}>SEHAT</span>}
               </div>
               <div className="kpi-value">{formatIDR(last.value_scaled, false)}</div>
               <div className={`kpi-trend ${qoq >= 0 ? 'trend-up' : 'trend-down'}`}>
-                {qoq >= 0 ? <TrendingUp size={16}/> : <TrendingDown size={16}/>}
+                {qoq >= 0 ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
                 {Math.abs(qoq).toFixed(1)}% vs Kuartal Lalu
               </div>
             </div>
@@ -359,16 +360,16 @@ function Section1({ data }) {
         })}
       </div>
 
-      <div className="chart-grid" style={{gridTemplateColumns: '1fr 1fr'}}>
-        <div className="glass-card" style={{marginBottom: 0}}>
+      <div className="chart-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+        <div className="glass-card" style={{ marginBottom: 0 }}>
           <div className="card-title">Regional Share (Simulasi 5 Regional)</div>
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
               <BarChart data={data.regional || []} layout="vertical" margin={{ top: 10, right: 30, left: -10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" horizontal={true} vertical={false} />
                 <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" width={180} tick={{fontSize: 12, fill: '#94a3b8'}} />
-                <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)'}} cursor={{fill: 'rgba(255,255,255,0.05)'}} formatter={(val) => formatIDR(val)} />
+                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" width={180} tick={{ fontSize: 12, fill: '#94a3b8' }} />
+                <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)' }} cursor={{ fill: 'rgba(255,255,255,0.05)' }} formatter={(val) => formatIDR(val)} />
                 <Bar dataKey="value" fill="var(--accent-blue)" radius={[0, 4, 4, 0]}>
                   {data.regional && data.regional.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -379,7 +380,7 @@ function Section1({ data }) {
           </div>
         </div>
 
-        <div className="glass-card" style={{marginBottom: 0}}>
+        <div className="glass-card" style={{ marginBottom: 0 }}>
           <div className="card-title">Product Mix (3 Digital Domains)</div>
           <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
@@ -399,7 +400,7 @@ function Section1({ data }) {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)'}} formatter={(value, name) => [`${value} Juta Pelanggan`, name]} />
+                <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)' }} formatter={(value, name) => [`${value} Juta Pelanggan`, name]} />
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
@@ -417,7 +418,7 @@ function Section2({ data }) {
 
   // Filter available metrics based on selected category from SEGMENT_MAP
   const availableMetrics = Object.keys(SEGMENT_MAP).filter(m => SEGMENT_MAP[m] === selectedSegment);
-  
+
   useEffect(() => {
     // Set default metrics when category changes (first 3)
     setSelectedMetrics(availableMetrics.slice(0, 3));
@@ -437,7 +438,7 @@ function Section2({ data }) {
       });
     } else {
       const periods = [...new Set(data.historical.map(d => d.period))];
-      const years = [...new Set(periods.map(p => p.split(' ')[0]))]; 
+      const years = [...new Set(periods.map(p => p.split(' ')[0]))];
       processed = years.map(y => {
         let obj = { period: y };
         selectedMetrics.forEach(m => {
@@ -451,45 +452,45 @@ function Section2({ data }) {
   }, [data, selectedMetrics, aggregation]);
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-      <AutoInsight 
-        title="Historical Trend Analysis" 
-        content={`Mode Agregasi ${aggregation} aktif pada kategori ${selectedSegment}. Anda membandingkan ${selectedMetrics.length} metrik secara bersamaan.`} 
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <AutoInsight
+        title="Historical Trend Analysis"
+        content={`Mode Agregasi ${aggregation} aktif pada kategori ${selectedSegment}. Anda membandingkan ${selectedMetrics.length} metrik secara bersamaan.`}
       />
 
       <div className="glass-card">
-        <div style={{display: 'flex', gap: '2rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-end'}}>
-          
-          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Kategori</label>
-            <select 
-              className="form-select" 
-              style={{padding: '0.6rem 1rem', width: '250px'}} 
-              value={selectedSegment} 
+        <div style={{ display: 'flex', gap: '2rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Kategori</label>
+            <select
+              className="form-select"
+              style={{ padding: '0.6rem 1rem', width: '250px' }}
+              value={selectedSegment}
               onChange={(e) => setSelectedSegment(e.target.value)}
             >
               {SEGMENTS.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
 
-          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Tampilan</label>
-            <div className="radio-group" style={{padding: '0.2rem', margin: 0}}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Tampilan</label>
+            <div className="radio-group" style={{ padding: '0.2rem', margin: 0 }}>
               <div className={`radio-label ${aggregation === 'Quarterly' ? 'active' : ''}`} onClick={() => setAggregation('Quarterly')}>Quarterly</div>
               <div className={`radio-label ${aggregation === 'Annual' ? 'active' : ''}`} onClick={() => setAggregation('Annual')}>Annual</div>
             </div>
           </div>
 
-          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Pilih Metrik</label>
-            <MultiSelectDropdown 
-              options={availableMetrics} 
-              selected={selectedMetrics} 
-              onChange={setSelectedMetrics} 
-              placeholder="Pilih metrik..." 
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Pilih Metrik</label>
+            <MultiSelectDropdown
+              options={availableMetrics}
+              selected={selectedMetrics}
+              onChange={setSelectedMetrics}
+              placeholder="Pilih metrik..."
             />
           </div>
-          
+
         </div>
 
         <div style={{ width: '100%', height: 450 }}>
@@ -498,10 +499,10 @@ function Section2({ data }) {
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} />
               <XAxis dataKey="period" stroke="var(--text-muted)" />
               <YAxis stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
-              <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)'}} formatter={(val) => formatIDR(val)} />
-              <Legend verticalAlign="top" height={36}/>
+              <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)' }} formatter={(val) => formatIDR(val)} />
+              <Legend verticalAlign="top" height={36} />
               {selectedMetrics.map((m, i) => (
-                <Line key={m} type="monotone" dataKey={m} stroke={COLORS[i % COLORS.length]} strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />
+                <Line key={m} type="monotone" dataKey={m} stroke={COLORS[i % COLORS.length]} strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
               ))}
             </LineChart>
           </ResponsiveContainer>
@@ -515,10 +516,10 @@ function Section3({ data }) {
   // Replicating Streamlit Forecast logic exactly
   const availableMetrics = [...new Set(data.forecast.map(d => d.metric_id))].sort();
   const [metric, setMetric] = useState(availableMetrics[0] || 'revenue');
-  
+
   const availableModels = [...new Set(data.forecast.filter(d => d.metric_id === metric).map(d => d.model))].sort();
   const [model, setModel] = useState('');
-  
+
   useEffect(() => {
     if (availableModels.length > 0 && !availableModels.includes(model)) setModel(availableModels[0]);
   }, [metric, data]);
@@ -544,33 +545,33 @@ function Section3({ data }) {
   const detailedForecasts = fc.filter(f => f.period !== (hist.length > 0 ? hist[hist.length - 1].period : ''));
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-      <AutoInsight 
-        title={`Proyeksi Model ${model}`} 
-        content={`Menggunakan pendekatan algoritma ${model} untuk memproyeksikan ${metric.toUpperCase()}. Confidence interval memberikan gambaran batas pesimis (lower) dan optimis (upper) dengan tingkat probabilitas 95%.`} 
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <AutoInsight
+        title={`Proyeksi Model ${model}`}
+        content={`Menggunakan pendekatan algoritma ${model} untuk memproyeksikan ${metric.toUpperCase()}. Confidence interval memberikan gambaran batas pesimis (lower) dan optimis (upper) dengan tingkat probabilitas 95%.`}
       />
 
       <div className="glass-card">
-        
-        <div style={{display: 'flex', gap: '2rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-end'}}>
-          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Pilih Metrik</label>
-            <select 
-              className="form-select" 
-              style={{padding: '0.6rem 1rem', width: '250px'}} 
-              value={metric} 
+
+        <div style={{ display: 'flex', gap: '2rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Pilih Metrik</label>
+            <select
+              className="form-select"
+              style={{ padding: '0.6rem 1rem', width: '250px' }}
+              value={metric}
               onChange={(e) => setMetric(e.target.value)}
             >
               {availableMetrics.map(m => <option key={m} value={m}>{m.toUpperCase()}</option>)}
             </select>
           </div>
 
-          <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
-            <label style={{fontSize: '0.85rem', color: 'var(--text-muted)'}}>Pilih Model</label>
-            <select 
-              className="form-select" 
-              style={{padding: '0.6rem 1rem', width: '250px'}} 
-              value={model} 
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Pilih Model</label>
+            <select
+              className="form-select"
+              style={{ padding: '0.6rem 1rem', width: '250px' }}
+              value={model}
               onChange={(e) => setModel(e.target.value)}
             >
               {availableModels.map(m => <option key={m} value={m}>{m}</option>)}
@@ -584,21 +585,21 @@ function Section3({ data }) {
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} />
               <XAxis dataKey="period" stroke="var(--text-muted)" />
               <YAxis stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
-              <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)'}} formatter={(val) => formatIDR(val)} />
-              <Legend verticalAlign="top" height={36}/>
-              
+              <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)' }} formatter={(val) => formatIDR(val)} />
+              <Legend verticalAlign="top" height={36} />
+
               <Area type="monotone" dataKey="U95" fill="rgba(245, 158, 11, 0.15)" stroke="none" name="CI 95%" />
               <Area type="monotone" dataKey="L95" fill="var(--bg-card)" stroke="none" name="Lower 95% CI (Mask)" legendType="none" />
               <Area type="monotone" dataKey="U80" fill="rgba(245, 158, 11, 0.25)" stroke="none" name="CI 80%" />
               <Area type="monotone" dataKey="L80" fill="var(--bg-card)" stroke="none" name="Lower 80% CI (Mask)" legendType="none" />
-              
-              <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={2} dot={{r:4}} />
-              <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={2} strokeDasharray="5 5" dot={{symbol: 'diamond', r: 5}} />
+
+              <Line type="monotone" dataKey="Actual" stroke="#64ffda" strokeWidth={2} dot={{ r: 4 }} />
+              <Line type="monotone" dataKey="Forecast" stroke="#ffd166" strokeWidth={2} strokeDasharray="5 5" dot={{ symbol: 'diamond', r: 5 }} />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
       </div>
-      
+
       {/* Detail Forecast Table */}
       <div className="glass-card">
         <div className="card-title">Detail Forecast:</div>
@@ -617,14 +618,14 @@ function Section3({ data }) {
               {detailedForecasts.map((f, i) => (
                 <tr key={i}>
                   <td><strong>{f.period.split(' ')[1]}</strong></td>
-                  <td><strong>{f.period.split(' ')[0].replace('Q','')}</strong></td>
-                  <td style={{color: '#f59e0b', fontWeight: 'bold'}}>{formatIDR(f.forecast)}</td>
-                  <td style={{color: 'var(--danger)'}}>{formatIDR(f.lower_95)}</td>
-                  <td style={{color: 'var(--success)'}}>{formatIDR(f.upper_95)}</td>
+                  <td><strong>{f.period.split(' ')[0].replace('Q', '')}</strong></td>
+                  <td style={{ color: '#f59e0b', fontWeight: 'bold' }}>{formatIDR(f.forecast)}</td>
+                  <td style={{ color: 'var(--danger)' }}>{formatIDR(f.lower_95)}</td>
+                  <td style={{ color: 'var(--success)' }}>{formatIDR(f.upper_95)}</td>
                 </tr>
               ))}
               {detailedForecasts.length === 0 && (
-                <tr><td colSpan="5" style={{textAlign: 'center'}}>Tidak ada data proyeksi untuk model ini.</td></tr>
+                <tr><td colSpan="5" style={{ textAlign: 'center' }}>Tidak ada data proyeksi untuk model ini.</td></tr>
               )}
             </tbody>
           </table>
@@ -638,7 +639,7 @@ function Section4({ data }) {
   // Target metrics exactly like Streamlit
   const target_metrics = ["revenue", "ebitda", "netinc", "opinc", "fcf"];
   const [targets, setTargets] = useState({});
-  
+
   useEffect(() => {
     const initialTargets = {};
     target_metrics.forEach(m => {
@@ -651,44 +652,44 @@ function Section4({ data }) {
   const targetResults = target_metrics.map(m => {
     const mFc = data.forecast.filter(d => d.metric_id === m);
     if (mFc.length === 0) return null;
-    
+
     // Find best model like Streamlit did
     const bestModelsDf = data.best_models || [];
     const bestModelRow = bestModelsDf.find(b => b.metric_id === m);
     const bestModel = bestModelRow ? bestModelRow.best_model : mFc[0].model;
-    
-    const modelFc = mFc.filter(d => d.model === bestModel); 
-    if(modelFc.length === 0) return null;
-    const nextQ = modelFc[0]; 
+
+    const modelFc = mFc.filter(d => d.model === bestModel);
+    if (modelFc.length === 0) return null;
+    const nextQ = modelFc[0];
     const t = (parseFloat(targets[m]) || 0) * 1000;
     const gap = t !== 0 ? ((nextQ.forecast - t) / Math.abs(t)) * 100 : 0;
-    
+
     let status = "OFF-TRACK"; let statusColor = "var(--danger)";
     if (nextQ.forecast >= t) { status = "ON-TRACK"; statusColor = "var(--success)"; }
     else if (nextQ.upper_95 >= t) { status = "AT-RISK"; statusColor = "var(--warning)"; }
-    
+
     return { m, nextQ, t, gap, status, statusColor, modelName: bestModel };
   }).filter(Boolean);
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-      <AutoInsight 
-        title="Simulasi Target Perusahaan" 
-        content="Bandingkan angka ekspektasi (Target) Anda terhadap kemampuan nyata perusahaan berdasarkan machine learning. Sesuai Streamlit, 5 metrik fundamental utama siap disimulasikan." 
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <AutoInsight
+        title="Simulasi Target Perusahaan"
+        content="Bandingkan angka ekspektasi (Target) Anda terhadap kemampuan nyata perusahaan berdasarkan machine learning. Sesuai Streamlit, 5 metrik fundamental utama siap disimulasikan."
       />
 
       <div className="glass-card">
-        <p style={{color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.85rem'}}>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.85rem' }}>
           *Target default = nilai terakhir + 5% growth (dapat disesuaikan):*
         </p>
-        
-        <div style={{display: 'flex', gap: '1.5rem', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
+
+        <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
           {target_metrics.map(m => (
-            <div key={m} style={{display: 'flex', flexDirection: 'column', gap: '0.35rem'}}>
-              <label style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>Target {m}</label>
-              <input type="number" className="form-input" style={{width: '120px', padding: '0.4rem'}} 
-                     value={targets[m] !== undefined ? targets[m] : ''} 
-                     onChange={(e) => setTargets(prev => ({...prev, [m]: e.target.value}))} step="0.1" />
+            <div key={m} style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+              <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Target {m}</label>
+              <input type="number" className="form-input" style={{ width: '120px', padding: '0.4rem' }}
+                value={targets[m] !== undefined ? targets[m] : ''}
+                onChange={(e) => setTargets(prev => ({ ...prev, [m]: e.target.value }))} step="0.1" />
             </div>
           ))}
         </div>
@@ -712,11 +713,11 @@ function Section4({ data }) {
                   <td>{res.modelName}</td>
                   <td>{formatIDR(res.nextQ.forecast)}</td>
                   <td>{formatIDR(res.t)}</td>
-                  <td style={{color: res.gap >= 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 'bold'}}>
+                  <td style={{ color: res.gap >= 0 ? 'var(--success)' : 'var(--danger)', fontWeight: 'bold' }}>
                     {res.gap > 0 ? '+' : ''}{res.gap.toFixed(1)}%
                   </td>
                   <td>
-                    <span className="badge" style={{backgroundColor: res.statusColor, color: '#fff', padding: '0.4rem 0.8rem'}}>
+                    <span className="badge" style={{ backgroundColor: res.statusColor, color: '#fff', padding: '0.4rem 0.8rem' }}>
                       {res.status}
                     </span>
                   </td>
@@ -735,15 +736,15 @@ function Section5({ data }) {
   const models = [...new Set(data.forecast.filter(d => d.metric_id === 'revenue').map(d => d.model))];
   const modelToUse = models.length > 0 ? models[0] : '';
   const revFc = data.forecast.filter(d => d.metric_id === 'revenue' && d.model === modelToUse);
-  
+
   const growthData = [];
-  
+
   revHist.forEach((h, i) => {
-    let qoq = i > 0 ? ((h.value_scaled - revHist[i-1].value_scaled) / Math.abs(revHist[i-1].value_scaled)) * 100 : 0;
+    let qoq = i > 0 ? ((h.value_scaled - revHist[i - 1].value_scaled) / Math.abs(revHist[i - 1].value_scaled)) * 100 : 0;
     growthData.push({ period: h.period, Revenue: h.value_scaled, Growth: qoq });
   });
   if (revFc.length > 0 && revHist.length > 0) {
-    let prevVal = revHist[revHist.length-1].value_scaled;
+    let prevVal = revHist[revHist.length - 1].value_scaled;
     revFc.forEach(f => {
       let qoq = ((f.forecast - prevVal) / Math.abs(prevVal)) * 100;
       growthData.push({ period: f.period, ForecastRev: f.forecast, Growth: qoq });
@@ -752,10 +753,10 @@ function Section5({ data }) {
   }
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-      <AutoInsight 
-        title="Momentum Pertumbuhan" 
-        content="Pertumbuhan kuartal ke kuartal (QoQ Growth) diproyeksikan akan mengalami akselerasi minor pada akhir tahun, mengindikasikan momentum penjualan enterprise berjalan sesuai track." 
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <AutoInsight
+        title="Momentum Pertumbuhan"
+        content="Pertumbuhan kuartal ke kuartal (QoQ Growth) diproyeksikan akan mengalami akselerasi minor pada akhir tahun, mengindikasikan momentum penjualan enterprise berjalan sesuai track."
       />
       <div className="glass-card">
         <div style={{ width: '100%', height: 450 }}>
@@ -765,11 +766,11 @@ function Section5({ data }) {
               <XAxis dataKey="period" stroke="var(--text-muted)" />
               <YAxis yAxisId="left" stroke="var(--text-muted)" tickFormatter={val => formatIDR(val).replace('Rp ', '')} />
               <YAxis yAxisId="right" orientation="right" stroke="var(--accent-purple)" tickFormatter={val => `${val}%`} />
-              <RechartsTooltip contentStyle={{backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)'}} />
-              <Legend verticalAlign="top" height={36}/>
+              <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-main)', border: '1px solid var(--border-glass)' }} />
+              <Legend verticalAlign="top" height={36} />
               <Bar yAxisId="left" dataKey="Revenue" fill="#64ffda" opacity={0.7} radius={[4, 4, 0, 0]} />
               <Bar yAxisId="left" dataKey="ForecastRev" fill="#ffd166" opacity={0.7} name="Forecast Revenue" radius={[4, 4, 0, 0]} />
-              <Line yAxisId="right" type="monotone" dataKey="Growth" stroke="#a78bfa" strokeWidth={2} dot={{r: 5}} name="QoQ Growth %" />
+              <Line yAxisId="right" type="monotone" dataKey="Growth" stroke="#a78bfa" strokeWidth={2} dot={{ r: 5 }} name="QoQ Growth %" />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
@@ -782,8 +783,8 @@ function Section6({ data }) {
   const [filterSeverity, setFilterSeverity] = useState('ALL');
   const anomalies = data.anomalies || [];
 
-  const filteredAnomalies = filterSeverity === 'ALL' 
-    ? anomalies 
+  const filteredAnomalies = filterSeverity === 'ALL'
+    ? anomalies
     : anomalies.filter(a => a.severity === filterSeverity);
 
   // Transform anomalies for the bubble chart (Timeline Anomali like Streamlit)
@@ -802,45 +803,45 @@ function Section6({ data }) {
   });
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
-      <AutoInsight 
-        title="Manajemen Risiko & Fraud" 
-        content={`Terdapat ${anomalies.length} anomali historis. Visualisasi di bawah kini sama persis dengan 'Timeline Anomali' di Streamlit, di mana ukuran bubble berdasarkan absolute value.`} 
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <AutoInsight
+        title="Manajemen Risiko & Fraud"
+        content={`Terdapat ${anomalies.length} anomali historis. Visualisasi di bawah kini sama persis dengan 'Timeline Anomali' di Streamlit, di mana ukuran bubble berdasarkan absolute value.`}
       />
 
-      <div className="kpi-grid" style={{gridTemplateColumns: 'repeat(3, 1fr)'}}>
-        <div className="glass-card" style={{borderLeft: '4px solid var(--danger)', marginBottom: 0}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Critical Alerts</h3>
-          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--danger)'}}>{anomalies.filter(a => a.severity === 'CRITICAL').length}</p>
+      <div className="kpi-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        <div className="glass-card" style={{ borderLeft: '4px solid var(--danger)', marginBottom: 0 }}>
+          <h3 style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase' }}>Critical Alerts</h3>
+          <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--danger)' }}>{anomalies.filter(a => a.severity === 'CRITICAL').length}</p>
         </div>
-        <div className="glass-card" style={{borderLeft: '4px solid var(--warning)', marginBottom: 0}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Warning Alerts</h3>
-          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--warning)'}}>{anomalies.filter(a => a.severity === 'WARNING').length}</p>
+        <div className="glass-card" style={{ borderLeft: '4px solid var(--warning)', marginBottom: 0 }}>
+          <h3 style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase' }}>Warning Alerts</h3>
+          <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--warning)' }}>{anomalies.filter(a => a.severity === 'WARNING').length}</p>
         </div>
-        <div className="glass-card" style={{borderLeft: '4px solid var(--info)', marginBottom: 0}}>
-          <h3 style={{color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Info / Deviations</h3>
-          <p style={{fontSize: '2rem', fontWeight: 700, color: 'var(--info)'}}>{anomalies.filter(a => a.severity === 'INFO').length}</p>
+        <div className="glass-card" style={{ borderLeft: '4px solid var(--info)', marginBottom: 0 }}>
+          <h3 style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase' }}>Info / Deviations</h3>
+          <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--info)' }}>{anomalies.filter(a => a.severity === 'INFO').length}</p>
         </div>
       </div>
 
       <div className="glass-card">
-        <div className="card-title" style={{marginBottom: '1.5rem'}}>Timeline Anomali</div>
-        
+        <div className="card-title" style={{ marginBottom: '1.5rem' }}>Timeline Anomali</div>
+
         <div style={{ width: '100%', height: 400 }}>
           <ResponsiveContainer>
             <ScatterChart margin={{ top: 20, right: 30, bottom: 40, left: 140 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border-glass)" vertical={false} horizontal={true} />
-              <XAxis dataKey="period" type="category" allowDuplicatedCategory={false} name="Period" stroke="var(--text-muted)" tick={{fontSize: 11, angle: -45, textAnchor: 'end'}} />
-              <YAxis dataKey="metric" type="category" allowDuplicatedCategory={false} name="Metric" stroke="var(--text-muted)" tick={{fontSize: 11}} width={140} />
+              <XAxis dataKey="period" type="category" allowDuplicatedCategory={false} name="Period" stroke="var(--text-muted)" tick={{ fontSize: 11, angle: -45, textAnchor: 'end' }} />
+              <YAxis dataKey="metric" type="category" allowDuplicatedCategory={false} name="Metric" stroke="var(--text-muted)" tick={{ fontSize: 11 }} width={140} />
               <ZAxis dataKey="sizeVal" range={[100, 1000]} name="Value (Abs)" />
-              <RechartsTooltip cursor={{strokeDasharray: '3 3'}} content={({ active, payload }) => {
+              <RechartsTooltip cursor={{ strokeDasharray: '3 3' }} content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const data = payload[0].payload;
                   return (
-                    <div style={{background: 'var(--bg-main)', border: '1px solid var(--border-glass)', padding: '10px', borderRadius: '8px'}}>
-                      <p style={{color: data.fill, fontWeight: 'bold'}}>{data.severity}</p>
-                      <p style={{color: 'white', fontSize: '0.85rem'}}>{data.period} - {data.metric}</p>
-                      <p style={{color: 'var(--text-muted)', fontSize: '0.8rem', maxWidth: '250px', marginTop: '4px'}}>{data.description}</p>
+                    <div style={{ background: 'var(--bg-main)', border: '1px solid var(--border-glass)', padding: '10px', borderRadius: '8px' }}>
+                      <p style={{ color: data.fill, fontWeight: 'bold' }}>{data.severity}</p>
+                      <p style={{ color: 'white', fontSize: '0.85rem' }}>{data.period} - {data.metric}</p>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', maxWidth: '250px', marginTop: '4px' }}>{data.description}</p>
                     </div>
                   );
                 }
@@ -857,9 +858,9 @@ function Section6({ data }) {
       </div>
 
       <div className="glass-card">
-        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap'}}>
-          <div className="card-title" style={{marginBottom: 0}}>Detail Anomali</div>
-          <div className="radio-group" style={{margin: 0}}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+          <div className="card-title" style={{ marginBottom: 0 }}>Detail Anomali</div>
+          <div className="radio-group" style={{ margin: 0 }}>
             <div className={`radio-label ${filterSeverity === 'ALL' ? 'active' : ''}`} onClick={() => setFilterSeverity('ALL')}>Semua</div>
             <div className={`radio-label ${filterSeverity === 'CRITICAL' ? 'active' : ''}`} onClick={() => setFilterSeverity('CRITICAL')}>Critical</div>
             <div className={`radio-label ${filterSeverity === 'WARNING' ? 'active' : ''}`} onClick={() => setFilterSeverity('WARNING')}>Warning</div>
@@ -889,17 +890,17 @@ function Section6({ data }) {
                     <td>{q}</td>
                     <td>{a.metric_name || a.metric_id}</td>
                     <td>
-                      <span style={{color: a.severity === 'CRITICAL' ? '#ff6b6b' : a.severity === 'WARNING' ? '#ffd166' : '#64ffda', fontWeight: 'bold'}}>
+                      <span style={{ color: a.severity === 'CRITICAL' ? '#ff6b6b' : a.severity === 'WARNING' ? '#ffd166' : '#64ffda', fontWeight: 'bold' }}>
                         {a.severity}
                       </span>
                     </td>
                     <td>{a.type}</td>
-                    <td style={{fontSize: '0.8rem', lineHeight: 1.4}}>{a.description}</td>
+                    <td style={{ fontSize: '0.8rem', lineHeight: 1.4 }}>{a.description}</td>
                   </tr>
                 );
               })}
               {filteredAnomalies.length === 0 && (
-                <tr><td colSpan="6" style={{textAlign: 'center'}}>Tidak ada anomali untuk filter ini.</td></tr>
+                <tr><td colSpan="6" style={{ textAlign: 'center' }}>Tidak ada anomali untuk filter ini.</td></tr>
               )}
             </tbody>
           </table>
@@ -911,7 +912,7 @@ function Section6({ data }) {
 
 function Section7({ data }) {
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div className="glass-card">
         <div className="card-title">Evaluasi Model (Walk-Forward Backtest)</div>
         <div className="data-table-container">
@@ -937,7 +938,7 @@ function Section7({ data }) {
           </table>
         </div>
       </div>
-      
+
       <div className="glass-card">
         <div className="card-title">Model Terbaik per Metrik (MAPE Terendah):</div>
         <div className="data-table-container">
@@ -953,7 +954,7 @@ function Section7({ data }) {
               {data.best_models.map((b, i) => (
                 <tr key={i}>
                   <td><strong>{b.metric_id.toUpperCase()}</strong></td>
-                  <td style={{color: 'var(--accent-blue)', fontWeight: 'bold'}}>{b.best_model}</td>
+                  <td style={{ color: 'var(--accent-blue)', fontWeight: 'bold' }}>{b.best_model}</td>
                   <td>{b.best_MAPE !== undefined ? b.best_MAPE.toFixed(2) : 'N/A'}</td>
                 </tr>
               ))}
@@ -964,34 +965,34 @@ function Section7({ data }) {
 
       <div className="glass-card">
         <div className="card-title">Batasan Sistem</div>
-        <div className="alert-box" style={{borderLeft: '4px solid #64ffda', background: 'rgba(26,26,46,0.8)'}}>
+        <div className="alert-box" style={{ borderLeft: '4px solid #64ffda', background: 'rgba(26,26,46,0.8)' }}>
           <div>
             <div className="alert-title">Batasan Usecase (WAJIB DIPATUHI):</div>
             <div className="alert-desc">
-              Sistem ini <strong>HANYA</strong> mencakup analisis performa keuangan internal perusahaan.<br/><br/>
+              Sistem ini <strong>HANYA</strong> mencakup analisis performa keuangan internal perusahaan.<br /><br />
               <strong>DILARANG:</strong> Prediksi harga saham, analisis market sentiment, prediksi IHSG/kapitalisasi pasar, rekomendasi trading (buy/sell/hold), analisis perilaku investor.
             </div>
           </div>
         </div>
-        
-        <div className="alert-box" style={{borderLeft: '4px solid #ffd166', background: 'rgba(26,26,46,0.8)'}}>
+
+        <div className="alert-box" style={{ borderLeft: '4px solid #ffd166', background: 'rgba(26,26,46,0.8)' }}>
           <div>
             <div className="alert-title">Limitasi Data & Penggunaan Data Dummy:</div>
             <div className="alert-desc">
-              • Short time-series: hanya 20 kuartal (2021 Q2 – 2026 Q1)<br/>
-              • <strong>Segmentasi Dummy:</strong> Alokasi persebaran 5 Regional dan Product Mix (Domain Digital) yang tampil di Executive Summary adalah <strong>data dummy/simulasi</strong> murni untuk mendemonstrasikan kapabilitas visualisasi. Data historis riil yang diproses model AI hanya berupa konsolidasi agregat tingkat perusahaan (entity-level).<br/>
-              • Tidak ada data budget / target perusahaan yang riil (sehingga simulasi Gap Analysis mengharuskan input target manual)<br/>
+              • Short time-series: hanya 20 kuartal (2021 Q2 – 2026 Q1)<br />
+              • <strong>Segmentasi Dummy:</strong> Alokasi persebaran 5 Regional dan Product Mix (Domain Digital) yang tampil di Executive Summary adalah <strong>data dummy/simulasi</strong> murni untuk mendemonstrasikan kapabilitas visualisasi. Data historis riil yang diproses model AI hanya berupa konsolidasi agregat tingkat perusahaan (entity-level).<br />
+              • Tidak ada data budget / target perusahaan yang riil (sehingga simulasi Gap Analysis mengharuskan input target manual)<br />
             </div>
           </div>
         </div>
-        
-        <div className="alert-box" style={{borderLeft: '4px solid #64ffda', background: 'rgba(26,26,46,0.8)'}}>
+
+        <div className="alert-box" style={{ borderLeft: '4px solid #64ffda', background: 'rgba(26,26,46,0.8)' }}>
           <div>
             <div className="alert-title">Catatan Model:</div>
             <div className="alert-desc">
-              • 20 kuartal tergolong short series — model kompleks (LSTM) WAJIB dibandingkan head-to-head dengan baseline sederhana lewat walk-forward backtest<br/>
-              • Jika LSTM kalah dari baseline, baseline menjadi model default<br/>
-              • Prediction interval mencerminkan uncertainty yang jujur dari short series<br/>
+              • 20 kuartal tergolong short series — model kompleks (LSTM) WAJIB dibandingkan head-to-head dengan baseline sederhana lewat walk-forward backtest<br />
+              • Jika LSTM kalah dari baseline, baseline menjadi model default<br />
+              • Prediction interval mencerminkan uncertainty yang jujur dari short series<br />
               • Semua data traceable ke CSV sumber — TIDAK ADA fabrikasi data
             </div>
           </div>
