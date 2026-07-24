@@ -1,8 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Initialize the standard, stable Gemini SDK
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
-
 const SYSTEM_PROMPT = `Anda adalah "AI Financial Assistant FPIS" (Financial Performance & Insight System) untuk eksekutif Telkom.
 Tugas Anda:
 1. Jawab pertanyaan seputar keuangan, metrik bisnis (EBITDA, Net Income, ROE, dll), dan tren makro.
@@ -10,17 +7,25 @@ Tugas Anda:
 3. Selalu bersikap profesional, singkat, dan berwawasan data.
 4. JANGAN menjawab pertanyaan yang tidak ada hubungannya sama sekali dengan keuangan, bisnis, teknologi, atau perusahaan (misal: resep masakan, humor, gosip selebriti). Jika ditanya demikian, tolak dengan sopan dan kembalikan topik ke analisis finansial.`;
 
-export default async function handler(req) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  if (!process.env.GEMINI_API_KEY) {
-    return new Response(JSON.stringify({ error: 'API Key belum dipasang di Vercel.' }), { status: 500 });
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'API Key belum dipasang di Vercel.' });
   }
 
   try {
-    const { messages } = await req.json();
+    const { messages } = req.body;
+
+    if (!messages || !Array.isArray(messages)) {
+      return res.status(400).json({ error: 'Format pesan tidak valid.' });
+    }
+
+    // Initialize the SDK inside the handler to ensure env vars are loaded
+    const genAI = new GoogleGenerativeAI(apiKey);
 
     // Map messages to standard Gemini format
     const formattedMessages = messages.map(m => ({
@@ -37,22 +42,13 @@ export default async function handler(req) {
     const result = await model.generateContent({ contents: formattedMessages });
     const responseText = result.response.text();
 
-    return new Response(
-      JSON.stringify({ response: responseText }),
-      {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return res.status(200).json({ response: responseText });
 
   } catch (error) {
     console.error('Gemini API Error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Gagal memproses permintaan AI.', details: error.message }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return res.status(500).json({ 
+      error: 'Gagal memproses permintaan AI.', 
+      details: error.message 
+    });
   }
 }
