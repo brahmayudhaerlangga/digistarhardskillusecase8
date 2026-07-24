@@ -139,28 +139,38 @@ function AIChatbot() {
     if (isOpen) scrollToBottom();
   }, [messages, isOpen]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    const userMsg = input.trim();
-    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setInput('');
+  const [isLoading, setIsLoading] = useState(false);
 
-    setTimeout(() => {
-      let botResponse = '';
-      const lower = userMsg.toLowerCase();
-      if (lower.includes('revenue') || lower.includes('pendapatan')) {
-        botResponse = 'Menurut model Ensemble, Revenue diprediksi tumbuh 4.2% YoY didorong oleh peningkatan pelanggan di sektor Digital Services.';
-      } else if (lower.includes('cost') || lower.includes('opex') || lower.includes('efisiensi')) {
-        botResponse = 'Analisis anomali kami mendeteksi lonjakan OPEX sebesar 12% pada kuartal lalu. Disarankan pengetatan budget marketing di Regional III.';
-      } else if (lower.includes('produk') || lower.includes('digital')) {
-        botResponse = 'Digital Connectivity menyumbang 72% dari total Revenue. Namun, Digital Platform menunjukkan tingkat konversi margin tertinggi (EBITDA margin 45%).';
-      } else if (lower.includes('target') || lower.includes('gap')) {
-        botResponse = 'Berdasarkan target yang diinput, Net Income memiliki gap -2.1% (AT-RISK). Strategi cost-efficiency lanjutan sangat direkomendasikan untuk menutupi gap tersebut.';
-      } else {
-        botResponse = 'Menarik. Sistem memproyeksikan stabilitas finansial dalam 2 kuartal ke depan. Apakah Anda ingin meninjau spesifik metrik seperti EBITDA atau Free Cash Flow?';
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+    const userMsg = input.trim();
+    
+    const newMessages = [...messages, { role: 'user', text: userMsg }];
+    setMessages(newMessages);
+    setInput('');
+    setIsLoading(true);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ messages: newMessages })
+      });
+
+      const data = await res.json();
+      
+      if (!res.ok) {
+        throw new Error(data.error || 'Gagal merespons');
       }
-      setMessages(prev => [...prev, { role: 'bot', text: botResponse }]);
-    }, 800);
+
+      setMessages(prev => [...prev, { role: 'bot', text: data.response }]);
+    } catch (err) {
+      setMessages(prev => [...prev, { role: 'bot', text: 'Maaf, terjadi kesalahan saat menghubungi server AI. Pastikan API Key Gemini Anda telah dikonfigurasi di Vercel.' }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -182,12 +192,15 @@ function AIChatbot() {
           <div className="chatbot-input">
             <input
               type="text"
-              placeholder="Tanyakan analisis finansial..."
+              placeholder={isLoading ? "AI sedang mengetik..." : "Tanyakan analisis finansial..."}
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleSend()}
+              disabled={isLoading}
             />
-            <button onClick={handleSend}><Send size={16} /></button>
+            <button onClick={handleSend} disabled={isLoading} style={{ opacity: isLoading ? 0.5 : 1 }}>
+              <Send size={16} />
+            </button>
           </div>
         </div>
       ) : (
